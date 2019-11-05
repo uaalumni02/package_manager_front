@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import Login from './logIn/logIn';
+import LoginForm from './logIn/login';
 
 function App() {
   return (
@@ -9,7 +9,7 @@ function App() {
       <h1>CHRIS180</h1>
         <h1>TZ Package Manager</h1>
       </header>
-      <Login />
+      <LoginForm />
     </div>
   );
 }
