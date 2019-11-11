@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import './login.css';
 
+
 const LoginForm = () => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
@@ -27,9 +28,12 @@ const LoginForm = () => {
     }
     return (
         <div className="container">
+            <div className="logo">
+                <img src="https://chris180.org/wp-content/uploads/2016/08/Logo-450x200.png" alt="main logo" />
+            </div>
             <div className="row px-2">
                 <div className="col-12 col-md-5 auth-box">
-                    <h3 className="text-center mt-4">Log in to your account</h3>
+                    <h3 className="text-center mt-4" style={{ fontFamily: 'CourierNewPS-ItalicMT' }}>Log in to your account</h3>
                     <p className="text-center text-danger mt-4"> </p>
                     <form id="submitForm" className="px-3 py-5" onSubmit={handleSubmit}>
                         <div className="form-group">
