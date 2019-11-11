@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import './login.css';
 
 const LoginForm = () => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
 
+    useEffect(() => {
+    }, [username, password])
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -21,8 +23,6 @@ const LoginForm = () => {
             .then(res => res.json())
             .then(response => {
                 console.log(response)
-                setUsername();
-                setPassword()
             }).catch(error => console.error('Error:', error));
     }
     return (
