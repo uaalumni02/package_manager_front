@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from "react";
 
 
 const Package = () => {
     return (
-        <div className="packahe">
+        <div className="packages">
             <h1>Test</h1>
         </div>
     )

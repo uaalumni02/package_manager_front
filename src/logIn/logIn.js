@@ -1,13 +1,11 @@
-import React, { useState, useEffect } from "react";
-import './login.css';
+import React, { useState } from "react";
+import { MDBContainer, MDBRow, MDBCol, MDBBtn, MDBCard, MDBCardBody, MDBInput } from 'mdbreact';
+import '../App.css';
+import './login';
 
-
-const LoginForm = () => {
+const Login = () => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
-
-    useEffect(() => {
-    }, [username, password])
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -23,44 +21,68 @@ const LoginForm = () => {
         })
             .then(res => res.json())
             .then(response => {
-                console.log(response)
+                console.log(response.success)
+                // local storage code works; removed to test alert with password *****
+                // localStorage.setItem('token', response.data.token);
+                // localStorage.setItem('user', response.data.user._id);
+                // const password = response.data.token;
+                // const localStoragePswd = localStorage.getItem('token', response.data.token);
+                if (response.success == true) {
+                    alert('corret password')
+                } else {
+                    alert('incorrect password')
+                }
             }).catch(error => console.error('Error:', error));
     }
     return (
-        <div className="container">
-            <div className="logo">
-                <img src="https://chris180.org/wp-content/uploads/2016/08/Logo-450x200.png" alt="main logo" />
-            </div>
-            <div className="row px-2">
-                <div className="col-12 col-md-5 auth-box">
-                    <h3 className="text-center mt-4" style={{ fontFamily: 'CourierNewPS-ItalicMT' }}>Log in to your account</h3>
-                    <p className="text-center text-danger mt-4"> </p>
-                    <form id="submitForm" className="px-3 py-5" onSubmit={handleSubmit}>
-                        <div className="form-group">
-                            <div className="input-group">
-                                <div className="input-group-prepend">
-                                    <div className="input-group-text"></div>
-                                </div>
-                                <input type="text" name="username" onChange={e => setUsername(e.target.value)} className="form-control form-control-lg" id="username" placeholder="Username" />
-                            </div>
+        <MDBContainer>
+            <br></br>
+            <MDBRow>
+                <MDBCol md="5">
+                    <MDBCard>
+                        <div className="header pt-3 grey lighten-2">
+                            <MDBRow className="d-flex justify-content-start">
+                                <h3 className="deep-grey-text mt-3 mb-4 pb-1 mx-5">
+                                    Log in
+                                </h3>
+                            </MDBRow>
                         </div>
-                        <div className="form-group">
-                            <div className="input-group">
-                                <div className="input-group-prepend">
-                                    <div className="input-group-text"><i className="ion ion-eye"></i></div>
-                                </div>
-                                <input type="password" name="password" onChange={e => setPassword(e.target.value)} className="form-control form-control-lg" id="password" placeholder="Password" />
+                        <MDBCardBody>
+                            <MDBInput label="Your username" onChange={e => setUsername(e.target.value)} group type="text" validate />
+                            <MDBInput
+                                label="Your password" onChange={e => setPassword(e.target.value)}
+                                group
+                                type="password"
+                                validate
+                                containerClass="mb-0"
+                            />
+                            <div className="text-center mb-4 mt-5">
+                                <MDBBtn
+                                    color="danger"
+                                    type="submit"
+                                    className="btn-block z-depth-2"
+                                    onClick={handleSubmit}
+                                >
+                                    Log in
+                </MDBBtn>
                             </div>
-                        </div>
-                        <br></br>
-                        <button type="submit" className="btn btn-tertiary btn-block">Login</button>
-                    </form>
-                    <br></br>
-                    <a href="./signup" className="auth-box-footer">Don't have an account yet? &nbsp;<span>Sign Up</span></a>
-                </div>
-            </div>
-        </div>
-    );
-}
 
-export default LoginForm
+                            <p className="font-small grey-text d-flex justify-content-center">
+                                Don't have an account?
+                <a
+                                    href="#!"
+                                    className="dark-grey-text font-weight-bold ml-1"
+                                >
+                                    Sign up
+                </a>
+                            </p>
+
+                        </MDBCardBody>
+                    </MDBCard>
+                </MDBCol>
+            </MDBRow>
+        </MDBContainer>
+    );
+};
+
+export default Login;

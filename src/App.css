@@ -1,5 +1,5 @@
 .App {
-  text-align: center;
+  margin-left: 500px;
 }
 
 .App-logo {
@@ -10,20 +10,10 @@
   font-size: calc(10px + 2vmin);
   text-align: center;
 }
+.center{ 
+  Display: flex;
+  Align-Items: center;
+  Justify-Content: centre;
+  }
 
-.App-link {
-  color: #09d3ac;
-}
 
-/* input {
-  padding: 20px 80px; 
-  padding-left: 10px;
-}
-button {
-  height: 25px;
-  width: 80px
-}
-
-body {
-  background-color: silver
-} */
