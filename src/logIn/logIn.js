@@ -31,16 +31,12 @@ const Login = () => {
     })
       .then(res => res.json())
       .then(response => {
-        console.log(response.success);
-        localStorage.setItem("token", response.data.token);
-        localStorage.setItem("user", response.data.user._id);
-        // const password = response.data.token;
-        // const localStoragePswd = localStorage.getItem("token");
-        if (response.success === true) {
-          // alert("corret password");
-          setLoggedIn(true);
-        } else {
+        if (response.success === false) {
           setInvalidLogin("Invalid username or password");
+        } else {
+          localStorage.setItem("token", response.data.token);
+          localStorage.setItem("user", response.data.user._id);
+          setLoggedIn(true);
         }
       })
       .catch(error => console.error("Error:", error));
@@ -109,5 +105,4 @@ const Login = () => {
     </MDBContainer>
   );
 };
-
 export default Login;
