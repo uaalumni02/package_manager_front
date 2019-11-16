@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Redirect } from "react-router-dom";
-import "./login.css";
 import {
   MDBContainer,
   MDBRow,
@@ -11,15 +10,14 @@ import {
   MDBInput
 } from "mdbreact";
 
-const Login = () => {
+const Register = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [InvalidLogin, setInvalidLogin] = useState("");
   const [loggedIn, setLoggedIn] = useState(false);
 
   const handleSubmit = event => {
     event.preventDefault();
-    fetch("http://localhost:3000/api/user/login", {
+    fetch("http://localhost:3000/api/user/", {
       method: "post",
       headers: {
         "Content-Type": "application/json"
@@ -31,13 +29,9 @@ const Login = () => {
     })
       .then(res => res.json())
       .then(response => {
-        if (response.success === false) {
-          setInvalidLogin("Invalid username or password");
-        } else {
-          localStorage.setItem("token", response.data.token);
-          localStorage.setItem("user", response.data.user._id);
-          setLoggedIn(true);
-        }
+        localStorage.setItem("token", response.userdata.token);
+        localStorage.setItem("user", response.userdata._id);
+        setLoggedIn(true);
       })
       .catch(error => console.error("Error:", error));
   };
@@ -59,7 +53,9 @@ const Login = () => {
           <MDBCard>
             <div className="header pt-3 grey lighten-2">
               <MDBRow className="d-flex justify-content-start">
-                <h3 className="deep-grey-text mt-3 mb-4 pb-1 mx-5">Log in</h3>
+                <h3 className="deep-grey-text mt-3 mb-4 pb-1 mx-5">
+                  Register for Account...
+                </h3>
               </MDBRow>
             </div>
             <MDBCardBody>
@@ -81,23 +77,15 @@ const Login = () => {
               />
 
               <div className="text-center mb-4 mt-5">
-                <p>{InvalidLogin}</p>
                 <MDBBtn
                   color="danger"
                   type="submit"
                   className="btn-block z-depth-2"
                   onClick={handleSubmit}
                 >
-                  Log in
+                  Register
                 </MDBBtn>
               </div>
-
-              <p className="font-small grey-text d-flex justify-content-center">
-                Don't have an account?
-                <a href="/register" className="dark-grey-text font-weight-bold ml-1">
-                  Sign up
-                </a>
-              </p>
             </MDBCardBody>
           </MDBCard>
         </MDBCol>
@@ -105,4 +93,4 @@ const Login = () => {
     </MDBContainer>
   );
 };
-export default Login;
+export default Register;

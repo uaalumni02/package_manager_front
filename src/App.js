@@ -3,6 +3,7 @@ import "./App.css";
 import { BrowserRouter, Route } from "react-router-dom";
 import Package from "./package/package";
 import Login from "./login/login";
+import Register from "./register/register";
 import NavbarPage from "./navBar/navBar";
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
       <BrowserRouter>
         <Route path="/" exact component={Login} />
         <Route path="/package" exact component={Package} />
+        <Route path="/register" exact component={Register} />
       </BrowserRouter>
     </div>
   );
