@@ -46,7 +46,7 @@ const Register = () => {
       </header>
       <br></br>
 
-      {loggedIn ? <Redirect to="/package/" /> : ""}
+      {loggedIn ? <Redirect to="/resident/" /> : ""}
 
       <MDBRow>
         <MDBCol md="5">
