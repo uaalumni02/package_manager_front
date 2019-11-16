@@ -24,7 +24,7 @@ const Resident = () => {
       method: "post",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": bearer
+        Authorization: bearer
       },
       body: JSON.stringify({
         name,
@@ -40,6 +40,13 @@ const Resident = () => {
   };
   return (
     <MDBContainer>
+      <header className="logo">
+        <img
+          src="https://chris180.org/wp-content/uploads/2016/08/Logo-450x200.png"
+          alt="main logo"
+          className="center"
+        />
+      </header>
       <br></br>
       <MDBRow>
         <MDBCol md="6">
