@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import DatePicker from "react-datepicker";
 import {
   MDBContainer,
   MDBRow,
@@ -11,7 +10,22 @@ import {
 } from "mdbreact";
 
 const Package = () => {
-  const [startDate, setStartDate] = useState(new Date());
+  const [companies, setCompanyNames] = useState([]);
+  window.addEventListener("load", (req, res) => {
+    const token = localStorage.getItem("token");
+    const bearer = "Bearer " + token;
+    fetch("http://localhost:3000/api/company", {
+      method: "GET",
+      headers: {
+        Authorization: bearer
+      }
+    })
+      .then(res => res.json())
+      .then(response => {
+        setCompanyNames(response.data);
+      })
+      .catch(error => console.error("Error:", error));
+  });
   return (
     <MDBContainer>
       <header className="logo">
@@ -35,12 +49,13 @@ const Package = () => {
                   Company
                 </label>
                 <select id="defaultFormCardNameEx" className="form-control">
-                  <option value="grapefruit">Grapefruit</option>
-                  <option value="lime">Lime</option>
-                  <option selected value="coconut">
-                    Coconut
-                  </option>
-                  <option value="mango">Mango</option>
+                  {companies.map(company => {
+                    return (
+                      <option value={company._id} key={company._id}>
+                        {company.companyName}
+                      </option>
+                    );
+                  })}
                 </select>
                 <br />
                 <label
@@ -50,12 +65,7 @@ const Package = () => {
                   Resident
                 </label>
                 <select id="defaultFormCardNameEx" className="form-control">
-                  <option value="grapefruit">Grapefruit</option>
-                  <option value="lime">Lime</option>
-                  <option selected value="coconut">
-                    Coconut
-                  </option>
-                  <option value="mango">Mango</option>
+                 
                 </select>
                 <br />
                 <label

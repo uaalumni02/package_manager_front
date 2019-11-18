@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Redirect } from "react-router-dom";
 
 import {
   MDBContainer,
@@ -34,7 +33,6 @@ const Resident = () => {
     })
       .then(res => res.json())
       .then(response => {
-        console.log(response);
       })
       .catch(error => console.error("Error:", error));
   };
