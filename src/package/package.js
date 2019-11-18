@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   MDBContainer,
   MDBRow,
@@ -11,7 +11,7 @@ import {
 
 const Package = () => {
   const [companies, setCompanyNames] = useState([]);
-  window.addEventListener("load", (req, res) => {
+  const fetchCompanyData = () => {
     const token = localStorage.getItem("token");
     const bearer = "Bearer " + token;
     fetch("http://localhost:3000/api/company", {
@@ -25,7 +25,10 @@ const Package = () => {
         setCompanyNames(response.data);
       })
       .catch(error => console.error("Error:", error));
-  });
+  };
+  useEffect(() => {
+    fetchCompanyData();
+  }, []);
   return (
     <MDBContainer>
       <header className="logo">
@@ -65,7 +68,13 @@ const Package = () => {
                   Resident
                 </label>
                 <select id="defaultFormCardNameEx" className="form-control">
-                 
+                  {/* {residents.map(resident => {
+                    return (
+                      <option value={resident._id} key={resident._id}>
+                        {resident.name}
+                      </option>
+                    );
+                  })} */}
                 </select>
                 <br />
                 <label
