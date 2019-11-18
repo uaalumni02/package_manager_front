@@ -11,6 +11,7 @@ import {
 
 const Package = () => {
   const [companies, setCompanyNames] = useState([]);
+  const [residents, setResidentNames] = useState([]);
   const fetchCompanyData = () => {
     const token = localStorage.getItem("token");
     const bearer = "Bearer " + token;
@@ -28,6 +29,25 @@ const Package = () => {
   };
   useEffect(() => {
     fetchCompanyData();
+  }, []);
+  const fetchResidentData = () => {
+    const token = localStorage.getItem("token");
+    const bearer = "Bearer " + token;
+    fetch("http://localhost:3000/api/resident", {
+      method: "GET",
+      headers: {
+        Authorization: bearer
+      }
+    })
+      .then(res => res.json())
+      .then(response => {
+        console.log(response);
+        setResidentNames(response.data);
+      })
+      .catch(error => console.error("Error:", error));
+  };
+  useEffect(() => {
+    fetchResidentData();
   }, []);
   return (
     <MDBContainer>
@@ -68,13 +88,13 @@ const Package = () => {
                   Resident
                 </label>
                 <select id="defaultFormCardNameEx" className="form-control">
-                  {/* {residents.map(resident => {
+                  {residents.map(resident => {
                     return (
                       <option value={resident._id} key={resident._id}>
                         {resident.name}
                       </option>
                     );
-                  })} */}
+                  })}
                 </select>
                 <br />
                 <label
