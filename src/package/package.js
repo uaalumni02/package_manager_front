@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Redirect } from "react-router-dom";
 import {
   MDBContainer,
   MDBRow,
@@ -16,6 +17,8 @@ const Package = () => {
   const [additionalInfo, setAdditionalInfo] = useState("");
   const [companyId, setCompanyId] = useState("");
   const [residentId, setResidentId] = useState("");
+  const [packageConfirmation, setPackageConfirmation] = useState(false);
+
   const fetchCompanyData = () => {
     const token = localStorage.getItem("token");
     const bearer = "Bearer " + token;
@@ -69,7 +72,11 @@ const Package = () => {
       })
     })
       .then(res => res.json())
-      .then(response => {})
+      .then(response => {
+        if (response.success === true) {
+        setPackageConfirmation(true);
+        }
+      })
       .catch(error => console.error("Error:", error));
   };
   return (
@@ -82,6 +89,7 @@ const Package = () => {
         />
       </header>
       <br></br>
+      {packageConfirmation ? <Redirect to="/confirmation/" /> : ""}
       <MDBRow>
         <MDBCol md="6">
           <MDBCard>
