@@ -18,6 +18,7 @@ const Package = () => {
   const [companyId, setCompanyId] = useState("");
   const [residentId, setResidentId] = useState("");
   const [packageConfirmation, setPackageConfirmation] = useState(false);
+  const [packageId, setpackageId] = useState("");
 
   const fetchCompanyData = () => {
     const token = localStorage.getItem("token");
@@ -73,8 +74,9 @@ const Package = () => {
     })
       .then(res => res.json())
       .then(response => {
+        setpackageId(response.data._id);
         if (response.success === true) {
-        setPackageConfirmation(true);
+          setPackageConfirmation(true);
         }
       })
       .catch(error => console.error("Error:", error));
@@ -89,7 +91,8 @@ const Package = () => {
         />
       </header>
       <br></br>
-      {packageConfirmation ? <Redirect to="/confirmation/" /> : ""}
+      {/* {packageConfirmation ? <Redirect to="/confirmation/" /> : ""} */}
+      {packageConfirmation ? <Redirect to={`/confirmation/${packageId}`} /> : ""}
       <MDBRow>
         <MDBCol md="6">
           <MDBCard>
@@ -161,7 +164,7 @@ const Package = () => {
                   className="form-control"
                   onChange={e => setAdditionalInfo(e.target.value)}
                 />
-               
+
                 <div className="text-center py-4 mt-3">
                   <MDBBtn
                     className="btn btn-outline-purple"

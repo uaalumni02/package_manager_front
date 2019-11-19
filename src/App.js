@@ -19,7 +19,7 @@ function App() {
         <Route path="/resident" exact component={Resident} />
         <Route path="/register" exact component={Register} />
         <Route path="/package" exact component={Package} />
-        <Route path="/confirmation" exact component={Confirmation} />
+        <Route path="/confirmation/:id" exact component={Confirmation} />
       </BrowserRouter>
     </div>
   );
