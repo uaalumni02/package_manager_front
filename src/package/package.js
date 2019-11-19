@@ -10,8 +10,12 @@ import {
 } from "mdbreact";
 
 const Package = () => {
-  const [companies, setCompanyNames] = useState([]);
-  const [residents, setResidentNames] = useState([]);
+  const [companyName, setCompanyNames] = useState([]);
+  const [name, setResidentNames] = useState([]);
+  const [deliveryDate, setDeliveryDate] = useState("");
+  const [additionalInfo, setAdditionalInfo] = useState("");
+  const [companyId, setCompanyId] = useState("");
+  const [residentId, setResidentId] = useState("");
   const fetchCompanyData = () => {
     const token = localStorage.getItem("token");
     const bearer = "Bearer " + token;
@@ -29,6 +33,7 @@ const Package = () => {
   };
   useEffect(() => {
     fetchCompanyData();
+    fetchResidentData();
   }, []);
   const fetchResidentData = () => {
     const token = localStorage.getItem("token");
@@ -41,14 +46,32 @@ const Package = () => {
     })
       .then(res => res.json())
       .then(response => {
-        console.log(response);
         setResidentNames(response.data);
       })
       .catch(error => console.error("Error:", error));
   };
-  useEffect(() => {
-    fetchResidentData();
-  }, []);
+
+  const submitPackage = event => {
+    const token = localStorage.getItem("token");
+    const bearer = "Bearer " + token;
+    event.preventDefault();
+    fetch("http://localhost:3000/api/package", {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: bearer
+      },
+      body: JSON.stringify({
+        name: residentId,
+        companyName: companyId,
+        deliveryDate,
+        additionalInfo
+      })
+    })
+      .then(res => res.json())
+      .then(response => {})
+      .catch(error => console.error("Error:", error));
+  };
   return (
     <MDBContainer>
       <header className="logo">
@@ -71,8 +94,12 @@ const Package = () => {
                 >
                   Company
                 </label>
-                <select id="defaultFormCardNameEx" className="form-control">
-                  {companies.map(company => {
+                <select
+                  id="defaultFormCardNameEx"
+                  className="form-control"
+                  onChange={e => setCompanyId(e.target.value)}
+                >
+                  {companyName.map(company => {
                     return (
                       <option value={company._id} key={company._id}>
                         {company.companyName}
@@ -87,8 +114,12 @@ const Package = () => {
                 >
                   Resident
                 </label>
-                <select id="defaultFormCardNameEx" className="form-control">
-                  {residents.map(resident => {
+                <select
+                  id="defaultFormCardNameEx"
+                  className="form-control"
+                  onChange={e => setResidentId(e.target.value)}
+                >
+                  {name.map(resident => {
                     return (
                       <option value={resident._id} key={resident._id}>
                         {resident.name}
@@ -107,6 +138,7 @@ const Package = () => {
                   type="datetime-local"
                   id="defaultFormCardNameEx"
                   className="form-control"
+                  onChange={e => setDeliveryDate(e.target.value)}
                 />
                 <br />
                 <label
@@ -115,13 +147,19 @@ const Package = () => {
                 >
                   Additionl Information
                 </label>
-                <input
+                <textarea
                   type="text"
                   id="defaultFormCardNameEx"
                   className="form-control"
+                  onChange={e => setAdditionalInfo(e.target.value)}
                 />
+               
                 <div className="text-center py-4 mt-3">
-                  <MDBBtn className="btn btn-outline-purple" type="submit">
+                  <MDBBtn
+                    className="btn btn-outline-purple"
+                    type="submit"
+                    onClick={submitPackage}
+                  >
                     Submit
                     <MDBIcon far icon="paper-plane" className="ml-2" />
                   </MDBBtn>
