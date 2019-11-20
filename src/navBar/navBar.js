@@ -10,7 +10,6 @@ import {
   MDBCollapse,
   MDBFormInline,
   MDBDropdown,
-  MDBDropdownToggle,
   MDBDropdownMenu,
   MDBDropdownItem
 } from "mdbreact";
@@ -25,7 +24,12 @@ class NavbarPage extends Component {
     this.setState({ isOpen: !this.state.isOpen });
   };
 
+  logOut = () => {
+    localStorage.clear();
+  };
+
   render() {
+    if (window.location.pathname === '/' || window.location.pathname === '/register') return null;
     return (
       <Router>
         <MDBNavbar color="grey" dark expand="lg">
@@ -35,20 +39,17 @@ class NavbarPage extends Component {
           <MDBNavbarToggler onClick={this.toggleCollapse} />
           <MDBCollapse id="navbarCollapse3" isOpen={this.state.isOpen} navbar>
             <MDBNavbarNav left>
-              <MDBNavItem active>
-                <MDBNavLink to="#!">Home</MDBNavLink>
+              <MDBNavItem>
+                <MDBNavLink to="/package">Delivery</MDBNavLink>
               </MDBNavItem>
               <MDBNavItem>
                 <MDBNavLink to="#!">Features</MDBNavLink>
               </MDBNavItem>
               <MDBNavItem>
-                <MDBNavLink to="#!">Pricing</MDBNavLink>
+                <MDBNavLink  to="/" onClick={this.logOut}>Log Out</MDBNavLink>
               </MDBNavItem>
               <MDBNavItem>
                 <MDBDropdown>
-                  <MDBDropdownToggle nav caret>
-                    <span className="mr-2">Dropdown</span>
-                  </MDBDropdownToggle>
                   <MDBDropdownMenu>
                     <MDBDropdownItem href="#!">Action</MDBDropdownItem>
                     <MDBDropdownItem href="#!">Another Action</MDBDropdownItem>
@@ -64,16 +65,7 @@ class NavbarPage extends Component {
             </MDBNavbarNav>
             <MDBNavbarNav right>
               <MDBNavItem>
-                <MDBFormInline waves>
-                  <div className="md-form my-0">
-                    <input
-                      className="form-control mr-sm-2"
-                      type="text"
-                      placeholder="Search"
-                      aria-label="Search"
-                    />
-                  </div>
-                </MDBFormInline>
+                <MDBFormInline waves></MDBFormInline>
               </MDBNavItem>
             </MDBNavbarNav>
           </MDBCollapse>

@@ -63,6 +63,7 @@ const PackageConfirmation = () => {
                   id="defaultFormCardNameEx"
                   className="form-control"
                   value = {companyName}
+                  onChange={e => setCompanyNames(e.target.value)}
                 />
                 <br />
                 <label
@@ -76,6 +77,7 @@ const PackageConfirmation = () => {
                   id="defaultFormCardNameEx"
                   className="form-control"
                   value = {name}
+                  onChange={e => setResidentNames(e.target.value)}
                 />
                 <br />
                 <label
@@ -89,6 +91,7 @@ const PackageConfirmation = () => {
                   id="defaultFormCardNameEx"
                   className="form-control"
                   value = {moment.unix(deliveryDate).format('MM/DD/YYYY hh:mmA')}
+                  onChange={e => setDeliveryDate(e.target.value)}
                 />
                 <br />
                 <label
@@ -102,6 +105,7 @@ const PackageConfirmation = () => {
                   id="defaultFormCardNameEx"
                   className="form-control"
                   value = {additionalInfo}
+                  onChange={e => setAdditionalInfo(e.target.value)}
                 />
               </form>
             </MDBCardBody>
