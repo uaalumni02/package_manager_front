@@ -91,7 +91,6 @@ const Package = () => {
         />
       </header>
       <br></br>
-      {/* {packageConfirmation ? <Redirect to="/confirmation/" /> : ""} */}
       {packageConfirmation ? <Redirect to={`/confirmation/${packageId}`} /> : ""}
       <MDBRow>
         <MDBCol md="6">
