@@ -29,7 +29,6 @@ class NavbarPage extends Component {
   };
 
   render() {
-    if (window.location.pathname === '/' || window.location.pathname === '/register') return null;
     return (
       <Router>
         <MDBNavbar color="grey" dark expand="lg">
