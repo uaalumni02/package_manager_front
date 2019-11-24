@@ -8,7 +8,8 @@ import {
   MDBBtn,
   MDBCard,
   MDBCardBody,
-  MDBInput
+  MDBInput,
+  MDBNavLink,
 } from "mdbreact";
 
 const Login = () => {
@@ -96,7 +97,7 @@ const Login = () => {
                 Don't have an account?
                 <a href="/register" className="dark-grey-text font-weight-bold ml-1">
                   Sign up
-                </a>
+                </a>                
               </p>
             </MDBCardBody>
           </MDBCard>

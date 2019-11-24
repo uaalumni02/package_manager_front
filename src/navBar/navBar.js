@@ -13,7 +13,8 @@ import {
   MDBDropdownMenu,
   MDBDropdownItem
 } from "mdbreact";
-import { BrowserRouter as Router } from "react-router-dom";
+
+import { BrowserRouter, Link } from "react-router-dom";
 
 class NavbarPage extends Component {
   state = {
@@ -30,7 +31,9 @@ class NavbarPage extends Component {
 
   render() {
     return (
-      <Router>
+    
+      // <Link to={'/register'}>OOOOOO</Link>
+      <>
         <MDBNavbar color="grey" dark expand="lg">
           <MDBNavbarBrand>
             <strong className="white-text">Navbar</strong>
@@ -39,13 +42,13 @@ class NavbarPage extends Component {
           <MDBCollapse id="navbarCollapse3" isOpen={this.state.isOpen} navbar>
             <MDBNavbarNav left>
               <MDBNavItem>
-                <MDBNavLink to="/package">Delivery</MDBNavLink>
+                <MDBNavLink to={"/package/"} >Delivery</MDBNavLink>
               </MDBNavItem>
               <MDBNavItem>
                 <MDBNavLink to="#!">Features</MDBNavLink>
               </MDBNavItem>
               <MDBNavItem>
-                <MDBNavLink  to="/" onClick={this.logOut}>Log Out</MDBNavLink>
+                <MDBNavLink   to={"/"} onClick={this.logOut}>Log Out</MDBNavLink>
               </MDBNavItem>
               <MDBNavItem>
                 <MDBDropdown>
@@ -69,7 +72,7 @@ class NavbarPage extends Component {
             </MDBNavbarNav>
           </MDBCollapse>
         </MDBNavbar>
-      </Router>
+      </>
     );
   }
 }

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
-import { BrowserRouter, Route } from "react-router-dom";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Resident from "./resident/resident";
 import Login from "./login/login";
 import Register from "./register/register";
@@ -14,27 +14,29 @@ function App() {
   const checkLogin = () => {
     const token = localStorage.getItem("token");
     if (token) {
-      setLoggedIn(true)
+      setLoggedIn(true);
     }
-  }
+  };
   useEffect(() => {
-    checkLogin()
-  }, []);
+    checkLogin();
+  });
   return (
     <div className="App">
       <header className="App-header">
+
       </header>
-      {loggedIn ? <NavbarPage /> : ""}
       <BrowserRouter>
-        <Route path="/" exact component={Login} />
-        <Route path="/resident" exact component={Resident} />
-        <Route path="/register" exact component={Register} />
-        <Route path="/package" exact component={Package} />
-        <Route path="/confirmation/:id" exact component={Confirmation} />
+        <div>{loggedIn ? <NavbarPage /> : ""}</div>
+      <Switch>
+        <Route exact path="/" component={Login} />
+        <Route exact path="/resident" component={Resident} />
+        <Route exact path="/register" component={Register} />
+        <Route exact path="/package" component={Package} />
+        <Route exact path="/confirmation/:id" component={Confirmation} />
+      </Switch>
       </BrowserRouter>
     </div>
   );
 }
-
 
 export default App;

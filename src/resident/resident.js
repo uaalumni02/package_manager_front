@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-
 import {
   MDBContainer,
   MDBRow,
@@ -10,17 +9,16 @@ import {
   MDBIcon
 } from "mdbreact";
 
-
 const Resident = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
-  
+
   const handleSubmit = event => {
     event.preventDefault();
     const token = localStorage.getItem("token");
     const bearer = "Bearer " + token;
-    
+
     fetch("http://localhost:3000/api/resident", {
       method: "post",
       headers: {
@@ -34,13 +32,18 @@ const Resident = () => {
       })
     })
       .then(res => res.json())
-      .then(response => {
-
-      })
+      .then(response => {})
       .catch(error => console.error("Error:", error));
   };
   return (
     <MDBContainer>
+      <header className="logo">
+        <img
+          src="https://chris180.org/wp-content/uploads/2016/08/Logo-450x200.png"
+          alt="main logo"
+          className="center"
+        />
+      </header>
       <br></br>
       <MDBRow>
         <MDBCol md="6">
