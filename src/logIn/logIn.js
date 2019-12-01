@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Redirect } from "react-router-dom";
+// import UserContext from '../UserContext'
 import "./login.css";
 import {
   MDBContainer,
@@ -9,7 +10,6 @@ import {
   MDBCard,
   MDBCardBody,
   MDBInput,
-  MDBNavLink,
 } from "mdbreact";
 
 const Login = () => {
@@ -17,6 +17,8 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [InvalidLogin, setInvalidLogin] = useState("");
   const [loggedIn, setLoggedIn] = useState(false);
+  // const user = useContext(UserContext)
+  // console.log(user)
 
   const handleSubmit = event => {
     event.preventDefault();

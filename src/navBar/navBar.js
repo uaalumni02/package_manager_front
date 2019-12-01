@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-
 import {
   MDBNavbar,
   MDBNavbarBrand,
@@ -14,7 +13,6 @@ import {
   MDBDropdownItem
 } from "mdbreact";
 
-import { BrowserRouter, Link } from "react-router-dom";
 
 class NavbarPage extends Component {
   state = {
@@ -31,8 +29,6 @@ class NavbarPage extends Component {
 
   render() {
     return (
-    
-      // <Link to={'/register'}>OOOOOO</Link>
       <>
         <MDBNavbar color="grey" dark expand="lg">
           <MDBNavbarBrand>

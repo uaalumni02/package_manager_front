@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { UserContext } from '../contexts/UserContext';
 import {
   MDBContainer,
   MDBRow,
@@ -13,7 +14,9 @@ const Resident = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
-
+  
+  const { loggedIn } = useContext(UserContext);
+  console.log(loggedIn)
   const handleSubmit = event => {
     event.preventDefault();
     const token = localStorage.getItem("token");
