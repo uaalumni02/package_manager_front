@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Redirect } from "react-router-dom";
-// import UserContext from '../UserContext'
 import "./login.css";
 import {
   MDBContainer,
@@ -17,9 +16,7 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [InvalidLogin, setInvalidLogin] = useState("");
   const [loggedIn, setLoggedIn] = useState(false);
-  // const user = useContext(UserContext)
-  // console.log(user)
-
+  
   const handleSubmit = event => {
     event.preventDefault();
     fetch("http://localhost:3000/api/user/login", {
@@ -59,7 +56,7 @@ const Login = () => {
 
       <MDBRow>
         <MDBCol md="5">
-          <MDBCard>
+          <MDBCard className="loginCard">
             <div className="header pt-3 grey lighten-2">
               <MDBRow className="d-flex justify-content-start">
                 <h3 className="deep-grey-text mt-3 mb-4 pb-1 mx-5">Log in</h3>

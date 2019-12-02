@@ -1,5 +1,7 @@
 import React, { useState, useContext } from "react";
 import { UserContext } from '../contexts/UserContext';
+import NavbarPage from "../navBar/navBar";
+import "./resident.css";
 import {
   MDBContainer,
   MDBRow,
@@ -39,18 +41,20 @@ const Resident = () => {
       .catch(error => console.error("Error:", error));
   };
   return (
-    <MDBContainer>
+    <>
+     {/* <MDBContainer> */}
+        <div>{loggedIn ? <NavbarPage /> : ""}</div>
       <header className="logo">
         <img
           src="https://chris180.org/wp-content/uploads/2016/08/Logo-450x200.png"
           alt="main logo"
-          className="center"
+          className="residentCenter"
         />
       </header>
       <br></br>
       <MDBRow>
         <MDBCol md="6">
-          <MDBCard>
+          <MDBCard className="residentCard">
             <MDBCardBody>
               <form>
                 <p className="h4 text-center py-4">Add New Resident</p>
@@ -108,7 +112,8 @@ const Resident = () => {
           </MDBCard>
         </MDBCol>
       </MDBRow>
-    </MDBContainer>
+    {/* </MDBContainer> */}
+    </>
   );
 };
 

@@ -1,5 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Redirect } from "react-router-dom";
+import { UserContext } from '../contexts/UserContext';
+import NavbarPage from "../navBar/navBar";
+import "./package.css";
 import {
   MDBContainer,
   MDBRow,
@@ -19,6 +22,7 @@ const Package = () => {
   const [residentId, setResidentId] = useState("");
   const [packageConfirmation, setPackageConfirmation] = useState(false);
   const [packageId, setpackageId] = useState("");
+  const { loggedIn } = useContext(UserContext);
 
   const fetchCompanyData = () => {
     const token = localStorage.getItem("token");
@@ -82,19 +86,21 @@ const Package = () => {
       .catch(error => console.error("Error:", error));
   };
   return (
-    <MDBContainer>
+    <>
+    {/* <MDBContainer> */}
+      <div>{loggedIn ? <NavbarPage /> : ""}</div>
       <header className="logo">
         <img
           src="https://chris180.org/wp-content/uploads/2016/08/Logo-450x200.png"
           alt="main logo"
-          className="center"
+          className="packageCenter"
         />
       </header>
       <br></br>
       {packageConfirmation ? <Redirect to={`/confirmation/${packageId}`} /> : ""}
       <MDBRow>
         <MDBCol md="6">
-          <MDBCard>
+          <MDBCard className="packageCard">
             <MDBCardBody>
               <form>
                 <p className="h4 text-center py-4">Package Delivery</p>
@@ -179,7 +185,8 @@ const Package = () => {
           </MDBCard>
         </MDBCol>
       </MDBRow>
-    </MDBContainer>
+    {/* </MDBContainer> */}
+    </>
   );
 };
 

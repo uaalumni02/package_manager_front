@@ -1,18 +1,15 @@
-import React, { useState, useEffect } from "react";
-import * as moment from 'moment'
-import {
-  MDBContainer,
-  MDBRow,
-  MDBCol,
-  MDBCard,
-  MDBCardBody,
-} from "mdbreact";
+import React, { useState, useEffect, useContext } from "react";
+import * as moment from "moment";
+import { UserContext } from "../contexts/UserContext";
+import NavbarPage from "../navBar/navBar";
+import { MDBContainer, MDBRow, MDBCol, MDBCard, MDBCardBody } from "mdbreact";
 
 const PackageConfirmation = () => {
-    const [companyName, setCompanyNames] = useState("");
-    const [name, setResidentNames] = useState("");
-    const [additionalInfo, setAdditionalInfo] = useState("");
-    const [deliveryDate, setDeliveryDate] = useState("");
+  const [companyName, setCompanyNames] = useState("");
+  const [name, setResidentNames] = useState("");
+  const [additionalInfo, setAdditionalInfo] = useState("");
+  const [deliveryDate, setDeliveryDate] = useState("");
+  const { loggedIn } = useContext(UserContext);
   const fetchPackageData = () => {
     const token = localStorage.getItem("token");
     const bearer = "Bearer " + token;
@@ -26,10 +23,10 @@ const PackageConfirmation = () => {
     })
       .then(res => res.json())
       .then(response => {
-        setCompanyNames(response.data.companyName.companyName)
-        setResidentNames(response.data.name.name)
-        setAdditionalInfo(response.data.additionalInfo)
-        setDeliveryDate(response.data.deliveryDate)
+        setCompanyNames(response.data.companyName.companyName);
+        setResidentNames(response.data.name.name);
+        setAdditionalInfo(response.data.additionalInfo);
+        setDeliveryDate(response.data.deliveryDate);
       })
       .catch(error => console.error("Error:", error));
   };
@@ -37,7 +34,9 @@ const PackageConfirmation = () => {
     fetchPackageData();
   }, []);
   return (
-    <MDBContainer>
+    // <MDBContainer>
+    <>
+    <div>{loggedIn ? <NavbarPage /> : ""}</div>
       <header className="logo">
         <img
           src="https://chris180.org/wp-content/uploads/2016/08/Logo-450x200.png"
@@ -62,7 +61,7 @@ const PackageConfirmation = () => {
                   type="text"
                   id="defaultFormCardNameEx"
                   className="form-control"
-                  value = {companyName}
+                  value={companyName}
                   onChange={e => setCompanyNames(e.target.value)}
                 />
                 <br />
@@ -76,7 +75,7 @@ const PackageConfirmation = () => {
                   type="text"
                   id="defaultFormCardNameEx"
                   className="form-control"
-                  value = {name}
+                  value={name}
                   onChange={e => setResidentNames(e.target.value)}
                 />
                 <br />
@@ -84,13 +83,13 @@ const PackageConfirmation = () => {
                   htmlFor="defaultFormCardNameEx"
                   className="grey-text font-weight-light"
                 >
-                   Date and Time Received
+                  Date and Time Received
                 </label>
                 <textarea
                   type="text"
                   id="defaultFormCardNameEx"
                   className="form-control"
-                  value = {moment.unix(deliveryDate).format('MM/DD/YYYY hh:mmA')}
+                  value={moment.unix(deliveryDate).format("MM/DD/YYYY hh:mmA")}
                   onChange={e => setDeliveryDate(e.target.value)}
                 />
                 <br />
@@ -104,7 +103,7 @@ const PackageConfirmation = () => {
                   type="text"
                   id="defaultFormCardNameEx"
                   className="form-control"
-                  value = {additionalInfo}
+                  value={additionalInfo}
                   onChange={e => setAdditionalInfo(e.target.value)}
                 />
               </form>
@@ -112,7 +111,8 @@ const PackageConfirmation = () => {
           </MDBCard>
         </MDBCol>
       </MDBRow>
-    </MDBContainer>
+    {/* </MDBContainer> */}
+    </>
   );
 };
 export default PackageConfirmation;

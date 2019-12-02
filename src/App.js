@@ -15,7 +15,7 @@ function App() {
       <header className="App-header"></header>
       <BrowserRouter>
         <UserContextProvider>
-          <NavbarPage />
+          {/* <NavbarPage /> */}
           {/* <div>{loggedIn ? <NavbarPage /> : ""}</div> */}
           <Switch>
             <Route exact path="/" component={Login} />
