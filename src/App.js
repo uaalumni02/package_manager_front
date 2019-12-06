@@ -6,7 +6,7 @@ import Login from "./login/login";
 import Register from "./register/register";
 import Package from "./package/package";
 import Confirmation from "./confirmation/confirmation";
-import NavbarPage from "./navBar/navBar";
+import AllPackages from "./allPackages/allPackages";
 import UserContextProvider from "./contexts/UserContext";
 
 function App() {
@@ -15,14 +15,13 @@ function App() {
       <header className="App-header"></header>
       <BrowserRouter>
         <UserContextProvider>
-          {/* <NavbarPage /> */}
-          {/* <div>{loggedIn ? <NavbarPage /> : ""}</div> */}
           <Switch>
             <Route exact path="/" component={Login} />
             <Route exact path="/resident" component={Resident} />
             <Route exact path="/register" component={Register} />
             <Route exact path="/package" component={Package} />
             <Route exact path="/confirmation/:id" component={Confirmation} />
+            <Route exact path="/allPackages" component={AllPackages} />
           </Switch>
         </UserContextProvider>
       </BrowserRouter>

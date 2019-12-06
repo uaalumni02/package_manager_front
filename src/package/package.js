@@ -4,7 +4,6 @@ import { UserContext } from '../contexts/UserContext';
 import NavbarPage from "../navBar/navBar";
 import "./package.css";
 import {
-  MDBContainer,
   MDBRow,
   MDBCol,
   MDBBtn,

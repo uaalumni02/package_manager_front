@@ -3,7 +3,6 @@ import { UserContext } from '../contexts/UserContext';
 import NavbarPage from "../navBar/navBar";
 import "./resident.css";
 import {
-  MDBContainer,
   MDBRow,
   MDBCol,
   MDBBtn,
@@ -18,7 +17,6 @@ const Resident = () => {
   const [phone, setPhone] = useState("");
   
   const { loggedIn } = useContext(UserContext);
-  console.log(loggedIn)
   const handleSubmit = event => {
     event.preventDefault();
     const token = localStorage.getItem("token");

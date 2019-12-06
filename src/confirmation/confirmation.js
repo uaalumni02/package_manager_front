@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import * as moment from "moment";
 import { UserContext } from "../contexts/UserContext";
 import NavbarPage from "../navBar/navBar";
-import { MDBContainer, MDBRow, MDBCol, MDBCard, MDBCardBody } from "mdbreact";
+import { MDBRow, MDBCol, MDBCard, MDBCardBody } from "mdbreact";
 
 const PackageConfirmation = () => {
   const [companyName, setCompanyNames] = useState("");
