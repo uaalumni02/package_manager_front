@@ -52,7 +52,7 @@ const Login = () => {
       </header>
       <br></br>
 
-      {loggedIn ? <Redirect to="/resident/" /> : ""}
+      {loggedIn ? <Redirect to="/package/" /> : ""}
 
       <MDBRow>
         <MDBCol md="5">
