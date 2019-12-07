@@ -3,6 +3,7 @@ import * as moment from "moment";
 import { UserContext } from "../contexts/UserContext";
 import NavbarPage from "../navBar/navBar";
 import { MDBRow, MDBCol, MDBCard, MDBCardBody } from "mdbreact";
+import "./confirmation.css";
 
 const PackageConfirmation = () => {
   const [companyName, setCompanyNames] = useState("");
@@ -47,7 +48,7 @@ const PackageConfirmation = () => {
       <br></br>
       <MDBRow>
         <MDBCol md="6">
-          <MDBCard>
+          <MDBCard className="package">
             <MDBCardBody>
               <form>
                 <p className="h4 text-center py-4">Delivery Confirmation</p>

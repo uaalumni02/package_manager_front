@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import * as moment from "moment";
 import { UserContext } from "../contexts/UserContext";
 import NavbarPage from "../navBar/navBar";
+import "./allPackages.css";
 import {
   MDBCard,
   MDBCardBody,
@@ -41,10 +42,11 @@ const AllPackages = () => {
           className="center"
         />
       </header>
-      <MDBCol>
+      <br></br>
+      <div className="packageBody">
         {packages.map(delivery => (
-          <MDBCard style={{ width: "22rem" }}>
-            <MDBCardBody>
+          <div className="card packageCard" style={{ width: "18rem" }}>
+            <MDBCardBody className="card-body">
               <MDBCardTitle>{delivery.name.name}</MDBCardTitle>
               <MDBCardText>
                 Delivery Date:
@@ -52,9 +54,9 @@ const AllPackages = () => {
               </MDBCardText>
               <MDBCardText>{delivery.companyName.companyName}</MDBCardText>
             </MDBCardBody>
-          </MDBCard>
+          </div>
         ))}
-      </MDBCol>
+      </div>
     </>
   );
 };

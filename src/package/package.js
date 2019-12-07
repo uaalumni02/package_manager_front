@@ -99,7 +99,7 @@ const Package = () => {
       {packageConfirmation ? <Redirect to={`/confirmation/${packageId}`} /> : ""}
       <MDBRow>
         <MDBCol md="6">
-          <MDBCard className="packageCard">
+          <MDBCard className="package">
             <MDBCardBody>
               <form>
                 <p className="h4 text-center py-4">Package Delivery</p>
