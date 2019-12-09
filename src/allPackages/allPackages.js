@@ -20,6 +20,7 @@ const AllPackages = () => {
     })
       .then(res => res.json())
       .then(response => {
+        console.log(response.data)
         for (var i = 0; i < response.data.length; i++) {
           resident = response.data[i]._id;
         }
@@ -42,7 +43,7 @@ const AllPackages = () => {
     })
       .then(res => res.json())
       .then(response => {
-        window.location.reload();
+        fetchPackageData()
       })
       .catch(error => console.error("Error:", error));
   };
