@@ -5,7 +5,7 @@ import NavbarPage from "../navBar/navBar";
 import "./allPackages.css";
 import { MDBCardBody, MDBCardTitle, MDBCardText, MDBBtn } from "mdbreact";
 
-let resident = ""
+let resident = "";
 const AllPackages = () => {
   const [packages, setPackages] = useState([]);
   const { loggedIn } = useContext(UserContext);
@@ -42,7 +42,6 @@ const AllPackages = () => {
     })
       .then(res => res.json())
       .then(response => {
-        console.log(response.data)
         window.location.reload();
       })
       .catch(error => console.error("Error:", error));
@@ -78,6 +77,5 @@ const AllPackages = () => {
     </>
   );
 };
-
 
 export default AllPackages;

@@ -34,7 +34,9 @@ const Package = () => {
     })
       .then(res => res.json())
       .then(response => {
-        setCompanyNames(response.data);
+        const companies = response.data;
+        setCompanyId(companies[0]._id)
+        setCompanyNames(companies);
       })
       .catch(error => console.error("Error:", error));
   };
@@ -53,7 +55,9 @@ const Package = () => {
     })
       .then(res => res.json())
       .then(response => {
-        setResidentNames(response.data);
+        const residents = response.data;
+        setResidentId(residents[0]._id)
+        setResidentNames(residents);
       })
       .catch(error => console.error("Error:", error));
   };
@@ -77,6 +81,8 @@ const Package = () => {
     })
       .then(res => res.json())
       .then(response => {
+        console.log(response)
+        console.log(name)
         setpackageId(response.data._id);
         if (response.success === true) {
           setPackageConfirmation(true);
@@ -86,7 +92,6 @@ const Package = () => {
   };
   return (
     <>
-    {/* <MDBContainer> */}
       <div>{loggedIn ? <NavbarPage /> : ""}</div>
       <header className="logo">
         <img
@@ -184,7 +189,6 @@ const Package = () => {
           </MDBCard>
         </MDBCol>
       </MDBRow>
-    {/* </MDBContainer> */}
     </>
   );
 };
