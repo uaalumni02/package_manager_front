@@ -48,6 +48,9 @@ class NavbarPage extends Component {
                 <MDBNavLink to={"/resident"}>Add Resident</MDBNavLink>
               </MDBNavItem>
               <MDBNavItem>
+                <MDBNavLink to={"/allResidents"}>Residents</MDBNavLink>
+              </MDBNavItem>
+              <MDBNavItem>
                 <MDBNavLink   to={"/"} onClick={this.logOut}>Log Out</MDBNavLink>
               </MDBNavItem>
               <MDBNavItem>

@@ -81,8 +81,6 @@ const Package = () => {
     })
       .then(res => res.json())
       .then(response => {
-        console.log(response)
-        console.log(name)
         setpackageId(response.data._id);
         if (response.success === true) {
           setPackageConfirmation(true);

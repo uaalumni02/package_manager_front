@@ -1,18 +1,17 @@
 import React, { useState, useEffect, useContext } from "react";
-import * as moment from "moment";
 import { UserContext } from "../contexts/UserContext";
 import NavbarPage from "../navBar/navBar";
-import "./allPackages.css";
+import "./allResidents.css";
 import { MDBCardBody, MDBCardTitle, MDBCardText, MDBBtn } from "mdbreact";
 
 let resident = "";
-const AllPackages = () => {
-  const [packages, setPackages] = useState([]);
+const AllResidents = () => {
+  const [residents, setResidents] = useState([]);
   const { loggedIn } = useContext(UserContext);
-  const fetchPackageData = () => {
+  const fetchResidentData = () => {
     const token = localStorage.getItem("token");
     const bearer = "Bearer " + token;
-    fetch("http://localhost:3000/api/package", {
+    fetch("http://localhost:3000/api/resident", {
       method: "GET",
       headers: {
         Authorization: bearer
@@ -23,18 +22,18 @@ const AllPackages = () => {
         for (var i = 0; i < response.data.length; i++) {
           resident = response.data[i]._id;
         }
-        setPackages(response.data);
+        setResidents(response.data);
       })
       .catch(error => console.error("Error:", error));
   };
   useEffect(() => {
-    fetchPackageData();
+    fetchResidentData();
   }, []);
 
-  const deletePackage = () => {
+  const deleteResident = () => {
     const token = localStorage.getItem("token");
     const bearer = "Bearer " + token;
-    fetch("http://localhost:3000/api/package/" + resident, {
+    fetch("http://localhost:3000/api/resident/" + resident, {
       method: "DELETE",
       headers: {
         Authorization: bearer
@@ -42,10 +41,11 @@ const AllPackages = () => {
     })
       .then(res => res.json())
       .then(response => {
-        fetchPackageData()
+        fetchResidentData();
       })
       .catch(error => console.error("Error:", error));
   };
+
   return (
     <>
       <div>{loggedIn ? <NavbarPage /> : ""}</div>
@@ -57,19 +57,16 @@ const AllPackages = () => {
         />
       </header>
       <br></br>
-      <div className="packageBody">
-        {packages.map(delivery => (
-          <div className="card packageCard" style={{ width: "18rem" }}>
+      <div className="residentBody">
+        {residents.map(resident => (
+          <div className="card residentCards" style={{ width: "18rem" }}>
             <MDBCardBody className="card-body">
-              <MDBCardTitle value={delivery.name._id} key={delivery.name._id}>
-                {delivery.name.name}
+              <MDBCardTitle value={resident._id} key={resident._id}>
+                {resident.name}
               </MDBCardTitle>
-              <MDBCardText>
-                Delivery Date:
-                {moment.unix(delivery.deliveryDate).format("MM/DD/YYYY hh:mmA")}
-              </MDBCardText>
-              <MDBCardText>{delivery.companyName.companyName}</MDBCardText>
-              <MDBBtn onClick={deletePackage}>Pick Up</MDBBtn>
+              <MDBCardText>Email: {resident.email}</MDBCardText>
+              <MDBCardText>Phone: {resident.phone}</MDBCardText>
+              <MDBBtn onClick={deleteResident}>Delete</MDBBtn>
             </MDBCardBody>
           </div>
         ))}
@@ -78,4 +75,4 @@ const AllPackages = () => {
   );
 };
 
-export default AllPackages;
+export default AllResidents;

@@ -1,4 +1,5 @@
 import React, { useState, useContext } from "react";
+import { Redirect } from "react-router-dom";
 import { UserContext } from '../contexts/UserContext';
 import NavbarPage from "../navBar/navBar";
 import "./resident.css";
@@ -15,7 +16,7 @@ const Resident = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
-  
+  const [residentConfirmation, setResidentConfirmation] = useState(false);
   const { loggedIn } = useContext(UserContext);
   const handleSubmit = event => {
     event.preventDefault();
@@ -35,7 +36,11 @@ const Resident = () => {
       })
     })
       .then(res => res.json())
-      .then(response => {})
+      .then(response => {
+        if (response.success === true) {
+          setResidentConfirmation(true);
+        }
+      })
       .catch(error => console.error("Error:", error));
   };
   return (
@@ -50,6 +55,7 @@ const Resident = () => {
         />
       </header>
       <br></br>
+      {residentConfirmation ? <Redirect to={`/allResidents/`} /> : ""}
       <MDBRow>
         <MDBCol md="6">
           <MDBCard className="residentCard">

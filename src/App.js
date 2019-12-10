@@ -8,6 +8,7 @@ import Package from "./package/package";
 import Confirmation from "./confirmation/confirmation";
 import AllPackages from "./allPackages/allPackages";
 import UserContextProvider from "./contexts/UserContext";
+import AllResidents from "./allResidents/allResidents";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
             <Route exact path="/package" component={Package} />
             <Route exact path="/confirmation/:id" component={Confirmation} />
             <Route exact path="/allPackages" component={AllPackages} />
+            <Route exact path="/allResidents" component={AllResidents} />
           </Switch>
         </UserContextProvider>
       </BrowserRouter>
