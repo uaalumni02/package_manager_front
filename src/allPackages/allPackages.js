@@ -20,6 +20,7 @@ const AllPackages = () => {
     })
       .then(res => res.json())
       .then(response => {
+        console.log(response)
         for (var i = 0; i < response.data.length; i++) {
           resident = response.data[i]._id;
         }
