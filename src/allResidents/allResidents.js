@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { UserContext } from "../contexts/UserContext";
 import NavbarPage from "../navBar/navBar";
+import { Redirect } from "react-router-dom";
 import "./allResidents.css";
 import { MDBCardBody, MDBCardTitle, MDBCardText, MDBBtn } from "mdbreact";
 
@@ -66,6 +67,13 @@ const AllResidents = () => {
               </MDBCardTitle>
               <MDBCardText>Email: {resident.email}</MDBCardText>
               <MDBCardText>Phone: {resident.phone}</MDBCardText>
+              <MDBBtn
+                onClick={event =>
+                  (window.location.href = `/editResident/${resident._id}`)
+                }
+              >
+                Edit
+              </MDBBtn>
               <MDBBtn onClick={deleteResident}>Delete</MDBBtn>
             </MDBCardBody>
           </div>

@@ -9,7 +9,7 @@ import Confirmation from "./confirmation/confirmation";
 import AllPackages from "./allPackages/allPackages";
 import UserContextProvider from "./contexts/UserContext";
 import AllResidents from "./allResidents/allResidents";
-
+import EditResident from "./editResident/editResident";
 function App() {
   return (
     <div className="App">
@@ -24,6 +24,7 @@ function App() {
             <Route exact path="/confirmation/:id" component={Confirmation} />
             <Route exact path="/allPackages" component={AllPackages} />
             <Route exact path="/allResidents" component={AllResidents} />
+            <Route exact path="/editResident/:id" component={EditResident} />
           </Switch>
         </UserContextProvider>
       </BrowserRouter>
