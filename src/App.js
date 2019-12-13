@@ -10,6 +10,7 @@ import AllPackages from "./allPackages/allPackages";
 import UserContextProvider from "./contexts/UserContext";
 import AllResidents from "./allResidents/allResidents";
 import EditResident from "./editResident/editResident";
+
 function App() {
   return (
     <div className="App">

@@ -2,10 +2,8 @@ import React, { useState, useEffect, useContext } from "react";
 import * as moment from "moment";
 import { UserContext } from "../contexts/UserContext";
 import NavbarPage from "../navBar/navBar";
-import "./allPackages.css";
-import { MDBCardBody, MDBCardTitle, MDBCardText, MDBBtn } from "mdbreact";
+import { MDBTable, MDBTableBody, MDBTableHead } from "mdbreact";
 
-let resident = "";
 const AllPackages = () => {
   const [packages, setPackages] = useState([]);
   const { loggedIn } = useContext(UserContext);
@@ -20,10 +18,8 @@ const AllPackages = () => {
     })
       .then(res => res.json())
       .then(response => {
-        console.log(response)
-        for (var i = 0; i < response.data.length; i++) {
-          resident = response.data[i]._id;
-        }
+        console.log(response.data);
+
         setPackages(response.data);
       })
       .catch(error => console.error("Error:", error));
@@ -32,21 +28,6 @@ const AllPackages = () => {
     fetchPackageData();
   }, []);
 
-  const deletePackage = () => {
-    const token = localStorage.getItem("token");
-    const bearer = "Bearer " + token;
-    fetch("http://localhost:3000/api/package/" + resident, {
-      method: "DELETE",
-      headers: {
-        Authorization: bearer
-      }
-    })
-      .then(res => res.json())
-      .then(response => {
-        fetchPackageData()
-      })
-      .catch(error => console.error("Error:", error));
-  };
   return (
     <>
       <div>{loggedIn ? <NavbarPage /> : ""}</div>
@@ -58,23 +39,28 @@ const AllPackages = () => {
         />
       </header>
       <br></br>
-      <div className="packageBody">
-        {packages.map(delivery => (
-          <div className="card packageCard" style={{ width: "18rem" }}>
-            <MDBCardBody className="card-body">
-              <MDBCardTitle value={delivery.name._id} key={delivery.name._id}>
-                {delivery.name.name}
-              </MDBCardTitle>
-              <MDBCardText>
-                Delivery Date:
+      <MDBTable bordered>
+        <MDBTableHead>
+          <tr>
+            <th>Delivered</th>
+            <th>Name</th>
+            <th>Date</th>
+            <th>Company</th>
+          </tr>
+        </MDBTableHead>
+        <MDBTableBody>
+          {packages.map(delivery => (
+            <tr>
+              <td>{delivery.isDelivered}</td>
+              <td>{delivery.name.name}</td>
+              <td>
                 {moment.unix(delivery.deliveryDate).format("MM/DD/YYYY hh:mmA")}
-              </MDBCardText>
-              <MDBCardText>{delivery.companyName.companyName}</MDBCardText>
-              <MDBBtn onClick={deletePackage}>Pick Up</MDBBtn>
-            </MDBCardBody>
-          </div>
-        ))}
-      </div>
+              </td>
+              <td>{delivery.companyName.companyName}</td>
+            </tr>
+          ))}
+        </MDBTableBody>
+      </MDBTable>
     </>
   );
 };
