@@ -22,6 +22,7 @@ const Package = () => {
   const [packageConfirmation, setPackageConfirmation] = useState(false);
   const [packageId, setpackageId] = useState("");
   const { loggedIn } = useContext(UserContext);
+  const [isDelivered] = useState(false);
 
   const fetchCompanyData = () => {
     const token = localStorage.getItem("token");
@@ -44,6 +45,7 @@ const Package = () => {
     fetchCompanyData();
     fetchResidentData();
   }, []);
+
   const fetchResidentData = () => {
     const token = localStorage.getItem("token");
     const bearer = "Bearer " + token;
@@ -76,7 +78,8 @@ const Package = () => {
         name: residentId,
         companyName: companyId,
         deliveryDate,
-        additionalInfo
+        additionalInfo,
+        isDelivered
       })
     })
       .then(res => res.json())
