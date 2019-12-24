@@ -19,6 +19,7 @@ const EditPackage = () => {
   const [companyId, setCompanyId] = useState("");
   const [residentId, setResidentId] = useState("");
   const [packageConfirmation, setPackageConfirmation] = useState(false);
+  const [currentPackageData, setCurrentPackageData] = useState(null);
   const [isDelivered] = useState(false);
   const { loggedIn } = useContext(UserContext);
 
@@ -75,8 +76,10 @@ const EditPackage = () => {
     })
       .then(res => res.json())
       .then(response => {
+
+        console.log(response)
+        setCurrentPackageData(response.data);
         setAdditionalInfo(response.data.additionalInfo);
-        // console.log(response.data)
       })
       .catch(error => console.error("Error:", error));
   };
@@ -142,8 +145,13 @@ const EditPackage = () => {
                   onChange={e => setCompanyId(e.target.value)}
                 >
                   {companyName.map(company => {
+                    console.log(currentPackageData)
+                    const selected = currentPackageData && currentPackageData.companyName._id == company._id;
                     return (
-                      <option value={company._id} key={company._id}>
+                      <option 
+                        value={company._id} 
+                        key={company._id} 
+                        selected={selected}>
                         {company.companyName}
                       </option>
                     );
@@ -162,8 +170,9 @@ const EditPackage = () => {
                   onChange={e => setResidentId(e.target.value)}
                 >
                   {name.map(resident => {
+                    const selected = currentPackageData && currentPackageData.name._id == resident._id;
                     return (
-                      <option value={resident._id} key={resident._id}>
+                      <option value={resident._id} key={resident._id} selected={selected}>
                         {resident.name}
                       </option>
                     );
@@ -181,6 +190,7 @@ const EditPackage = () => {
                   id="defaultFormCardNameEx"
                   className="form-control"
                   onChange={e => setDeliveryDate(e.target.value)}
+                  value={ new Date() }
                 />
                 <br />
                 <label

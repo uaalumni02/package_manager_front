@@ -19,7 +19,7 @@ const AllPackages = () => {
     })
       .then(res => res.json())
       .then(response => {
-        console.log(response.data)
+        console.log(response.data);
         setPackages(response.data);
       })
       .catch(error => console.error("Error:", error));
@@ -28,10 +28,10 @@ const AllPackages = () => {
     fetchPackageData();
   }, []);
 
-  const deliverPackage =  (delivery) => {
-    const deliveredPackage = { ...delivery, isDelivered: true }
+  const deliverPackage = delivery => {
+    const deliveredPackage = { ...delivery, isDelivered: true };
 
-    const {  isDelivered } = deliveredPackage;
+    const { isDelivered } = deliveredPackage;
 
     const token = localStorage.getItem("token");
     const bearer = "Bearer " + token;
@@ -53,7 +53,6 @@ const AllPackages = () => {
       })
       .catch(error => console.error("Error:", error));
   };
-  
 
   return (
     <>
@@ -74,19 +73,17 @@ const AllPackages = () => {
             <th>Company</th>
             <th>Additional Info</th>
             <th>Retrieved</th>
-            <th>Pick Up</th>
+            <th>Action</th>
           </tr>
         </MDBTableHead>
         <MDBTableBody>
           {packages.map(delivery => (
-            <tr  onClick={event =>
-              (window.location.href = `/editPackage/${delivery._id}`)
-            } value={delivery._id} key={delivery._id}>
+            <tr value={delivery._id} key={delivery._id}>
               <td>{delivery.name.name}</td>
               <td>
                 {moment.unix(delivery.deliveryDate).format("MM/DD/YYYY hh:mmA")}
               </td>
-              <td >{delivery.companyName.companyName}</td>
+              <td>{delivery.companyName.companyName}</td>
               <td>{delivery.additionalInfo}</td>
               <td>{delivery.isDelivered ? "Yes" : "No"}</td>
               <td>
@@ -97,6 +94,15 @@ const AllPackages = () => {
                   size="sm"
                 >
                   Pick Up
+                </MDBBtn>
+                <MDBBtn
+                  color=""
+                  size="sm"
+                  onClick={event =>
+                    (window.location.href = `/editPackage/${delivery._id}`)
+                  }
+                >
+                  Edit
                 </MDBBtn>
               </td>
             </tr>
