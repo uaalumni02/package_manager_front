@@ -5,7 +5,6 @@ import NavbarPage from "../navBar/navBar";
 import { MDBTable, MDBTableBody, MDBTableHead, MDBBtn } from "mdbreact";
 
 const AllPackages = () => {
-  // const [isDelivered] = useState(false);
   const [packages, setPackages] = useState([]);
   const { loggedIn } = useContext(UserContext);
 
@@ -20,6 +19,7 @@ const AllPackages = () => {
     })
       .then(res => res.json())
       .then(response => {
+        console.log(response.data)
         setPackages(response.data);
       })
       .catch(error => console.error("Error:", error));
@@ -42,7 +42,6 @@ const AllPackages = () => {
         Authorization: bearer
       },
       body: JSON.stringify({
-        // deliveryDate: deliveryDate,
         isDelivered
       })
     })
@@ -54,6 +53,7 @@ const AllPackages = () => {
       })
       .catch(error => console.error("Error:", error));
   };
+  
 
   return (
     <>
@@ -69,24 +69,26 @@ const AllPackages = () => {
       <MDBTable bordered>
         <MDBTableHead>
           <tr>
-            <th>Resident Pick-Up</th>
             <th>Name</th>
             <th>Delivery Date</th>
             <th>Company</th>
             <th>Additional Info</th>
+            <th>Retrieved</th>
             <th>Pick Up</th>
           </tr>
         </MDBTableHead>
         <MDBTableBody>
           {packages.map(delivery => (
-            <tr value={delivery._id} key={delivery._id}>
-              <td>{delivery.isDelivered ? "Yes" : "No"}</td>
+            <tr  onClick={event =>
+              (window.location.href = `/editPackage/${delivery._id}`)
+            } value={delivery._id} key={delivery._id}>
               <td>{delivery.name.name}</td>
               <td>
                 {moment.unix(delivery.deliveryDate).format("MM/DD/YYYY hh:mmA")}
               </td>
-              <td>{delivery.companyName.companyName}</td>
+              <td >{delivery.companyName.companyName}</td>
               <td>{delivery.additionalInfo}</td>
+              <td>{delivery.isDelivered ? "Yes" : "No"}</td>
               <td>
                 <MDBBtn
                   disabled={delivery.isDelivered}
@@ -101,6 +103,7 @@ const AllPackages = () => {
           ))}
         </MDBTableBody>
       </MDBTable>
+      <p>Total Packages: {packages.length}</p>
     </>
   );
 };

@@ -10,6 +10,7 @@ import AllPackages from "./allPackages/allPackages";
 import UserContextProvider from "./contexts/UserContext";
 import AllResidents from "./allResidents/allResidents";
 import EditResident from "./editResident/editResident";
+import EditPackage from "./editPackage/editPackage";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
             <Route exact path="/allPackages" component={AllPackages} />
             <Route exact path="/allResidents" component={AllResidents} />
             <Route exact path="/editResident/:id" component={EditResident} />
+            <Route exact path="/editPackage/:id" component={EditPackage} />
           </Switch>
         </UserContextProvider>
       </BrowserRouter>
