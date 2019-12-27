@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { Redirect } from "react-router-dom";
 import { UserContext } from "../contexts/UserContext";
 import NavbarPage from "../navBar/navBar";
+import moment from 'moment'
 import {
   MDBRow,
   MDBCol,
@@ -190,7 +191,7 @@ const EditPackage = () => {
                   id="defaultFormCardNameEx"
                   className="form-control"
                   onChange={e => setDeliveryDate(e.target.value)}
-                  value={ new Date() }
+                  value={ currentPackageData ? moment.unix(currentPackageData.deliveryDate).format('YYYY-MM-DDTH:mm') : ''}
                 />
                 <br />
                 <label

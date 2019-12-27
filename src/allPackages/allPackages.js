@@ -7,7 +7,6 @@ import { MDBTable, MDBTableBody, MDBTableHead, MDBBtn } from "mdbreact";
 const AllPackages = () => {
   const [packages, setPackages] = useState([]);
   const { loggedIn } = useContext(UserContext);
-
   const fetchPackageData = () => {
     const token = localStorage.getItem("token");
     const bearer = "Bearer " + token;
@@ -19,7 +18,6 @@ const AllPackages = () => {
     })
       .then(res => res.json())
       .then(response => {
-        console.log(response.data);
         setPackages(response.data);
       })
       .catch(error => console.error("Error:", error));
@@ -30,7 +28,6 @@ const AllPackages = () => {
 
   const deliverPackage = delivery => {
     const deliveredPackage = { ...delivery, isDelivered: true };
-
     const { isDelivered } = deliveredPackage;
 
     const token = localStorage.getItem("token");
@@ -53,7 +50,23 @@ const AllPackages = () => {
       })
       .catch(error => console.error("Error:", error));
   };
-
+  const deletePackage = delivery => {
+    const token = localStorage.getItem("token");
+    const bearer = "Bearer " + token;
+    fetch("http://localhost:3000/api/package/" + delivery._id, {
+      method: "DELETE",
+      headers: {
+        Authorization: bearer
+      }
+    })
+      .then(res => res.json())
+      .then(response => {
+        if (response.success === true) {
+          fetchPackageData();
+        }
+      })
+      .catch(error => console.error("Error:", error));
+  };
   return (
     <>
       <div>{loggedIn ? <NavbarPage /> : ""}</div>
@@ -103,6 +116,13 @@ const AllPackages = () => {
                   }
                 >
                   Edit
+                </MDBBtn>
+                <MDBBtn
+                  color=""
+                  size="sm"
+                  onClick={() => deletePackage(delivery)}
+                >
+                  Delete
                 </MDBBtn>
               </td>
             </tr>
