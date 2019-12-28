@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useContext } from "react";
+import * as moment from "moment";
 import { UserContext } from "../contexts/UserContext";
 import NavbarPage from "../navBar/navBar";
-import "./allResidents.css";
-import { MDBCardBody, MDBCardTitle, MDBCardText, MDBBtn } from "mdbreact";
+import { MDBTable, MDBTableBody, MDBTableHead, MDBBtn, MDBCol } from "mdbreact";
 
 let resident = "";
 const AllResidents = () => {
@@ -57,27 +57,37 @@ const AllResidents = () => {
         />
       </header>
       <br></br>
-      <div className="residentBody">
-        {residents.map(resident => (
-          <div className="card residentCards" style={{ width: "18rem" }}>
-            <MDBCardBody className="card-body">
-              <MDBCardTitle value={resident._id} key={resident._id}>
-                {resident.name}
-              </MDBCardTitle>
-              <MDBCardText>Email: {resident.email}</MDBCardText>
-              <MDBCardText>Phone: {resident.phone}</MDBCardText>
+      <MDBTable bordered>
+        <MDBTableHead>
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Action</th>
+          </tr>
+        </MDBTableHead>
+        <MDBTableBody>
+          {residents.map(resident => (
+            <tr value={resident._id} key={resident._id}>
+              <td>{resident.name}</td>
+              <td>{resident.email}</td>
+              <td>{resident.phone}</td>
               <MDBBtn
+                color=""
+                size="sm"
                 onClick={event =>
                   (window.location.href = `/editResident/${resident._id}`)
                 }
               >
                 Edit
               </MDBBtn>
-              <MDBBtn onClick={deleteResident}>Delete</MDBBtn>
-            </MDBCardBody>
-          </div>
-        ))}
-      </div>
+              <MDBBtn color="" size="sm" onClick={deleteResident}>
+                Delete
+              </MDBBtn>
+            </tr>
+          ))}
+        </MDBTableBody>
+      </MDBTable>
     </>
   );
 };
