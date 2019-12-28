@@ -2,10 +2,18 @@ import React, { useState, useEffect, useContext } from "react";
 import * as moment from "moment";
 import { UserContext } from "../contexts/UserContext";
 import NavbarPage from "../navBar/navBar";
-import { MDBTable, MDBTableBody, MDBTableHead, MDBBtn } from "mdbreact";
+import {
+  MDBTable,
+  MDBTableBody,
+  MDBTableHead,
+  MDBBtn,
+  MDBCol,
+  MDBIcon
+} from "mdbreact";
 
 const AllPackages = () => {
   const [packages, setPackages] = useState([]);
+  const [search, setSearch] = useState("");
   const { loggedIn } = useContext(UserContext);
   const fetchPackageData = () => {
     const token = localStorage.getItem("token");
@@ -67,6 +75,15 @@ const AllPackages = () => {
       })
       .catch(error => console.error("Error:", error));
   };
+
+  const handleInput = e => {
+    setSearch(e.target.value);
+    console.log(e.target.value);
+  };
+
+  let filteredPackages = packages.filter(delivery => {
+    return delivery.name.name.toLowerCase().includes(search.toLowerCase());
+  });
   return (
     <>
       <div>{loggedIn ? <NavbarPage /> : ""}</div>
@@ -77,6 +94,19 @@ const AllPackages = () => {
           className="center"
         />
       </header>
+      <br></br>
+      <MDBCol md="6">
+        <form className="form-inline mt-4 mb-4">
+          <MDBIcon icon="search" />
+          <input
+            className="form-control form-control-sm ml-3 w-75"
+            type="text"
+            placeholder="Search"
+            aria-label="Search"
+            onChange={handleInput}
+          />
+        </form>
+      </MDBCol>
       <br></br>
       <MDBTable bordered>
         <MDBTableHead>
@@ -90,7 +120,7 @@ const AllPackages = () => {
           </tr>
         </MDBTableHead>
         <MDBTableBody>
-          {packages.map(delivery => (
+          {filteredPackages.map(delivery => (
             <tr value={delivery._id} key={delivery._id}>
               <td>{delivery.name.name}</td>
               <td>
