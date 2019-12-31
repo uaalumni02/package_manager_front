@@ -20,7 +20,9 @@ const AllPackages = () => {
     })
       .then(res => res.json())
       .then(response => {
+        console.log(response.data)
         response.data.sort((a, b) => b.deliveryDate - a.deliveryDate);
+        response.data.sort((a, b) => b.isDelivered - a.isDelivered);
         setPackages(response.data);
       })
       .catch(error => console.error("Error:", error));
