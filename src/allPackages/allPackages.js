@@ -2,14 +2,8 @@ import React, { useState, useEffect, useContext } from "react";
 import * as moment from "moment";
 import { UserContext } from "../contexts/UserContext";
 import NavbarPage from "../navBar/navBar";
-import {
-  MDBTable,
-  MDBTableBody,
-  MDBTableHead,
-  MDBBtn,
-  MDBCol,
-  MDBIcon
-} from "mdbreact";
+import "./allPackages.css";
+import { MDBTable, MDBTableBody, MDBTableHead, MDBBtn, MDBCol } from "mdbreact";
 
 const AllPackages = () => {
   const [packages, setPackages] = useState([]);
@@ -26,6 +20,7 @@ const AllPackages = () => {
     })
       .then(res => res.json())
       .then(response => {
+        response.data.sort((a, b) => b.deliveryDate - a.deliveryDate);
         setPackages(response.data);
       })
       .catch(error => console.error("Error:", error));
@@ -78,12 +73,12 @@ const AllPackages = () => {
 
   const handleInput = e => {
     setSearch(e.target.value);
-    console.log(e.target.value);
   };
 
   let filteredPackages = packages.filter(delivery => {
     return delivery.name.name.toLowerCase().includes(search.toLowerCase());
   });
+
   return (
     <>
       <div>{loggedIn ? <NavbarPage /> : ""}</div>
@@ -95,9 +90,8 @@ const AllPackages = () => {
         />
       </header>
       <br></br>
-      <MDBCol md="6">
+      <MDBCol className="search" md="6">
         <form className="form-inline mt-4 mb-4">
-          <MDBIcon icon="search" />
           <input
             className="form-control form-control-sm ml-3 w-75"
             type="text"
@@ -159,7 +153,6 @@ const AllPackages = () => {
           ))}
         </MDBTableBody>
       </MDBTable>
-      <p>Total Packages: {packages.length}</p>
     </>
   );
 };
