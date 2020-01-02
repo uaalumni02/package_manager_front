@@ -23,6 +23,7 @@ const Package = () => {
   const [packageId, setpackageId] = useState("");
   const { loggedIn } = useContext(UserContext);
   const [isDelivered] = useState(false);
+  const [isDeleted] = useState(false);
 
   const fetchCompanyData = () => {
     const token = localStorage.getItem("token");
@@ -79,7 +80,8 @@ const Package = () => {
         companyName: companyId,
         deliveryDate,
         additionalInfo,
-        isDelivered
+        isDelivered, 
+        isDeleted
       })
     })
       .then(res => res.json())

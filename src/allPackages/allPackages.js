@@ -20,10 +20,12 @@ const AllPackages = () => {
     })
       .then(res => res.json())
       .then(response => {
-        console.log(response.data)
         response.data.sort((a, b) => b.deliveryDate - a.deliveryDate);
-        response.data.sort((a, b) => b.isDelivered - a.isDelivered);
-        setPackages(response.data);
+        response.data.sort((a, b) => a.isDelivered - b.isDelivered);
+        var newArray = response.data.filter(function (el) {
+          return el.isDeleted === false
+        });
+        setPackages(newArray);
       })
       .catch(error => console.error("Error:", error));
   };
@@ -55,14 +57,22 @@ const AllPackages = () => {
       })
       .catch(error => console.error("Error:", error));
   };
+  
   const deletePackage = delivery => {
+    const deletePackage = { ...delivery, isDeleted: true };
+    const { isDeleted } = deletePackage;
+
     const token = localStorage.getItem("token");
     const bearer = "Bearer " + token;
     fetch("http://localhost:3000/api/package/" + delivery._id, {
-      method: "DELETE",
+      method: "PATCH",
       headers: {
+        "Content-Type": "application/json",
         Authorization: bearer
-      }
+      },
+      body: JSON.stringify({
+        isDeleted
+      })
     })
       .then(res => res.json())
       .then(response => {
