@@ -3,12 +3,26 @@ import * as moment from "moment";
 import { UserContext } from "../contexts/UserContext";
 import NavbarPage from "../navBar/navBar";
 import "./allPackages.css";
-import { MDBTable, MDBTableBody, MDBTableHead, MDBBtn, MDBCol } from "mdbreact";
+import {
+  MDBTable,
+  MDBTableBody,
+  MDBTableHead,
+  MDBBtn,
+  MDBCol,
+  MDBContainer,
+  MDBModal,
+  MDBModalBody,
+  MDBModalHeader,
+  MDBModalFooter
+} from "mdbreact";
 
 const AllPackages = () => {
   const [packages, setPackages] = useState([]);
   const [search, setSearch] = useState("");
   const { loggedIn } = useContext(UserContext);
+
+  const [modal, setModal] = useState(false);
+
   const fetchPackageData = () => {
     const token = localStorage.getItem("token");
     const bearer = "Bearer " + token;
@@ -20,10 +34,11 @@ const AllPackages = () => {
     })
       .then(res => res.json())
       .then(response => {
+        console.log(response.data);
         response.data.sort((a, b) => b.deliveryDate - a.deliveryDate);
         response.data.sort((a, b) => a.isDelivered - b.isDelivered);
-        var newArray = response.data.filter(function (el) {
-          return el.isDeleted === false
+        let newArray = response.data.filter(el => {
+          return !el.isDeleted;
         });
         setPackages(newArray);
       })
@@ -51,13 +66,13 @@ const AllPackages = () => {
     })
       .then(res => res.json())
       .then(response => {
-        if (response.success === true) {
+        if (response.success) {
           fetchPackageData();
         }
       })
       .catch(error => console.error("Error:", error));
   };
-  
+
   const deletePackage = delivery => {
     const deletePackage = { ...delivery, isDeleted: true };
     const { isDeleted } = deletePackage;
@@ -76,7 +91,7 @@ const AllPackages = () => {
     })
       .then(res => res.json())
       .then(response => {
-        if (response.success === true) {
+        if (response.success) {
           fetchPackageData();
         }
       })
@@ -90,6 +105,10 @@ const AllPackages = () => {
   let filteredPackages = packages.filter(delivery => {
     return delivery.name.name.toLowerCase().includes(search.toLowerCase());
   });
+
+  const toggle = () => {
+    setModal(!modal);
+  };
 
   return (
     <>
@@ -153,11 +172,29 @@ const AllPackages = () => {
                 >
                   Edit
                 </MDBBtn>
-                <MDBBtn
-                  color=""
-                  size="sm"
-                  onClick={() => deletePackage(delivery)}
-                >
+                <MDBContainer>
+                  <MDBModal isOpen={modal} onClick={toggle}>
+                    <MDBModalHeader onClick={toggle}>
+                      Delete Confirmation
+                    </MDBModalHeader>
+                    <MDBModalBody>Please Confirm Deletion</MDBModalBody>
+                    <MDBModalFooter>
+                      <MDBBtn color="secondary" onClick={toggle}>
+                        Close
+                      </MDBBtn>
+                      <MDBBtn
+                        onClick={() => {
+                          deletePackage(delivery);
+                          toggle();
+                        }}
+                        color="primary"
+                      >
+                        Delete
+                      </MDBBtn>
+                    </MDBModalFooter>
+                  </MDBModal>
+                </MDBContainer>
+                <MDBBtn color="" size="sm" onClick={toggle}>
                   Delete
                 </MDBBtn>
               </td>
