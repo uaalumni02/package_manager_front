@@ -8,7 +8,7 @@ import {
   MDBBtn,
   MDBCard,
   MDBCardBody,
-  MDBInput,
+  MDBInput
 } from "mdbreact";
 
 const Login = () => {
@@ -16,7 +16,8 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [InvalidLogin, setInvalidLogin] = useState("");
   const [loggedIn, setLoggedIn] = useState(false);
-  
+  const [isAdmin, setIsAdmin] = useState(true);
+
   const handleSubmit = event => {
     event.preventDefault();
     fetch("http://localhost:3000/api/user/login", {
@@ -26,11 +27,15 @@ const Login = () => {
       },
       body: JSON.stringify({
         username,
-        password
+        password,
+        isAdmin
       })
     })
       .then(res => res.json())
       .then(response => {
+        if (response.data.user.isAdmin === false) {
+          setIsAdmin(false);
+        }
         if (response.success === false) {
           setInvalidLogin("Invalid username or password");
         } else {
@@ -51,9 +56,8 @@ const Login = () => {
         />
       </header>
       <br></br>
-
       {loggedIn ? <Redirect to="/package/" /> : ""}
-
+      {!isAdmin ? <Redirect to="/adminApproval/" /> : ""}
       <MDBRow>
         <MDBCol md="5">
           <MDBCard className="loginCard">
@@ -94,9 +98,12 @@ const Login = () => {
 
               <p className="font-small grey-text d-flex justify-content-center">
                 Don't have an account?
-                <a href="/register" className="dark-grey-text font-weight-bold ml-1">
+                <a
+                  href="/register"
+                  className="dark-grey-text font-weight-bold ml-1"
+                >
                   Sign up
-                </a>                
+                </a>
               </p>
             </MDBCardBody>
           </MDBCard>

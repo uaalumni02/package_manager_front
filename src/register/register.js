@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Redirect } from "react-router-dom";
+import "./register.css";
 import {
   MDBContainer,
   MDBRow,
@@ -13,7 +14,7 @@ import {
 const Register = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [loggedIn, setLoggedIn] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(true);
 
   const handleSubmit = event => {
     event.preventDefault();
@@ -24,14 +25,15 @@ const Register = () => {
       },
       body: JSON.stringify({
         username,
-        password
+        password,
+        isAdmin: false
       })
     })
       .then(res => res.json())
       .then(response => {
-        localStorage.setItem("token", response.userdata.token);
-        localStorage.setItem("user", response.userdata._id);
-        setLoggedIn(true);
+        if (response.success) {
+          setIsAdmin(false);
+        }
       })
       .catch(error => console.error("Error:", error));
   };
@@ -45,12 +47,10 @@ const Register = () => {
         />
       </header>
       <br></br>
-
-      {loggedIn ? <Redirect to="/resident/" /> : ""}
-
+      {!isAdmin ? <Redirect to="/adminApproval/" /> : ""}
       <MDBRow>
         <MDBCol md="5">
-          <MDBCard>
+          <MDBCard className="loginCard">
             <div className="header pt-3 grey lighten-2">
               <MDBRow className="d-flex justify-content-start">
                 <h3 className="deep-grey-text mt-3 mb-4 pb-1 mx-5">
