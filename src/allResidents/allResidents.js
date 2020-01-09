@@ -1,8 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
-import * as moment from "moment";
 import { UserContext } from "../contexts/UserContext";
 import NavbarPage from "../navBar/navBar";
-import { MDBTable, MDBTableBody, MDBTableHead, MDBBtn, MDBCol } from "mdbreact";
+import { MDBTable, MDBTableBody, MDBTableHead, MDBBtn } from "mdbreact";
 
 let resident = "";
 const AllResidents = () => {

@@ -34,7 +34,6 @@ const AllPackages = () => {
     })
       .then(res => res.json())
       .then(response => {
-        console.log(response.data);
         response.data.sort((a, b) => b.deliveryDate - a.deliveryDate);
         response.data.sort((a, b) => a.isDelivered - b.isDelivered);
         let newArray = response.data.filter(el => {

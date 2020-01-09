@@ -12,6 +12,8 @@ import AllResidents from "./allResidents/allResidents";
 import EditResident from "./editResident/editResident";
 import EditPackage from "./editPackage/editPackage";
 import AdminApproval from "./adminApproval/adminApproval";
+import AdminLogin from "./adminLogin/adminLogin";
+import Admins from "./admin/admin";
 
 function App() {
   return (
@@ -30,6 +32,8 @@ function App() {
             <Route exact path="/editResident/:id" component={EditResident} />
             <Route exact path="/editPackage/:id" component={EditPackage} />
             <Route exact path="/adminApproval" component={AdminApproval} />
+            <Route exact path="/adminLogin" component={AdminLogin} />
+            <Route exact path="/admins" component={Admins} />
           </Switch>
         </UserContextProvider>
       </BrowserRouter>

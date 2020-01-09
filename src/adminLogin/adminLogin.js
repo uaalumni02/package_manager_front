@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Redirect } from "react-router-dom";
-import "./register.css";
+
 import {
   MDBContainer,
   MDBRow,
@@ -11,28 +11,33 @@ import {
   MDBInput
 } from "mdbreact";
 
-const Register = () => {
+const AdminLogin = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [isAdmin, setIsAdmin] = useState(true);
+  const [InvalidLogin, setInvalidLogin] = useState("");
+  const [loggedIn, setLoggedIn] = useState(false);
 
   const handleSubmit = event => {
     event.preventDefault();
-    fetch("http://localhost:3000/api/user/", {
+    fetch("http://localhost:3000/api/admin/login", {
       method: "post",
       headers: {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
         username,
-        password,
-        isAdmin: false
+        password
       })
     })
       .then(res => res.json())
       .then(response => {
-        if (response.success) {
-          setIsAdmin(false);
+        console.log(response);
+        if (response.success === false) {
+          setInvalidLogin("Invalid admin name or password");
+        } else {
+          localStorage.setItem("token", response.data.token);
+          localStorage.setItem("admin", response.data.admin._id);
+          setLoggedIn(true);
         }
       })
       .catch(error => console.error("Error:", error));
@@ -47,14 +52,14 @@ const Register = () => {
         />
       </header>
       <br></br>
-      {!isAdmin ? <Redirect to="/adminApproval/" /> : ""}
+      {loggedIn ? <Redirect to="/admins/" /> : ""}
       <MDBRow>
         <MDBCol md="5">
           <MDBCard className="loginCard">
             <div className="header pt-3 grey lighten-2">
               <MDBRow className="d-flex justify-content-start">
                 <h3 className="deep-grey-text mt-3 mb-4 pb-1 mx-5">
-                  Register for Account...
+                  Admin Log in
                 </h3>
               </MDBRow>
             </div>
@@ -77,22 +82,20 @@ const Register = () => {
               />
 
               <div className="text-center mb-4 mt-5">
+                <p>{InvalidLogin}</p>
                 <MDBBtn
                   color="danger"
                   type="submit"
                   className="btn-block z-depth-2"
                   onClick={handleSubmit}
                 >
-                  Register
+                  Log in
                 </MDBBtn>
               </div>
               <p className="font-small grey-text d-flex justify-content-center">
-                Return to log in?
-                <a
-                  href="/"
-                  className="dark-grey-text font-weight-bold ml-1"
-                >
-                  Log In
+                Return to user log in?
+                <a href="/" className="dark-grey-text font-weight-bold ml-1">
+                  User Sign In
                 </a>
               </p>
             </MDBCardBody>
@@ -102,4 +105,4 @@ const Register = () => {
     </MDBContainer>
   );
 };
-export default Register;
+export default AdminLogin;
