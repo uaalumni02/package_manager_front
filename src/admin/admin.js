@@ -5,6 +5,7 @@ import { MDBTable, MDBTableBody, MDBTableHead, MDBBtn } from "mdbreact";
 
 const Admins = () => {
   const [users, setUsers] = useState([]);
+  const [noApprovals, setNoApprovals] = useState("");
   const { loggedIn } = useContext(UserContext);
   const fetchUserData = () => {
     const token = localStorage.getItem("token");
@@ -20,7 +21,11 @@ const Admins = () => {
         let newArray = response.data.filter(el => {
           return !el.isAdmin;
         });
+        console.log(newArray.length);
         setUsers(newArray);
+        if (newArray.length === 0) {
+          setNoApprovals("No pending user approvals");
+        }
       })
       .catch(error => console.error("Error:", error));
   };
@@ -39,7 +44,30 @@ const Admins = () => {
     })
       .then(res => res.json())
       .then(response => {
-        console.log(response)
+        if (response.success) {
+          fetchUserData();
+        }
+      })
+      .catch(error => console.error("Error:", error));
+  };
+  const approveRequest = user => {
+    const approve = { ...user, isAdmin: true };
+    const { isAdmin } = approve;
+
+    const token = localStorage.getItem("token");
+    const bearer = "Bearer " + token;
+    fetch("http://localhost:3000/api/user/" + user._id, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: bearer
+      },
+      body: JSON.stringify({
+        isAdmin
+      })
+    })
+      .then(res => res.json())
+      .then(response => {
         if (response.success) {
           fetchUserData();
         }
@@ -69,7 +97,13 @@ const Admins = () => {
             <tr value={user._id} key={user._id}>
               <td>{user.username}</td>
               <td>
-                <MDBBtn color="" size="sm">
+                <MDBBtn
+                  color=""
+                  size="sm"
+                  onClick={() => {
+                    approveRequest(user);
+                  }}
+                >
                   Approve
                 </MDBBtn>
                 <MDBBtn
@@ -79,13 +113,16 @@ const Admins = () => {
                     deleteAdminRequest(user);
                   }}
                 >
-                  Delete
+                  Decline
                 </MDBBtn>
               </td>
             </tr>
           ))}
         </MDBTableBody>
       </MDBTable>
+      <center>
+        <h1>{noApprovals}</h1>
+      </center>
     </>
   );
 };
