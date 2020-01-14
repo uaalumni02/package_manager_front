@@ -16,6 +16,7 @@ const Resident = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
+  const [isDeleted] = useState(false);
   const [residentConfirmation, setResidentConfirmation] = useState(false);
   const { loggedIn } = useContext(UserContext);
   const handleSubmit = event => {
@@ -32,7 +33,8 @@ const Resident = () => {
       body: JSON.stringify({
         name,
         email,
-        phone
+        phone, 
+        isDeleted
       })
     })
       .then(res => res.json())

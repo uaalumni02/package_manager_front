@@ -3,7 +3,6 @@ import { UserContext } from "../contexts/UserContext";
 import NavbarPage from "../navBar/navBar";
 import { MDBTable, MDBTableBody, MDBTableHead, MDBBtn } from "mdbreact";
 
-let resident = "";
 const AllResidents = () => {
   const [residents, setResidents] = useState([]);
   const { loggedIn } = useContext(UserContext);
@@ -18,10 +17,10 @@ const AllResidents = () => {
     })
       .then(res => res.json())
       .then(response => {
-        for (var i = 0; i < response.data.length; i++) {
-          resident = response.data[i]._id;
-        }
-        setResidents(response.data);
+        let newArray = response.data.filter(el => {
+          return !el.isDeleted;
+        });
+        setResidents(newArray);
       })
       .catch(error => console.error("Error:", error));
   };
@@ -29,18 +28,27 @@ const AllResidents = () => {
     fetchResidentData();
   }, []);
 
-  const deleteResident = () => {
+  const deleteResident = resident => {
+    const deleteResident = { ...resident, isDeleted: true };
+    const { isDeleted } = deleteResident;
     const token = localStorage.getItem("token");
     const bearer = "Bearer " + token;
-    fetch("http://localhost:3000/api/resident/" + resident, {
-      method: "DELETE",
+    fetch("http://localhost:3000/api/resident/" + resident._id, {
+      method: "PATCH",
       headers: {
+        "Content-Type": "application/json",
         Authorization: bearer
-      }
+      },
+      body: JSON.stringify({
+        isDeleted
+      })
     })
       .then(res => res.json())
       .then(response => {
-        fetchResidentData();
+        console.log(response)
+        if (response.success) {
+          fetchResidentData();
+        }
       })
       .catch(error => console.error("Error:", error));
   };
@@ -80,7 +88,13 @@ const AllResidents = () => {
               >
                 Edit
               </MDBBtn>
-              <MDBBtn color="" size="sm" onClick={deleteResident}>
+              <MDBBtn
+                color=""
+                size="sm"
+                onClick={() => {
+                  deleteResident(resident);
+                }}
+              >
                 Delete
               </MDBBtn>
             </tr>
