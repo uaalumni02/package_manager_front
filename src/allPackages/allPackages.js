@@ -111,7 +111,7 @@ const AllPackages = () => {
 
   return (
     <>
-      <div>{loggedIn ? <NavbarPage /> : ""}</div>
+      {/* <div>{loggedIn ? <NavbarPage /> : ""}</div> */}
       <header className="logo">
         <img
           src="https://chris180.org/wp-content/uploads/2016/08/Logo-450x200.png"
@@ -119,6 +119,7 @@ const AllPackages = () => {
           className="center"
         />
       </header>
+      <div>{loggedIn ? <NavbarPage /> : ""}</div>
       <br></br>
       <MDBCol className="search" md="6">
         <form className="form-inline mt-4 mb-4">

@@ -95,7 +95,7 @@ const Package = () => {
   };
   return (
     <>
-      <div>{loggedIn ? <NavbarPage /> : ""}</div>
+      {/* <div>{loggedIn ? <NavbarPage /> : ""}</div> */}
       <header className="logo">
         <img
           src="https://chris180.org/wp-content/uploads/2016/08/Logo-450x200.png"
@@ -103,6 +103,7 @@ const Package = () => {
           className="packageCenter"
         />
       </header>
+      <div>{loggedIn ? <NavbarPage /> : ""}</div>
       <br></br>
       {packageConfirmation ? <Redirect to={`/confirmation/${packageId}`} /> : ""}
       <MDBRow>
