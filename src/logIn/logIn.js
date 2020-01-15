@@ -16,7 +16,7 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [InvalidLogin, setInvalidLogin] = useState("");
   const [loggedIn, setLoggedIn] = useState(false);
-  const [isAdmin, setIsAdmin] = useState(true);
+  const [isAdmin] = useState(true);
 
   const handleSubmit = event => {
     event.preventDefault();
@@ -33,9 +33,6 @@ const Login = () => {
     })
       .then(res => res.json())
       .then(response => {
-        if (response.data.user.isAdmin === false) {
-          setIsAdmin(false);
-        }
         if (response.success === false) {
           setInvalidLogin("Invalid username or password");
         } else {
