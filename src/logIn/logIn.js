@@ -69,7 +69,7 @@ const Login = () => {
             <MDBCardBody>
               <MDBInput
                 label="Your username"
-                onChange={e => setUsername(e.target.value)}
+                onChange={e => setUsername(e.target.value.trim())}
                 group
                 type="text"
                 validate
@@ -77,7 +77,7 @@ const Login = () => {
 
               <MDBInput
                 label="Your password"
-                onChange={e => setPassword(e.target.value)}
+                onChange={e => setPassword(e.target.value.trim())}
                 group
                 type="password"
                 validate
