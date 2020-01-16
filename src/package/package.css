@@ -1,5 +1,7 @@
 .packageCenter {
     margin-left: 500px;
+    height: 150px;
+    width: 250px;
   }
   .package {
     left: 50%

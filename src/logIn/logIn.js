@@ -43,13 +43,14 @@ const Login = () => {
       })
       .catch(error => console.error("Error:", error));
   };
+
   return (
     <MDBContainer>
       <header className="logo">
         <img
           src="https://chris180.org/wp-content/uploads/2016/08/Logo-450x200.png"
           alt="main logo"
-          className="center"
+          className="packageCenter"
         />
       </header>
       <br></br>

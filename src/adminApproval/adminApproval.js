@@ -14,7 +14,7 @@ const AdminApproval = () => {
         <img
           src="https://chris180.org/wp-content/uploads/2016/08/Logo-450x200.png"
           alt="main logo"
-          className="center"
+          className="packageCenter"
         />
       </header>
       <br></br>
