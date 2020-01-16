@@ -65,7 +65,7 @@ const AdminLogin = () => {
             <MDBCardBody>
               <MDBInput
                 label="Your username"
-                onChange={e => setUsername(e.target.value)}
+                onChange={e => setUsername(e.target.value.toLowerCase().trim())}
                 group
                 type="text"
                 validate
