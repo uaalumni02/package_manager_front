@@ -3,7 +3,7 @@ import React, { createContext, useState, useEffect } from "react";
 export const UserContext = createContext();
 
 const UserContextProvider = props => {
-  const [loggedIn, setLoggedIn] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(true);
   const checkLogin = () => {
     const token = localStorage.getItem("token");
     if (token) {
