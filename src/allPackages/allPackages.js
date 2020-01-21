@@ -20,16 +20,18 @@ const AllPackages = () => {
   const [packages, setPackages] = useState([]);
   const [search, setSearch] = useState("");
   const { loggedIn } = useContext(UserContext);
-
   const [modal, setModal] = useState(false);
 
+  const role =  localStorage.getItem("role");
+  
   const fetchPackageData = () => {
     const token = localStorage.getItem("token");
     const bearer = "Bearer " + token;
     fetch("http://localhost:3000/api/package", {
       method: "GET",
       headers: {
-        Authorization: bearer
+        Authorization: bearer,
+        'role': role
       }
     })
       .then(res => res.json())
@@ -57,7 +59,8 @@ const AllPackages = () => {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
-        Authorization: bearer
+        Authorization: bearer,
+        'role': role
       },
       body: JSON.stringify({
         isDelivered
@@ -82,7 +85,8 @@ const AllPackages = () => {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
-        Authorization: bearer
+        Authorization: bearer,
+        'role': role
       },
       body: JSON.stringify({
         isDeleted

@@ -11,6 +11,9 @@ const PackageConfirmation = () => {
   const [additionalInfo, setAdditionalInfo] = useState("");
   const [deliveryDate, setDeliveryDate] = useState("");
   const { loggedIn } = useContext(UserContext);
+
+  const role =  localStorage.getItem("role");
+
   const fetchPackageData = () => {
     const token = localStorage.getItem("token");
     const bearer = "Bearer " + token;
@@ -19,7 +22,8 @@ const PackageConfirmation = () => {
     fetch("http://localhost:3000/api/package/" + id, {
       method: "GET",
       headers: {
-        Authorization: bearer
+        Authorization: bearer,
+        'role': role
       }
     })
       .then(res => res.json())
@@ -37,14 +41,14 @@ const PackageConfirmation = () => {
   return (
     // <MDBContainer>
     <>
-    <div>{loggedIn ? <NavbarPage /> : ""}</div>
       <header className="logo">
         <img
           src="https://chris180.org/wp-content/uploads/2016/08/Logo-450x200.png"
           alt="main logo"
-          className="center"
+          className="packageCenter"
         />
       </header>
+      <div>{loggedIn ? <NavbarPage /> : ""}</div>
       <br></br>
       <MDBRow>
         <MDBCol md="6">

@@ -6,13 +6,17 @@ import { MDBTable, MDBTableBody, MDBTableHead, MDBBtn } from "mdbreact";
 const AllResidents = () => {
   const [residents, setResidents] = useState([]);
   const { loggedIn } = useContext(UserContext);
+
+  const role = localStorage.getItem("role");
+
   const fetchResidentData = () => {
     const token = localStorage.getItem("token");
     const bearer = "Bearer " + token;
     fetch("http://localhost:3000/api/resident", {
       method: "GET",
       headers: {
-        Authorization: bearer
+        Authorization: bearer,
+        role: role
       }
     })
       .then(res => res.json())
@@ -37,7 +41,8 @@ const AllResidents = () => {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
-        Authorization: bearer
+        Authorization: bearer,
+        role: role
       },
       body: JSON.stringify({
         isDeleted
@@ -45,7 +50,7 @@ const AllResidents = () => {
     })
       .then(res => res.json())
       .then(response => {
-        console.log(response)
+        console.log(response);
         if (response.success) {
           fetchResidentData();
         }

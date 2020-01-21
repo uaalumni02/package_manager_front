@@ -17,6 +17,8 @@ const EditResident = () => {
   const [phone, setPhone] = useState("");
   const { loggedIn } = useContext(UserContext);
   const [updateConfirmation, setUpdateConfirmation] = useState(false);
+
+  const role =  localStorage.getItem("role");
   
   const fetchResidentData = () => {
     const token = localStorage.getItem("token");
@@ -26,7 +28,8 @@ const EditResident = () => {
     fetch("http://localhost:3000/api/resident/" + id, {
       method: "GET",
       headers: {
-        Authorization: bearer
+        Authorization: bearer,
+        'role': role
       }
     })
       .then(res => res.json())
@@ -51,7 +54,8 @@ const EditResident = () => {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
-        Authorization: bearer
+        Authorization: bearer,
+        'role': role
       },
       body: JSON.stringify({
         name: name,

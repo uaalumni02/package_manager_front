@@ -19,6 +19,9 @@ const Resident = () => {
   const [isDeleted] = useState(false);
   const [residentConfirmation, setResidentConfirmation] = useState(false);
   const { loggedIn } = useContext(UserContext);
+
+  const role =  localStorage.getItem("role");
+
   const handleSubmit = event => {
     event.preventDefault();
     const token = localStorage.getItem("token");
@@ -28,7 +31,8 @@ const Resident = () => {
       method: "post",
       headers: {
         "Content-Type": "application/json",
-        Authorization: bearer
+        Authorization: bearer,
+        'role': role
       },
       body: JSON.stringify({
         name,

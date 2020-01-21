@@ -24,14 +24,18 @@ const Package = () => {
   const { loggedIn } = useContext(UserContext);
   const [isDelivered] = useState(false);
   const [isDeleted] = useState(false);
+  
+  const role =  localStorage.getItem("role");
 
   const fetchCompanyData = () => {
     const token = localStorage.getItem("token");
     const bearer = "Bearer " + token;
+    
     fetch("http://localhost:3000/api/company", {
       method: "GET",
       headers: {
-        Authorization: bearer
+        Authorization: bearer,
+        'role': role
       }
     })
       .then(res => res.json())
@@ -53,14 +57,18 @@ const Package = () => {
     fetch("http://localhost:3000/api/resident", {
       method: "GET",
       headers: {
-        Authorization: bearer
+        Authorization: bearer,
+        'role': role
       }
     })
       .then(res => res.json())
       .then(response => {
         const residents = response.data;
+        let newArray = response.data.filter(el => {
+          return !el.isDeleted;
+        });
         setResidentId(residents[0]._id)
-        setResidentNames(residents);
+        setResidentNames(newArray);
       })
       .catch(error => console.error("Error:", error));
   };
@@ -73,7 +81,8 @@ const Package = () => {
       method: "post",
       headers: {
         "Content-Type": "application/json",
-        Authorization: bearer
+        Authorization: bearer,
+        'role': role
       },
       body: JSON.stringify({
         name: residentId,

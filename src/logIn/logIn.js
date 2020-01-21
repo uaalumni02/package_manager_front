@@ -16,7 +16,7 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [InvalidLogin, setInvalidLogin] = useState("");
   const [loggedIn, setLoggedIn] = useState(false);
-  const [isAdmin] = useState(true);
+  
 
   const handleSubmit = event => {
     event.preventDefault();
@@ -28,7 +28,6 @@ const Login = () => {
       body: JSON.stringify({
         username,
         password,
-        isAdmin
       })
     })
       .then(res => res.json())
@@ -38,6 +37,7 @@ const Login = () => {
         } else {
           localStorage.setItem("token", response.data.token);
           localStorage.setItem("user", response.data.user._id);
+          localStorage.setItem("role", response.data.user.role);
           setLoggedIn(true);
         }
       })
@@ -55,7 +55,7 @@ const Login = () => {
       </header>
       <br></br>
       {loggedIn ? <Redirect to="/package/" /> : ""}
-      {!isAdmin ? <Redirect to="/adminApproval/" /> : ""}
+      {/* {!isAdmin ? <Redirect to="/adminApproval/" /> : ""} */}
       <MDBRow>
         <MDBCol md="5">
           <MDBCard className="loginCard">

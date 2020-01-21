@@ -24,13 +24,16 @@ const EditPackage = () => {
   const [isDelivered] = useState(false);
   const { loggedIn } = useContext(UserContext);
 
+  const role =  localStorage.getItem("role");
+
   const fetchCompanyData = () => {
     const token = localStorage.getItem("token");
     const bearer = "Bearer " + token;
     fetch("http://localhost:3000/api/company", {
       method: "GET",
       headers: {
-        Authorization: bearer
+        Authorization: bearer,
+        'role': role
       }
     })
       .then(res => res.json())
@@ -52,7 +55,8 @@ const EditPackage = () => {
     fetch("http://localhost:3000/api/resident", {
       method: "GET",
       headers: {
-        Authorization: bearer
+        Authorization: bearer,
+        'role': role
       }
     })
       .then(res => res.json())
@@ -72,13 +76,12 @@ const EditPackage = () => {
     fetch("http://localhost:3000/api/package/" + id, {
       method: "GET",
       headers: {
-        Authorization: bearer
+        Authorization: bearer,
+        'role': role
       }
     })
       .then(res => res.json())
       .then(response => {
-
-        console.log(response)
         setCurrentPackageData(response.data);
         setAdditionalInfo(response.data.additionalInfo);
       })
@@ -97,7 +100,8 @@ const EditPackage = () => {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
-        Authorization: bearer
+        Authorization: bearer,
+        'role': role
       },
       body: JSON.stringify({
         name: residentId,
