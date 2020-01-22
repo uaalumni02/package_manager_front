@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { Redirect } from "react-router-dom";
 import { UserContext } from "../contexts/UserContext";
 import NavbarPage from "../navBar/navBar";
-import moment from 'moment'
+import moment from "moment";
 import {
   MDBRow,
   MDBCol,
@@ -24,16 +24,13 @@ const EditPackage = () => {
   const [isDelivered] = useState(false);
   const { loggedIn } = useContext(UserContext);
 
-  const role =  localStorage.getItem("role");
-
   const fetchCompanyData = () => {
     const token = localStorage.getItem("token");
     const bearer = "Bearer " + token;
     fetch("http://localhost:3000/api/company", {
       method: "GET",
       headers: {
-        Authorization: bearer,
-        'role': role
+        Authorization: bearer
       }
     })
       .then(res => res.json())
@@ -55,8 +52,7 @@ const EditPackage = () => {
     fetch("http://localhost:3000/api/resident", {
       method: "GET",
       headers: {
-        Authorization: bearer,
-        'role': role
+        Authorization: bearer
       }
     })
       .then(res => res.json())
@@ -76,8 +72,7 @@ const EditPackage = () => {
     fetch("http://localhost:3000/api/package/" + id, {
       method: "GET",
       headers: {
-        Authorization: bearer,
-        'role': role
+        Authorization: bearer
       }
     })
       .then(res => res.json())
@@ -96,12 +91,11 @@ const EditPackage = () => {
     const bearer = "Bearer " + token;
     const url = window.location.pathname;
     const id = url.substring(url.lastIndexOf("/") + 1);
-    fetch("http://localhost:3000/api/package/" +id, {
+    fetch("http://localhost:3000/api/package/" + id, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
-        Authorization: bearer,
-        'role': role
+        Authorization: bearer
       },
       body: JSON.stringify({
         name: residentId,
@@ -118,7 +112,7 @@ const EditPackage = () => {
         }
       })
       .catch(error => console.error("Error:", error));
-  }
+  };
 
   return (
     <>
@@ -150,13 +144,16 @@ const EditPackage = () => {
                   onChange={e => setCompanyId(e.target.value)}
                 >
                   {companyName.map(company => {
-                    console.log(currentPackageData)
-                    const selected = currentPackageData && currentPackageData.companyName._id === company._id;
+                    console.log(currentPackageData);
+                    const selected =
+                      currentPackageData &&
+                      currentPackageData.companyName._id === company._id;
                     return (
-                      <option 
-                        value={company._id} 
-                        key={company._id} 
-                        selected={selected}>
+                      <option
+                        value={company._id}
+                        key={company._id}
+                        selected={selected}
+                      >
                         {company.companyName}
                       </option>
                     );
@@ -175,9 +172,15 @@ const EditPackage = () => {
                   onChange={e => setResidentId(e.target.value)}
                 >
                   {name.map(resident => {
-                    const selected = currentPackageData && currentPackageData.name._id === resident._id;
+                    const selected =
+                      currentPackageData &&
+                      currentPackageData.name._id === resident._id;
                     return (
-                      <option value={resident._id} key={resident._id} selected={selected}>
+                      <option
+                        value={resident._id}
+                        key={resident._id}
+                        selected={selected}
+                      >
                         {resident.name}
                       </option>
                     );
@@ -195,7 +198,13 @@ const EditPackage = () => {
                   id="defaultFormCardNameEx"
                   className="form-control"
                   onChange={e => setDeliveryDate(e.target.value)}
-                  value={ currentPackageData ? moment.unix(currentPackageData.deliveryDate).format('YYYY-MM-DDTH:mm') : ''}
+                  value={
+                    currentPackageData
+                      ? moment
+                          .unix(currentPackageData.deliveryDate)
+                          .format("YYYY-MM-DDTH:mm")
+                      : ""
+                  }
                 />
                 <br />
                 <label
@@ -213,7 +222,11 @@ const EditPackage = () => {
                 />
 
                 <div className="text-center py-4 mt-3">
-                  <MDBBtn onClick={updatePackage} className="btn btn-outline-purple" type="submit">
+                  <MDBBtn
+                    onClick={updatePackage}
+                    className="btn btn-outline-purple"
+                    type="submit"
+                  >
                     Edit
                     <MDBIcon far icon="paper-plane" className="ml-2" />
                   </MDBBtn>

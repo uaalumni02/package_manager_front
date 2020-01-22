@@ -32,13 +32,11 @@ const Login = () => {
     })
       .then(res => res.json())
       .then(response => {
-        console.log(response)
         if (response.success === false || response.data.user.role === 'standard' ) {
           setInvalidLogin("Invalid username or password");
         } else {
           localStorage.setItem("token", response.data.token);
           localStorage.setItem("user", response.data.user._id);
-          localStorage.setItem("role", response.data.user.role);
           setLoggedIn(true);
         }
       })

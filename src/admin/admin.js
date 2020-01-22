@@ -7,21 +7,21 @@ const Admins = () => {
   const [users, setUsers] = useState([]);
   const { loggedIn } = useContext(UserContext);
 
-  const role =  localStorage.getItem("role");
-
   const fetchUserData = () => {
     const token = localStorage.getItem("token");
     const bearer = "Bearer " + token;
     fetch("http://localhost:3000/api/user", {
       method: "GET",
       headers: {
-        Authorization: bearer,
-        'role': role
+        Authorization: bearer
       }
     })
       .then(res => res.json())
       .then(response => {
-        setUsers(response.data);
+        let newArray = response.data.filter(el => {
+          return el.role === "admin" || el.role === "standard";
+        });
+        setUsers(newArray);
       })
       .catch(error => console.error("Error:", error));
   };
@@ -36,11 +36,10 @@ const Admins = () => {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
-        Authorization: bearer,
-        'role': role
+        Authorization: bearer
       },
       body: JSON.stringify({
-        role: 'standard'
+        role: "standard"
       })
     })
       .then(res => res.json())
@@ -61,8 +60,7 @@ const Admins = () => {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
-        Authorization: bearer,
-        'role': role
+        Authorization: bearer
       },
       body: JSON.stringify({
         role
@@ -78,7 +76,6 @@ const Admins = () => {
   };
   return (
     <>
-      {/* <div>{loggedIn ? <NavbarPage /> : ""}</div> */}
       <header className="logo">
         <img
           src="https://chris180.org/wp-content/uploads/2016/08/Logo-450x200.png"

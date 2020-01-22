@@ -26,12 +26,10 @@ const Register = () => {
       body: JSON.stringify({
         username,
         password,
-        // role
       })
     })
       .then(res => res.json())
       .then(response => {
-        console.log(response)
         if (response.success) {
           setRole("standard");
         }

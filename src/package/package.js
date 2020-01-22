@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Redirect } from "react-router-dom";
-import { UserContext } from '../contexts/UserContext';
+import { UserContext } from "../contexts/UserContext";
 import NavbarPage from "../navBar/navBar";
 import "./package.css";
 import {
@@ -24,24 +24,21 @@ const Package = () => {
   const { loggedIn } = useContext(UserContext);
   const [isDelivered] = useState(false);
   const [isDeleted] = useState(false);
-  
-  const role =  localStorage.getItem("role");
 
   const fetchCompanyData = () => {
     const token = localStorage.getItem("token");
     const bearer = "Bearer " + token;
-    
+
     fetch("http://localhost:3000/api/company", {
       method: "GET",
       headers: {
-        Authorization: bearer,
-        'role': role
+        Authorization: bearer
       }
     })
       .then(res => res.json())
       .then(response => {
         const companies = response.data;
-        setCompanyId(companies[0]._id)
+        setCompanyId(companies[0]._id);
         setCompanyNames(companies);
       })
       .catch(error => console.error("Error:", error));
@@ -57,8 +54,7 @@ const Package = () => {
     fetch("http://localhost:3000/api/resident", {
       method: "GET",
       headers: {
-        Authorization: bearer,
-        'role': role
+        Authorization: bearer
       }
     })
       .then(res => res.json())
@@ -67,7 +63,7 @@ const Package = () => {
         let newArray = response.data.filter(el => {
           return !el.isDeleted;
         });
-        setResidentId(residents[0]._id)
+        setResidentId(residents[0]._id);
         setResidentNames(newArray);
       })
       .catch(error => console.error("Error:", error));
@@ -81,15 +77,14 @@ const Package = () => {
       method: "post",
       headers: {
         "Content-Type": "application/json",
-        Authorization: bearer,
-        'role': role
+        Authorization: bearer
       },
       body: JSON.stringify({
         name: residentId,
         companyName: companyId,
         deliveryDate,
         additionalInfo,
-        isDelivered, 
+        isDelivered,
         isDeleted
       })
     })
@@ -104,7 +99,6 @@ const Package = () => {
   };
   return (
     <>
-      {/* <div>{loggedIn ? <NavbarPage /> : ""}</div> */}
       <header className="logo">
         <img
           src="https://chris180.org/wp-content/uploads/2016/08/Logo-450x200.png"
@@ -114,7 +108,11 @@ const Package = () => {
       </header>
       <div>{loggedIn ? <NavbarPage /> : ""}</div>
       <br></br>
-      {packageConfirmation ? <Redirect to={`/confirmation/${packageId}`} /> : ""}
+      {packageConfirmation ? (
+        <Redirect to={`/confirmation/${packageId}`} />
+      ) : (
+        ""
+      )}
       <MDBRow>
         <MDBCol md="6">
           <MDBCard className="package">

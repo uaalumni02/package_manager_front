@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import { Redirect } from "react-router-dom";
-import { UserContext } from '../contexts/UserContext';
+import { UserContext } from "../contexts/UserContext";
 import NavbarPage from "../navBar/navBar";
 import "./resident.css";
 import {
@@ -20,8 +20,6 @@ const Resident = () => {
   const [residentConfirmation, setResidentConfirmation] = useState(false);
   const { loggedIn } = useContext(UserContext);
 
-  const role =  localStorage.getItem("role");
-
   const handleSubmit = event => {
     event.preventDefault();
     const token = localStorage.getItem("token");
@@ -31,13 +29,12 @@ const Resident = () => {
       method: "post",
       headers: {
         "Content-Type": "application/json",
-        Authorization: bearer,
-        'role': role
+        Authorization: bearer
       },
       body: JSON.stringify({
         name,
         email,
-        phone, 
+        phone,
         isDeleted
       })
     })
@@ -51,8 +48,6 @@ const Resident = () => {
   };
   return (
     <>
-     {/* <MDBContainer> */}
-        {/* <div>{loggedIn ? <NavbarPage /> : ""}</div> */}
       <header className="logo">
         <img
           src="https://chris180.org/wp-content/uploads/2016/08/Logo-450x200.png"
@@ -123,7 +118,6 @@ const Resident = () => {
           </MDBCard>
         </MDBCol>
       </MDBRow>
-    {/* </MDBContainer> */}
     </>
   );
 };

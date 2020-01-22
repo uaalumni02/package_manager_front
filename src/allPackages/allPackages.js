@@ -22,16 +22,13 @@ const AllPackages = () => {
   const { loggedIn } = useContext(UserContext);
   const [modal, setModal] = useState(false);
 
-  const role =  localStorage.getItem("role");
-  
   const fetchPackageData = () => {
     const token = localStorage.getItem("token");
     const bearer = "Bearer " + token;
     fetch("http://localhost:3000/api/package", {
       method: "GET",
       headers: {
-        Authorization: bearer,
-        'role': role
+        Authorization: bearer
       }
     })
       .then(res => res.json())
@@ -59,8 +56,7 @@ const AllPackages = () => {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
-        Authorization: bearer,
-        'role': role
+        Authorization: bearer
       },
       body: JSON.stringify({
         isDelivered
@@ -85,8 +81,7 @@ const AllPackages = () => {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
-        Authorization: bearer,
-        'role': role
+        Authorization: bearer
       },
       body: JSON.stringify({
         isDeleted
@@ -115,7 +110,6 @@ const AllPackages = () => {
 
   return (
     <>
-      {/* <div>{loggedIn ? <NavbarPage /> : ""}</div> */}
       <header className="logo">
         <img
           src="https://chris180.org/wp-content/uploads/2016/08/Logo-450x200.png"

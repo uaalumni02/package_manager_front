@@ -18,8 +18,6 @@ const EditResident = () => {
   const { loggedIn } = useContext(UserContext);
   const [updateConfirmation, setUpdateConfirmation] = useState(false);
 
-  const role =  localStorage.getItem("role");
-  
   const fetchResidentData = () => {
     const token = localStorage.getItem("token");
     const bearer = "Bearer " + token;
@@ -28,15 +26,14 @@ const EditResident = () => {
     fetch("http://localhost:3000/api/resident/" + id, {
       method: "GET",
       headers: {
-        Authorization: bearer,
-        'role': role
+        Authorization: bearer
       }
     })
       .then(res => res.json())
       .then(response => {
-       setName(response.data.name)
-       setEmail(response.data.email)
-       setPhone(response.data.phone)
+        setName(response.data.name);
+        setEmail(response.data.email);
+        setPhone(response.data.phone);
       })
       .catch(error => console.error("Error:", error));
   };
@@ -50,12 +47,11 @@ const EditResident = () => {
     const bearer = "Bearer " + token;
     const url = window.location.pathname;
     const id = url.substring(url.lastIndexOf("/") + 1);
-    fetch("http://localhost:3000/api/resident/" +id, {
+    fetch("http://localhost:3000/api/resident/" + id, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
-        Authorization: bearer,
-        'role': role
+        Authorization: bearer
       },
       body: JSON.stringify({
         name: name,
@@ -70,11 +66,11 @@ const EditResident = () => {
         }
       })
       .catch(error => console.error("Error:", error));
-  }
+  };
 
   return (
-    <> 
-    <div>{loggedIn ? <NavbarPage /> : ""}</div>
+    <>
+      <div>{loggedIn ? <NavbarPage /> : ""}</div>
       <header className="logo">
         <img
           src="https://chris180.org/wp-content/uploads/2016/08/Logo-450x200.png"
@@ -133,7 +129,11 @@ const EditResident = () => {
                   onChange={e => setPhone(e.target.value)}
                 />
                 <div className="text-center py-4 mt-3">
-                  <MDBBtn onClick={updateResident} className="btn btn-outline-purple" type="submit">
+                  <MDBBtn
+                    onClick={updateResident}
+                    className="btn btn-outline-purple"
+                    type="submit"
+                  >
                     Submit
                     <MDBIcon far icon="paper-plane" className="ml-2" />
                   </MDBBtn>

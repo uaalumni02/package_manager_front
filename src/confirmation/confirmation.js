@@ -12,8 +12,6 @@ const PackageConfirmation = () => {
   const [deliveryDate, setDeliveryDate] = useState("");
   const { loggedIn } = useContext(UserContext);
 
-  const role =  localStorage.getItem("role");
-
   const fetchPackageData = () => {
     const token = localStorage.getItem("token");
     const bearer = "Bearer " + token;
@@ -22,8 +20,7 @@ const PackageConfirmation = () => {
     fetch("http://localhost:3000/api/package/" + id, {
       method: "GET",
       headers: {
-        Authorization: bearer,
-        'role': role
+        Authorization: bearer
       }
     })
       .then(res => res.json())
@@ -39,7 +36,6 @@ const PackageConfirmation = () => {
     fetchPackageData();
   });
   return (
-    // <MDBContainer>
     <>
       <header className="logo">
         <img
@@ -116,7 +112,7 @@ const PackageConfirmation = () => {
           </MDBCard>
         </MDBCol>
       </MDBRow>
-    {/* </MDBContainer> */}
+      {/* </MDBContainer> */}
     </>
   );
 };

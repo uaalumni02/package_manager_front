@@ -7,16 +7,13 @@ const AllResidents = () => {
   const [residents, setResidents] = useState([]);
   const { loggedIn } = useContext(UserContext);
 
-  const role = localStorage.getItem("role");
-
   const fetchResidentData = () => {
     const token = localStorage.getItem("token");
     const bearer = "Bearer " + token;
     fetch("http://localhost:3000/api/resident", {
       method: "GET",
       headers: {
-        Authorization: bearer,
-        role: role
+        Authorization: bearer
       }
     })
       .then(res => res.json())
@@ -41,8 +38,7 @@ const AllResidents = () => {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
-        Authorization: bearer,
-        role: role
+        Authorization: bearer
       },
       body: JSON.stringify({
         isDeleted
@@ -50,7 +46,6 @@ const AllResidents = () => {
     })
       .then(res => res.json())
       .then(response => {
-        console.log(response);
         if (response.success) {
           fetchResidentData();
         }
@@ -60,7 +55,6 @@ const AllResidents = () => {
 
   return (
     <>
-      {/* <div>{loggedIn ? <NavbarPage /> : ""}</div> */}
       <header className="logo">
         <img
           src="https://chris180.org/wp-content/uploads/2016/08/Logo-450x200.png"
