@@ -19,7 +19,7 @@ const AdminLogin = () => {
 
   const handleSubmit = event => {
     event.preventDefault();
-    fetch("http://localhost:3000/api/admin/login", {
+    fetch("http://localhost:3000/api/user/login", {
       method: "post",
       headers: {
         "Content-Type": "application/json"
@@ -31,11 +31,15 @@ const AdminLogin = () => {
     })
       .then(res => res.json())
       .then(response => {
-        if (response.success === false) {
-          setInvalidLogin("Invalid admin name or password");
+        if (
+          response.success === false ||
+          response.data.user.role === "standard"
+        ) {
+          setInvalidLogin("Invalid username or password");
         } else {
           localStorage.setItem("token", response.data.token);
-          localStorage.setItem("admin", response.data.admin._id);
+          localStorage.setItem("user", response.data.user._id);
+          localStorage.setItem("role", response.data.user.role);
           setLoggedIn(true);
         }
       })

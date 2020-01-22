@@ -30,7 +30,7 @@ const AllResidents = () => {
   };
   useEffect(() => {
     fetchResidentData();
-  }, []);
+  });
 
   const deleteResident = resident => {
     const deleteResident = { ...resident, isDeleted: true };

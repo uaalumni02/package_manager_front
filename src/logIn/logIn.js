@@ -23,7 +23,7 @@ const Login = () => {
     fetch("http://localhost:3000/api/user/login", {
       method: "post",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
         username,
@@ -32,7 +32,8 @@ const Login = () => {
     })
       .then(res => res.json())
       .then(response => {
-        if (response.success === false) {
+        console.log(response)
+        if (response.success === false || response.data.user.role === 'standard' ) {
           setInvalidLogin("Invalid username or password");
         } else {
           localStorage.setItem("token", response.data.token);

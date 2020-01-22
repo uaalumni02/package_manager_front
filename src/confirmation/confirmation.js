@@ -37,7 +37,7 @@ const PackageConfirmation = () => {
   };
   useEffect(() => {
     fetchPackageData();
-  }, []);
+  });
   return (
     // <MDBContainer>
     <>

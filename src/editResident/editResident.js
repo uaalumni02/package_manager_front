@@ -42,7 +42,7 @@ const EditResident = () => {
   };
   useEffect(() => {
     fetchResidentData();
-  }, []);
+  });
 
   const updateResident = event => {
     event.preventDefault();

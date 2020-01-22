@@ -47,7 +47,7 @@ const EditPackage = () => {
   useEffect(() => {
     fetchCompanyData();
     fetchResidentData();
-  }, []);
+  });
 
   const fetchResidentData = () => {
     const token = localStorage.getItem("token");
@@ -151,7 +151,7 @@ const EditPackage = () => {
                 >
                   {companyName.map(company => {
                     console.log(currentPackageData)
-                    const selected = currentPackageData && currentPackageData.companyName._id == company._id;
+                    const selected = currentPackageData && currentPackageData.companyName._id === company._id;
                     return (
                       <option 
                         value={company._id} 
@@ -175,7 +175,7 @@ const EditPackage = () => {
                   onChange={e => setResidentId(e.target.value)}
                 >
                   {name.map(resident => {
-                    const selected = currentPackageData && currentPackageData.name._id == resident._id;
+                    const selected = currentPackageData && currentPackageData.name._id === resident._id;
                     return (
                       <option value={resident._id} key={resident._id} selected={selected}>
                         {resident.name}

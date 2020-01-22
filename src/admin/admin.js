@@ -6,13 +6,17 @@ import { MDBTable, MDBTableBody, MDBTableHead, MDBBtn } from "mdbreact";
 const Admins = () => {
   const [users, setUsers] = useState([]);
   const { loggedIn } = useContext(UserContext);
+
+  const role =  localStorage.getItem("role");
+
   const fetchUserData = () => {
     const token = localStorage.getItem("token");
     const bearer = "Bearer " + token;
     fetch("http://localhost:3000/api/user", {
       method: "GET",
       headers: {
-        Authorization: bearer
+        Authorization: bearer,
+        'role': role
       }
     })
       .then(res => res.json())
@@ -26,18 +30,17 @@ const Admins = () => {
   }, []);
 
   const declineAdminRequest = user => {
-    const decline = { ...user, isAdmin: false };
-    const { isAdmin } = decline;
     const token = localStorage.getItem("token");
     const bearer = "Bearer " + token;
     fetch("http://localhost:3000/api/user/" + user._id, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
-        Authorization: bearer
+        Authorization: bearer,
+        'role': role
       },
       body: JSON.stringify({
-        isAdmin
+        role: 'standard'
       })
     })
       .then(res => res.json())
@@ -49,8 +52,8 @@ const Admins = () => {
       .catch(error => console.error("Error:", error));
   };
   const approveRequest = user => {
-    const approve = { ...user, isAdmin: true };
-    const { isAdmin } = approve;
+    const approve = { ...user, role: "admin" };
+    const { role } = approve;
 
     const token = localStorage.getItem("token");
     const bearer = "Bearer " + token;
@@ -58,10 +61,11 @@ const Admins = () => {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
-        Authorization: bearer
+        Authorization: bearer,
+        'role': role
       },
       body: JSON.stringify({
-        isAdmin
+        role
       })
     })
       .then(res => res.json())
@@ -97,7 +101,7 @@ const Admins = () => {
               <td>{user.username}</td>
               <td>
                 <MDBBtn
-                  disabled={user.isAdmin}
+                  disabled={user.role === "admin"}
                   color=""
                   size="sm"
                   onClick={() => {
@@ -107,7 +111,7 @@ const Admins = () => {
                   Approve
                 </MDBBtn>
                 <MDBBtn
-                  disabled={user.isAdmin === false}
+                  disabled={user.role === "standard"}
                   color=""
                   size="sm"
                   onClick={() => {

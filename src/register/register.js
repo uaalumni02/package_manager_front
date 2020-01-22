@@ -14,7 +14,7 @@ import {
 const Register = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [role, setRole] = useState("admin");
+  const [role, setRole] = useState("");
 
   const handleSubmit = event => {
     event.preventDefault();
@@ -26,13 +26,14 @@ const Register = () => {
       body: JSON.stringify({
         username,
         password,
-        role
+        // role
       })
     })
       .then(res => res.json())
       .then(response => {
+        console.log(response)
         if (response.success) {
-          setRole();
+          setRole("standard");
         }
       })
       .catch(error => console.error("Error:", error));
@@ -47,7 +48,7 @@ const Register = () => {
         />
       </header>
       <br></br>
-      {setRole ? <Redirect to="/adminApproval/" /> : ""}
+      {role === 'standard' ? <Redirect to="/adminApproval/" /> : ""}
       <MDBRow>
         <MDBCol md="5">
           <MDBCard className="loginCard">

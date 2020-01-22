@@ -47,7 +47,7 @@ const AllPackages = () => {
   };
   useEffect(() => {
     fetchPackageData();
-  }, []);
+  });
 
   const deliverPackage = delivery => {
     const deliveredPackage = { ...delivery, isDelivered: true };
