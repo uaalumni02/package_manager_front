@@ -18,8 +18,9 @@ const Admins = () => {
     })
       .then(res => res.json())
       .then(response => {
+        console.log(response.data)
         let newArray = response.data.filter(el => {
-          return el.role === "admin" || el.role === "standard";
+          return el.role === "admin" || el.role === "standard" || !el.role;
         });
         setUsers(newArray);
       })
