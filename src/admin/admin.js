@@ -5,8 +5,8 @@ import { MDBTable, MDBTableBody, MDBTableHead, MDBBtn } from "mdbreact";
 
 const Admins = () => {
   const [users, setUsers] = useState([]);
-  const { loggedIn } = useContext(UserContext);
-
+  const { loggedIn, user } = useContext(UserContext);
+  console.log(user);
   const fetchUserData = () => {
     const token = localStorage.getItem("token");
     const bearer = "Bearer " + token;
@@ -18,11 +18,7 @@ const Admins = () => {
     })
       .then(res => res.json())
       .then(response => {
-        console.log(response.data)
-        let newArray = response.data.filter(el => {
-          return el.role === "admin" || el.role === "standard" || !el.role;
-        });
-        setUsers(newArray);
+        setUsers(response.data);
       })
       .catch(error => console.error("Error:", error));
   };
@@ -75,6 +71,7 @@ const Admins = () => {
       })
       .catch(error => console.error("Error:", error));
   };
+
   return (
     <>
       <header className="logo">

@@ -16,7 +16,6 @@ const AdminLogin = () => {
   const [password, setPassword] = useState("");
   const [InvalidLogin, setInvalidLogin] = useState("");
   const [loggedIn, setLoggedIn] = useState(false);
-
   const handleSubmit = event => {
     event.preventDefault();
     fetch("http://localhost:3000/api/user/login", {
@@ -31,6 +30,7 @@ const AdminLogin = () => {
     })
       .then(res => res.json())
       .then(response => {
+        console.log(response.data.user.username)
         if (
           response.success === false ||
           response.data.user.role === "standard"
@@ -40,11 +40,13 @@ const AdminLogin = () => {
           localStorage.setItem("token", response.data.token);
           localStorage.setItem("user", response.data.user._id);
           localStorage.setItem("role", response.data.user.role);
+          localStorage.setItem("userName", response.data.user.username);
           setLoggedIn(true);
         }
       })
       .catch(error => console.error("Error:", error));
   };
+
   return (
     <MDBContainer>
       <header className="logo">
