@@ -5,8 +5,7 @@ import { MDBTable, MDBTableBody, MDBTableHead, MDBBtn } from "mdbreact";
 
 const Admins = () => {
   const [users, setUsers] = useState([]);
-  const { loggedIn, user } = useContext(UserContext);
-  console.log(user);
+  const { loggedIn } = useContext(UserContext);
   const fetchUserData = () => {
     const token = localStorage.getItem("token");
     const bearer = "Bearer " + token;
@@ -18,6 +17,7 @@ const Admins = () => {
     })
       .then(res => res.json())
       .then(response => {
+        console.log(response.data)
         setUsers(response.data);
       })
       .catch(error => console.error("Error:", error));

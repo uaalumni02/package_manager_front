@@ -30,17 +30,14 @@ const AdminLogin = () => {
     })
       .then(res => res.json())
       .then(response => {
-        console.log(response.data.user.username)
+        console.log(response.data)
         if (
           response.success === false ||
           response.data.user.role === "standard"
         ) {
-          setInvalidLogin("Invalid username or password");
+          setInvalidLogin("Invalid username, password or pending approval");
         } else {
           localStorage.setItem("token", response.data.token);
-          localStorage.setItem("user", response.data.user._id);
-          localStorage.setItem("role", response.data.user.role);
-          localStorage.setItem("userName", response.data.user.username);
           setLoggedIn(true);
         }
       })

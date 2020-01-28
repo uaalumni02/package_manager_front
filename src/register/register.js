@@ -30,7 +30,6 @@ const Register = () => {
     })
       .then(res => res.json())
       .then(response => {
-        console.log(response)
         if (response.success) {
           setRole("standard");
         }

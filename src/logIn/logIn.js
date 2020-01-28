@@ -33,7 +33,7 @@ const Login = () => {
       .then(res => res.json())
       .then(response => {
         if (response.success === false || response.data.user.role === 'standard' ) {
-          setInvalidLogin("Invalid username or password");
+          setInvalidLogin("Invalid username, password or pending approval");
         } else {
           localStorage.setItem("token", response.data.token);
           localStorage.setItem("user", response.data.user._id);
@@ -54,7 +54,6 @@ const Login = () => {
       </header>
       <br></br>
       {loggedIn ? <Redirect to="/package/" /> : ""}
-      {/* {!isAdmin ? <Redirect to="/adminApproval/" /> : ""} */}
       <MDBRow>
         <MDBCol md="5">
           <MDBCard className="loginCard">
