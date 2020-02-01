@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Redirect } from "react-router-dom";
-import "./login.css";
+
 import {
   MDBContainer,
   MDBRow,
@@ -58,7 +58,7 @@ const Login = () => {
       <br></br>
       {loggedIn ? <Redirect to="/package/" /> : ""}
       <MDBRow>
-        <MDBCol md="5">
+        <MDBCol md="5" className="col-md-4 mx-auto" >
           <MDBCard className="loginCard">
             <div className="header pt-3 grey lighten-2">
               <MDBRow className="d-flex justify-content-start">

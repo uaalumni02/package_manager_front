@@ -131,7 +131,7 @@ const AllPackages = () => {
         </form>
       </MDBCol>
       <br></br>
-      <MDBTable bordered className="col-md-8 mx-auto">
+      <MDBTable bordered className="table-responsive-md">
         <MDBTableHead>
           <tr>
             <th>Name</th>

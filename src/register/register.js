@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Redirect } from "react-router-dom";
-import "./register.css";
+
 import {
   MDBContainer,
   MDBRow,
@@ -38,17 +38,17 @@ const Register = () => {
   };
   return (
     <MDBContainer>
-      <header className="logo">
+      {/* <header className="logo">
         <img
           src="https://chris180.org/wp-content/uploads/2016/08/Logo-450x200.png"
           alt="main logo"
           className="packageCenter"
         />
-      </header>
+      </header> */}
       <br></br>
       {role === 'standard' ? <Redirect to="/adminApproval/" /> : ""}
       <MDBRow>
-        <MDBCol md="5">
+      <MDBCol md="5" className="col-md-4 mx-auto" >
           <MDBCard className="loginCard">
             <div className="header pt-3 grey lighten-2">
               <MDBRow className="d-flex justify-content-start">

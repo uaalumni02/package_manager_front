@@ -57,7 +57,7 @@ const AdminLogin = () => {
       <br></br>
       {loggedIn ? <Redirect to="/admins/" /> : ""}
       <MDBRow>
-        <MDBCol md="5">
+      <MDBCol md="5" className="col-md-4 mx-auto" >
           <MDBCard className="loginCard">
             <div className="header pt-3 grey lighten-2">
               <MDBRow className="d-flex justify-content-start">

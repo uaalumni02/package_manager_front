@@ -3,7 +3,7 @@ import * as moment from "moment";
 import { UserContext } from "../contexts/UserContext";
 import NavbarPage from "../navBar/navBar";
 import { MDBRow, MDBCol, MDBCard, MDBCardBody, MDBContainer } from "mdbreact";
-import "./confirmation.css";
+
 
 const PackageConfirmation = () => {
   const [companyName, setCompanyNames] = useState("");
