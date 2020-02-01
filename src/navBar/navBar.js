@@ -14,7 +14,6 @@ import {
   MDBDropdownItem
 } from "mdbreact";
 
-
 class NavbarPage extends Component {
   state = {
     isOpen: false
@@ -31,7 +30,7 @@ class NavbarPage extends Component {
   render() {
     return (
       <>
-        <MDBNavbar color="grey" dark expand="lg">
+        <MDBNavbar className="navBar" color="grey" dark expand="lg">
           <MDBNavbarBrand>
             <strong className="white-text">TZ</strong>
           </MDBNavbarBrand>
@@ -39,7 +38,7 @@ class NavbarPage extends Component {
           <MDBCollapse id="navbarCollapse3" isOpen={this.state.isOpen} navbar>
             <MDBNavbarNav left>
               <MDBNavItem>
-                <MDBNavLink to={"/package/"} >Delivery</MDBNavLink>
+                <MDBNavLink to={"/package/"}>Delivery</MDBNavLink>
               </MDBNavItem>
               <MDBNavItem>
                 <MDBNavLink to={"/allPackages"}>Packages</MDBNavLink>
@@ -50,11 +49,15 @@ class NavbarPage extends Component {
               <MDBNavItem>
                 <MDBNavLink to={"/allResidents"}>Residents</MDBNavLink>
               </MDBNavItem>
-               <MDBNavItem>
-                <MDBNavLink to={"/adminLogin"} onClick={this.logOut}>Admin</MDBNavLink>
-              </MDBNavItem> 
               <MDBNavItem>
-                <MDBNavLink   to={"/"} onClick={this.logOut}>Log Out</MDBNavLink>
+                <MDBNavLink to={"/adminLogin"} onClick={this.logOut}>
+                  Admin
+                </MDBNavLink>
+              </MDBNavItem>
+              <MDBNavItem>
+                <MDBNavLink to={"/"} onClick={this.logOut}>
+                  Log Out
+                </MDBNavLink>
               </MDBNavItem>
               <MDBNavItem>
                 <MDBDropdown>

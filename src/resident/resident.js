@@ -9,7 +9,8 @@ import {
   MDBBtn,
   MDBCard,
   MDBCardBody,
-  MDBIcon
+  MDBIcon, 
+  MDBContainer
 } from "mdbreact";
 
 const Resident = () => {
@@ -48,18 +49,19 @@ const Resident = () => {
   };
   return (
     <>
-      <header className="logo">
+      {/* <header className="logo">
         <img
           src="https://chris180.org/wp-content/uploads/2016/08/Logo-450x200.png"
           alt="main logo"
           className="packageCenter"
         />
-      </header>
+      </header> */}
       <div>{loggedIn ? <NavbarPage /> : ""}</div>
       <br></br>
       {residentConfirmation ? <Redirect to={`/allResidents/`} /> : ""}
+      <MDBContainer>
       <MDBRow>
-        <MDBCol md="6">
+      <MDBCol md="6" className="col-md-8 mx-auto">
           <MDBCard className="residentCard">
             <MDBCardBody>
               <form>
@@ -118,6 +120,7 @@ const Resident = () => {
           </MDBCard>
         </MDBCol>
       </MDBRow>
+      </MDBContainer>
     </>
   );
 };

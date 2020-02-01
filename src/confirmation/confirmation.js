@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import * as moment from "moment";
 import { UserContext } from "../contexts/UserContext";
 import NavbarPage from "../navBar/navBar";
-import { MDBRow, MDBCol, MDBCard, MDBCardBody } from "mdbreact";
+import { MDBRow, MDBCol, MDBCard, MDBCardBody, MDBContainer } from "mdbreact";
 import "./confirmation.css";
 
 const PackageConfirmation = () => {
@@ -37,82 +37,85 @@ const PackageConfirmation = () => {
   });
   return (
     <>
-      <header className="logo">
+      {/* <header className="logo">
         <img
           src="https://chris180.org/wp-content/uploads/2016/08/Logo-450x200.png"
           alt="main logo"
           className="packageCenter"
         />
-      </header>
+      </header> */}
       <div>{loggedIn ? <NavbarPage /> : ""}</div>
       <br></br>
-      <MDBRow>
-        <MDBCol md="6">
-          <MDBCard className="package">
-            <MDBCardBody>
-              <form>
-                <p className="h4 text-center py-4">Delivery Confirmation</p>
-                <label
-                  htmlFor="defaultFormCardNameEx"
-                  className="grey-text font-weight-light"
-                >
-                  Company
-                </label>
-                <textarea
-                  type="text"
-                  id="defaultFormCardNameEx"
-                  className="form-control"
-                  value={companyName}
-                  onChange={e => setCompanyNames(e.target.value)}
-                />
-                <br />
-                <label
-                  htmlFor="defaultFormCardNameEx"
-                  className="grey-text font-weight-light"
-                >
-                  Resident
-                </label>
-                <textarea
-                  type="text"
-                  id="defaultFormCardNameEx"
-                  className="form-control"
-                  value={name}
-                  onChange={e => setResidentNames(e.target.value)}
-                />
-                <br />
-                <label
-                  htmlFor="defaultFormCardNameEx"
-                  className="grey-text font-weight-light"
-                >
-                  Date and Time Received
-                </label>
-                <textarea
-                  type="text"
-                  id="defaultFormCardNameEx"
-                  className="form-control"
-                  value={moment.unix(deliveryDate).format("MM/DD/YYYY hh:mmA")}
-                  onChange={e => setDeliveryDate(e.target.value)}
-                />
-                <br />
-                <label
-                  htmlFor="defaultFormCardNameEx"
-                  className="grey-text font-weight-light"
-                >
-                  Additionl Information
-                </label>
-                <textarea
-                  type="text"
-                  id="defaultFormCardNameEx"
-                  className="form-control"
-                  value={additionalInfo}
-                  onChange={e => setAdditionalInfo(e.target.value)}
-                />
-              </form>
-            </MDBCardBody>
-          </MDBCard>
-        </MDBCol>
-      </MDBRow>
-      {/* </MDBContainer> */}
+      <MDBContainer>
+        <MDBRow>
+          <MDBCol md="6" className="col-md-8 mx-auto">
+            <MDBCard className="package">
+              <MDBCardBody>
+                <form>
+                  <p className="h4 text-center py-4">Delivery Confirmation</p>
+                  <label
+                    htmlFor="defaultFormCardNameEx"
+                    className="grey-text font-weight-light"
+                  >
+                    Company
+                  </label>
+                  <textarea
+                    type="text"
+                    id="defaultFormCardNameEx"
+                    className="form-control"
+                    value={companyName}
+                    onChange={e => setCompanyNames(e.target.value)}
+                  />
+                  <br />
+                  <label
+                    htmlFor="defaultFormCardNameEx"
+                    className="grey-text font-weight-light"
+                  >
+                    Resident
+                  </label>
+                  <textarea
+                    type="text"
+                    id="defaultFormCardNameEx"
+                    className="form-control"
+                    value={name}
+                    onChange={e => setResidentNames(e.target.value)}
+                  />
+                  <br />
+                  <label
+                    htmlFor="defaultFormCardNameEx"
+                    className="grey-text font-weight-light"
+                  >
+                    Date and Time Received
+                  </label>
+                  <textarea
+                    type="text"
+                    id="defaultFormCardNameEx"
+                    className="form-control"
+                    value={moment
+                      .unix(deliveryDate)
+                      .format("MM/DD/YYYY hh:mmA")}
+                    onChange={e => setDeliveryDate(e.target.value)}
+                  />
+                  <br />
+                  <label
+                    htmlFor="defaultFormCardNameEx"
+                    className="grey-text font-weight-light"
+                  >
+                    Additionl Information
+                  </label>
+                  <textarea
+                    type="text"
+                    id="defaultFormCardNameEx"
+                    className="form-control"
+                    value={additionalInfo}
+                    onChange={e => setAdditionalInfo(e.target.value)}
+                  />
+                </form>
+              </MDBCardBody>
+            </MDBCard>
+          </MDBCol>
+        </MDBRow>
+      </MDBContainer>
     </>
   );
 };

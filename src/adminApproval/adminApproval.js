@@ -10,13 +10,13 @@ import {
 const AdminApproval = () => {
   return (
     <MDBContainer>
-      <header className="logo">
+      {/* <header className="logo">
         <img
           src="https://chris180.org/wp-content/uploads/2016/08/Logo-450x200.png"
           alt="main logo"
           className="packageCenter"
         />
-      </header>
+      </header> */}
       <br></br>
       <MDBRow>
         <MDBCol md="5">

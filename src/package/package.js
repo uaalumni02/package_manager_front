@@ -2,6 +2,8 @@ import React, { useState, useEffect, useContext } from "react";
 import { Redirect } from "react-router-dom";
 import { UserContext } from "../contexts/UserContext";
 import NavbarPage from "../navBar/navBar";
+import "bootstrap-css-only/css/bootstrap.min.css";
+import "mdbreact/dist/css/mdb.css";
 import "./package.css";
 import {
   MDBRow,
@@ -9,7 +11,8 @@ import {
   MDBBtn,
   MDBCard,
   MDBCardBody,
-  MDBIcon
+  MDBIcon,
+  MDBContainer
 } from "mdbreact";
 
 const Package = () => {
@@ -99,13 +102,13 @@ const Package = () => {
   };
   return (
     <>
-      <header className="logo">
+      {/* <header className="logo">
         <img
           src="https://chris180.org/wp-content/uploads/2016/08/Logo-450x200.png"
           alt="main logo"
           className="packageCenter"
         />
-      </header>
+      </header> */}
       <div>{loggedIn ? <NavbarPage /> : ""}</div>
       <br></br>
       {packageConfirmation ? (
@@ -113,8 +116,9 @@ const Package = () => {
       ) : (
         ""
       )}
+      <MDBContainer>
       <MDBRow>
-        <MDBCol md="6">
+        <MDBCol md="6" className="col-md-8 mx-auto">
           <MDBCard className="package">
             <MDBCardBody>
               <form>
@@ -200,6 +204,7 @@ const Package = () => {
           </MDBCard>
         </MDBCol>
       </MDBRow>
+      </MDBContainer>
     </>
   );
 };

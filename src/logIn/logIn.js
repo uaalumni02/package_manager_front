@@ -16,23 +16,25 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [InvalidLogin, setInvalidLogin] = useState("");
   const [loggedIn, setLoggedIn] = useState(false);
-  
 
   const handleSubmit = event => {
     event.preventDefault();
     fetch("http://localhost:3000/api/user/login", {
       method: "post",
       headers: {
-        "Content-Type": "application/json",
+        "Content-Type": "application/json"
       },
       body: JSON.stringify({
         username,
-        password,
+        password
       })
     })
       .then(res => res.json())
       .then(response => {
-        if (response.success === false || response.data.user.role === 'standard' ) {
+        if (
+          response.success === false ||
+          response.data.user.role === "standard"
+        ) {
           setInvalidLogin("Invalid username, password or pending approval");
         } else {
           localStorage.setItem("token", response.data.token);
@@ -45,13 +47,14 @@ const Login = () => {
 
   return (
     <MDBContainer>
-      <header className="logo">
+      <br></br><br></br><br></br>
+     {/* <header className="logo">
         <img
           src="https://chris180.org/wp-content/uploads/2016/08/Logo-450x200.png"
           alt="main logo"
           className="packageCenter"
         />
-      </header>
+      </header> */}
       <br></br>
       {loggedIn ? <Redirect to="/package/" /> : ""}
       <MDBRow>

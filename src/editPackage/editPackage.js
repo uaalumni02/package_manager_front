@@ -9,7 +9,8 @@ import {
   MDBBtn,
   MDBCard,
   MDBCardBody,
-  MDBIcon
+  MDBIcon,
+  MDBContainer
 } from "mdbreact";
 
 const EditPackage = () => {
@@ -117,15 +118,16 @@ const EditPackage = () => {
   return (
     <>
       <div>{loggedIn ? <NavbarPage /> : ""}</div>
-      <header className="logo">
+      {/* <header className="logo">
         <img
           src="https://chris180.org/wp-content/uploads/2016/08/Logo-450x200.png"
           alt="main logo"
           className="packageCenter"
         />
-      </header>
+      </header> */}
       <br></br>
       {packageConfirmation ? <Redirect to={`/allPackages/`} /> : ""}
+      <MDBContainer>
       <MDBRow>
         <MDBCol md="6">
           <MDBCard className="package">
@@ -236,6 +238,7 @@ const EditPackage = () => {
           </MDBCard>
         </MDBCol>
       </MDBRow>
+      </MDBContainer>
     </>
   );
 };

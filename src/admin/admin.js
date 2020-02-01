@@ -74,16 +74,16 @@ const Admins = () => {
 
   return (
     <>
-      <header className="logo">
+      {/* <header className="logo">
         <img
           src="https://chris180.org/wp-content/uploads/2016/08/Logo-450x200.png"
           alt="main logo"
           className="packageCenter"
         />
-      </header>
+      </header> */}
       <div>{loggedIn ? <NavbarPage /> : ""}</div>
       <br></br>
-      <MDBTable bordered>
+      <MDBTable bordered className="col-md-8 mx-auto">
         <MDBTableHead>
           <tr>
             <th>User Name</th>
