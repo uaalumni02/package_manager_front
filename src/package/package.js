@@ -117,93 +117,93 @@ const Package = () => {
         ""
       )}
       <MDBContainer>
-      <MDBRow>
-        <MDBCol md="6" className="col-md-8 mx-auto">
-          <MDBCard className="package">
-            <MDBCardBody>
-              <form>
-                <p className="h4 text-center py-4">Package Delivery</p>
-                <label
-                  htmlFor="defaultFormCardNameEx"
-                  className="grey-text font-weight-light"
-                >
-                  Company
-                </label>
-                <select
-                  id="defaultFormCardNameEx"
-                  className="form-control"
-                  onChange={e => setCompanyId(e.target.value)}
-                >
-                  {companyName.map(company => {
-                    return (
-                      <option value={company._id} key={company._id}>
-                        {company.companyName}
-                      </option>
-                    );
-                  })}
-                </select>
-                <br />
-                <label
-                  htmlFor="defaultFormCardNameEx"
-                  className="grey-text font-weight-light"
-                >
-                  Resident
-                </label>
-                <select
-                  id="defaultFormCardNameEx"
-                  className="form-control"
-                  onChange={e => setResidentId(e.target.value)}
-                >
-                  {name.map(resident => {
-                    return (
-                      <option value={resident._id} key={resident._id}>
-                        {resident.name}
-                      </option>
-                    );
-                  })}
-                </select>
-                <br />
-                <label
-                  htmlFor="defaultFormCardNameEx"
-                  className="grey-text font-weight-light"
-                >
-                  Select Date and Time
-                </label>
-                <input
-                  type="datetime-local"
-                  id="defaultFormCardNameEx"
-                  className="form-control"
-                  onChange={e => setDeliveryDate(e.target.value)}
-                />
-                <br />
-                <label
-                  htmlFor="defaultFormCardNameEx"
-                  className="grey-text font-weight-light"
-                >
-                  Additionl Information
-                </label>
-                <textarea
-                  type="text"
-                  id="defaultFormCardNameEx"
-                  className="form-control"
-                  onChange={e => setAdditionalInfo(e.target.value)}
-                />
-
-                <div className="text-center py-4 mt-3">
-                  <MDBBtn
-                    className="btn btn-outline-purple"
-                    type="submit"
-                    onClick={submitPackage}
+        <MDBRow>
+          <MDBCol md="6" className="col-md-8 mx-auto">
+            <MDBCard className="package">
+              <MDBCardBody>
+                <form>
+                  <p className="h4 text-center py-4">Package Delivery</p>
+                  <label
+                    htmlFor="defaultFormCardNameEx"
+                    className="grey-text font-weight-light"
                   >
-                    Submit
-                    <MDBIcon far icon="paper-plane" className="ml-2" />
-                  </MDBBtn>
-                </div>
-              </form>
-            </MDBCardBody>
-          </MDBCard>
-        </MDBCol>
-      </MDBRow>
+                    Company
+                  </label>
+                  <select
+                    id="defaultFormCardNameEx"
+                    className="form-control"
+                    onChange={e => setCompanyId(e.target.value)}
+                  >
+                    {companyName.map(company => {
+                      return (
+                        <option value={company._id} key={company._id}>
+                          {company.companyName}
+                        </option>
+                      );
+                    })}
+                  </select>
+                  <br />
+                  <label
+                    htmlFor="defaultFormCardNameEx"
+                    className="grey-text font-weight-light"
+                  >
+                    Resident
+                  </label>
+                  <select
+                    id="defaultFormCardNameEx"
+                    className="form-control"
+                    onChange={e => setResidentId(e.target.value)}
+                  >
+                    {name.map(resident => {
+                      return (
+                        <option value={resident._id} key={resident._id}>
+                          {resident.name}
+                        </option>
+                      );
+                    })}
+                  </select>
+                  <br />
+                  <label
+                    htmlFor="defaultFormCardNameEx"
+                    className="grey-text font-weight-light"
+                  >
+                    Select Date and Time
+                  </label>
+                  <input
+                    type="datetime-local"
+                    id="defaultFormCardNameEx"
+                    className="form-control"
+                    onChange={e => setDeliveryDate(e.target.value)}
+                  />
+                  <br />
+                  <label
+                    htmlFor="defaultFormCardNameEx"
+                    className="grey-text font-weight-light"
+                  >
+                    Additionl Information
+                  </label>
+                  <textarea
+                    type="text"
+                    id="defaultFormCardNameEx"
+                    className="form-control"
+                    onChange={e => setAdditionalInfo(e.target.value)}
+                  />
+
+                  <div className="text-center py-4 mt-3">
+                    <MDBBtn
+                      className="btn btn-outline-purple"
+                      type="submit"
+                      onClick={submitPackage}
+                    >
+                      Submit
+                      <MDBIcon far icon="paper-plane" className="ml-2" />
+                    </MDBBtn>
+                  </div>
+                </form>
+              </MDBCardBody>
+            </MDBCard>
+          </MDBCol>
+        </MDBRow>
       </MDBContainer>
     </>
   );
