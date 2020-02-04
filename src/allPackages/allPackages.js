@@ -119,6 +119,8 @@ const AllPackages = () => {
       </header> */}
       <div>{loggedIn ? <NavbarPage /> : ""}</div>
       <br></br>
+      <br></br> <br></br>
+      <br></br>
       <MDBCol className="search" md="6">
         <form className="form-inline mt-4 mb-4">
           <input
@@ -130,6 +132,7 @@ const AllPackages = () => {
           />
         </form>
       </MDBCol>
+      <br></br>
       <br></br>
       <MDBTable bordered className="table-responsive-md">
         <MDBTableHead>
