@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { UserContext } from "../contexts/UserContext";
-import NavbarPage from "../navBar/navBar";
+import NavbarPage from "../components/navBar";
 import { MDBTable, MDBTableBody, MDBTableHead, MDBBtn } from "mdbreact";
 
 const Admins = () => {
@@ -82,7 +82,7 @@ const Admins = () => {
         />
       </header> */}
       <div>{loggedIn ? <NavbarPage /> : ""}</div>
-      <br></br>
+      <br></br> <br></br> <br></br> <br></br> <br></br> <br></br> <br></br>
       <MDBTable bordered className="table-responsive-md">
         <MDBTableHead>
           <tr>

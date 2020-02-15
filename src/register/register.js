@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { Redirect } from "react-router-dom";
+import Button from "../components/button";
 
 import {
   MDBContainer,
   MDBRow,
   MDBCol,
-  MDBBtn,
   MDBCard,
   MDBCardBody,
   MDBInput
@@ -25,7 +25,7 @@ const Register = () => {
       },
       body: JSON.stringify({
         username,
-        password,
+        password
       })
     })
       .then(res => res.json())
@@ -38,17 +38,13 @@ const Register = () => {
   };
   return (
     <MDBContainer>
-      {/* <header className="logo">
-        <img
-          src="https://chris180.org/wp-content/uploads/2016/08/Logo-450x200.png"
-          alt="main logo"
-          className="packageCenter"
-        />
-      </header> */}
       <br></br>
-      {role === 'standard' ? <Redirect to="/adminApproval/" /> : ""}
+      <br></br>
+      <br></br>
+      <br></br>
+      {role === "standard" ? <Redirect to="/adminApproval/" /> : ""}
       <MDBRow>
-      <MDBCol md="5" className="col-md-4 mx-auto" >
+        <MDBCol md="5" className="col-md-4 mx-auto">
           <MDBCard className="loginCard">
             <div className="header pt-3 grey lighten-2">
               <MDBRow className="d-flex justify-content-start">
@@ -76,14 +72,7 @@ const Register = () => {
               />
 
               <div className="text-center mb-4 mt-5">
-                <MDBBtn
-                  color="danger"
-                  type="submit"
-                  className="btn-block z-depth-2"
-                  onClick={handleSubmit}
-                >
-                  Register
-                </MDBBtn>
+                <Button onClick={handleSubmit} title="register" />
               </div>
               <p className="font-small grey-text d-flex justify-content-center">
                 Return to log in?

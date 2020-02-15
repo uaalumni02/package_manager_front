@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Redirect } from "react-router-dom";
+import Button from  "../components/button"
 
 import {
   MDBContainer,
@@ -30,7 +31,6 @@ const AdminLogin = () => {
     })
       .then(res => res.json())
       .then(response => {
-        console.log(response.data)
         if (
           response.success === false ||
           response.data.user.role === "standard"
@@ -47,13 +47,6 @@ const AdminLogin = () => {
   return (
     <MDBContainer>
       <br></br><br></br><br></br>
-      {/* <header className="logo">
-        <img
-          src="https://chris180.org/wp-content/uploads/2016/08/Logo-450x200.png"
-          alt="main logo"
-          className="packageCenter"
-        />
-      </header> */}
       <br></br>
       {loggedIn ? <Redirect to="/admins/" /> : ""}
       <MDBRow>
@@ -86,14 +79,7 @@ const AdminLogin = () => {
 
               <div className="text-center mb-4 mt-5">
                 <p>{InvalidLogin}</p>
-                <MDBBtn
-                  color="danger"
-                  type="submit"
-                  className="btn-block z-depth-2"
-                  onClick={handleSubmit}
-                >
-                  Log in
-                </MDBBtn>
+                 <Button onClick={handleSubmit} label="Log In"  />
               </div>
               <p className="font-small grey-text d-flex justify-content-center">
                 Return to user log in?

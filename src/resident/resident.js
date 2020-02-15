@@ -1,17 +1,10 @@
 import React, { useState, useContext } from "react";
 import { Redirect } from "react-router-dom";
 import { UserContext } from "../contexts/UserContext";
-import NavbarPage from "../navBar/navBar";
+import NavbarPage from "../components/navBar";
+import SubmitBtn from "../components/submitBtn";
 
-import {
-  MDBRow,
-  MDBCol,
-  MDBBtn,
-  MDBCard,
-  MDBCardBody,
-  MDBIcon, 
-  MDBContainer
-} from "mdbreact";
+import { MDBRow, MDBCol, MDBCard, MDBCardBody, MDBContainer } from "mdbreact";
 
 const Resident = () => {
   const [name, setName] = useState("");
@@ -57,69 +50,62 @@ const Resident = () => {
         />
       </header> */}
       <div>{loggedIn ? <NavbarPage /> : ""}</div>
-      <br></br>
+      <br></br> <br></br> <br></br> <br></br> <br></br> <br></br> <br></br>
       {residentConfirmation ? <Redirect to={`/allResidents/`} /> : ""}
       <MDBContainer>
-      <MDBRow>
-      <MDBCol md="6" className="col-md-8 mx-auto">
-          <MDBCard className="residentCard">
-            <MDBCardBody>
-              <form>
-                <p className="h4 text-center py-4">Add New Resident</p>
-                <label
-                  htmlFor="defaultFormCardNameEx"
-                  className="grey-text font-weight-light"
-                >
-                  Name
-                </label>
-                <input
-                  type="text"
-                  id="defaultFormCardNameEx"
-                  className="form-control"
-                  onChange={e => setName(e.target.value)}
-                />
-                <br />
-                <label
-                  htmlFor="defaultFormCardEmailEx"
-                  className="grey-text font-weight-light"
-                >
-                  Email
-                </label>
-                <input
-                  type="email"
-                  id="defaultFormCardEmailEx"
-                  className="form-control"
-                  onChange={e => setEmail(e.target.value)}
-                />
-                <label
-                  htmlFor="defaultFormCardNameEx"
-                  className="grey-text font-weight-light"
-                >
-                  <br />
-                  Phone
-                </label>
-                <input
-                  type="text"
-                  id="defaultFormCardNameEx"
-                  className="form-control"
-                  placeholder="999-999-9999"
-                  onChange={e => setPhone(e.target.value)}
-                />
-                <div className="text-center py-4 mt-3">
-                  <MDBBtn
-                    className="btn btn-outline-purple"
-                    type="submit"
-                    onClick={handleSubmit}
+        <MDBRow>
+          <MDBCol md="6" className="col-md-8 mx-auto">
+            <MDBCard className="residentCard">
+              <MDBCardBody>
+                <form>
+                  <p className="h4 text-center py-4">Add New Resident</p>
+                  <label
+                    htmlFor="defaultFormCardNameEx"
+                    className="grey-text font-weight-light"
                   >
-                    Submit
-                    <MDBIcon far icon="paper-plane" className="ml-2" />
-                  </MDBBtn>
-                </div>
-              </form>
-            </MDBCardBody>
-          </MDBCard>
-        </MDBCol>
-      </MDBRow>
+                    Name
+                  </label>
+                  <input
+                    type="text"
+                    id="defaultFormCardNameEx"
+                    className="form-control"
+                    onChange={e => setName(e.target.value)}
+                  />
+                  <br />
+                  <label
+                    htmlFor="defaultFormCardEmailEx"
+                    className="grey-text font-weight-light"
+                  >
+                    Email
+                  </label>
+                  <input
+                    type="email"
+                    id="defaultFormCardEmailEx"
+                    className="form-control"
+                    onChange={e => setEmail(e.target.value)}
+                  />
+                  <label
+                    htmlFor="defaultFormCardNameEx"
+                    className="grey-text font-weight-light"
+                  >
+                    <br />
+                    Phone
+                  </label>
+                  <input
+                    type="text"
+                    id="defaultFormCardNameEx"
+                    className="form-control"
+                    placeholder="999-999-9999"
+                    onChange={e => setPhone(e.target.value)}
+                  />
+                  <div className="text-center py-4 mt-3">
+                    <SubmitBtn onClick={handleSubmit} label="Submit" />
+                  </div>
+                </form>
+              </MDBCardBody>
+            </MDBCard>
+          </MDBCol>
+        </MDBRow>
       </MDBContainer>
     </>
   );

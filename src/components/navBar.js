@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "./navBar.css";
+import "../static/navBar.css";
 import {
   MDBNavbar,
   MDBNavbarBrand,

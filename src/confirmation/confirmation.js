@@ -1,9 +1,8 @@
 import React, { useState, useEffect, useContext } from "react";
 import * as moment from "moment";
 import { UserContext } from "../contexts/UserContext";
-import NavbarPage from "../navBar/navBar";
+import NavbarPage from "../components/navBar";
 import { MDBRow, MDBCol, MDBCard, MDBCardBody, MDBContainer } from "mdbreact";
-
 
 const PackageConfirmation = () => {
   const [companyName, setCompanyNames] = useState("");
@@ -45,7 +44,7 @@ const PackageConfirmation = () => {
         />
       </header> */}
       <div>{loggedIn ? <NavbarPage /> : ""}</div>
-      <br></br>
+      <br></br> <br></br> <br></br> <br></br> <br></br> <br></br> <br></br>
       <MDBContainer>
         <MDBRow>
           <MDBCol md="6" className="col-md-8 mx-auto">

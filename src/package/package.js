@@ -1,9 +1,11 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Redirect } from "react-router-dom";
 import { UserContext } from "../contexts/UserContext";
-import NavbarPage from "../navBar/navBar";
+import NavbarPage from "../components/navBar";
 import "bootstrap-css-only/css/bootstrap.min.css";
 import "mdbreact/dist/css/mdb.css";
+
+import SubmitBtn from  "../components/submitBtn"
 
 import {
   MDBRow,
@@ -110,7 +112,7 @@ const Package = () => {
         />
       </header> */}
       <div>{loggedIn ? <NavbarPage /> : ""}</div>
-      <br></br>
+      <br></br> <br></br> <br></br> <br></br> <br></br> <br></br> <br></br>
       {packageConfirmation ? (
         <Redirect to={`/confirmation/${packageId}`} />
       ) : (
@@ -190,14 +192,7 @@ const Package = () => {
                   />
 
                   <div className="text-center py-4 mt-3">
-                    <MDBBtn
-                      className="btn btn-outline-purple"
-                      type="submit"
-                      onClick={submitPackage}
-                    >
-                      Submit
-                      <MDBIcon far icon="paper-plane" className="ml-2" />
-                    </MDBBtn>
+                    <SubmitBtn  onClick={submitPackage} label="Submit" />
                   </div>
                 </form>
               </MDBCardBody>

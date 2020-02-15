@@ -1,25 +1,13 @@
 import React from "react";
-import {
-  MDBContainer,
-  MDBRow,
-  MDBCol,
-  MDBCard,
-  MDBCardBody,
-} from "mdbreact";
 
-const AdminApproval = () => {
+import { MDBContainer, MDBRow, MDBCol, MDBCard, MDBCardBody } from "mdbreact";
+
+const ApprovalMessage = () => {
   return (
     <MDBContainer>
-      {/* <header className="logo">
-        <img
-          src="https://chris180.org/wp-content/uploads/2016/08/Logo-450x200.png"
-          alt="main logo"
-          className="packageCenter"
-        />
-      </header> */}
       <br></br>
       <MDBRow>
-        <MDBCol md="5">
+        <MDBCol md="5" className="col-md-4 mx-auto">
           <MDBCard className="loginCard">
             <div className="header pt-3 grey lighten-2">
               <MDBRow className="d-flex justify-content-start">
@@ -35,10 +23,7 @@ const AdminApproval = () => {
               </p>
               <p className="font-small grey-text d-flex justify-content-center">
                 Return to log in?
-                <a
-                  href="/"
-                  className="dark-grey-text font-weight-bold ml-1"
-                >
+                <a href="/" className="dark-grey-text font-weight-bold ml-1">
                   Click Here
                 </a>
               </p>
@@ -50,4 +35,4 @@ const AdminApproval = () => {
   );
 };
 
-export default AdminApproval;
+export default ApprovalMessage;
