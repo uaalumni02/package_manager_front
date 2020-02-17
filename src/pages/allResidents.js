@@ -10,7 +10,7 @@ const AllResidents = () => {
   const fetchResidentData = () => {
     const token = localStorage.getItem("token");
     const bearer = "Bearer " + token;
-    fetch("http://localhost:3000/api/resident", {
+    fetch("https://tz-package-manager.herokuapp.com/api/resident", {
       method: "GET",
       headers: {
         Authorization: bearer
@@ -34,7 +34,7 @@ const AllResidents = () => {
     const { isDeleted } = deleteResident;
     const token = localStorage.getItem("token");
     const bearer = "Bearer " + token;
-    fetch("http://localhost:3000/api/resident/" + resident._id, {
+    fetch("https://tz-package-manager.herokuapp.com/api/resident/" + resident._id, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",

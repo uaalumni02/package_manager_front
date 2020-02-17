@@ -18,7 +18,7 @@ const Register = () => {
 
   const handleSubmit = event => {
     event.preventDefault();
-    fetch("http://localhost:3000/api/user/", {
+    fetch("https://tz-package-manager.herokuapp.com/api/user/", {
       method: "post",
       headers: {
         "Content-Type": "application/json"

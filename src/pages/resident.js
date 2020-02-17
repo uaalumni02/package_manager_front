@@ -19,7 +19,7 @@ const Resident = () => {
     const token = localStorage.getItem("token");
     const bearer = "Bearer " + token;
 
-    fetch("http://localhost:3000/api/resident", {
+    fetch("https://tz-package-manager.herokuapp.com/api/resident", {
       method: "post",
       headers: {
         "Content-Type": "application/json",

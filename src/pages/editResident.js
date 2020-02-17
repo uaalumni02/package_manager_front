@@ -23,7 +23,7 @@ const EditResident = () => {
     const bearer = "Bearer " + token;
     const url = window.location.pathname;
     const id = url.substring(url.lastIndexOf("/") + 1);
-    fetch("http://localhost:3000/api/resident/" + id, {
+    fetch("https://tz-package-manager.herokuapp.com/api/resident/" + id, {
       method: "GET",
       headers: {
         Authorization: bearer
@@ -47,7 +47,7 @@ const EditResident = () => {
     const bearer = "Bearer " + token;
     const url = window.location.pathname;
     const id = url.substring(url.lastIndexOf("/") + 1);
-    fetch("http://localhost:3000/api/resident/" + id, {
+    fetch("https://tz-package-manager.herokuapp.com/api/resident/" + id, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",

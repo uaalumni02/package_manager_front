@@ -34,7 +34,7 @@ const Package = () => {
     const token = localStorage.getItem("token");
     const bearer = "Bearer " + token;
 
-    fetch("http://localhost:3000/api/company", {
+    fetch("https://tz-package-manager.herokuapp.com/api/company", {
       method: "GET",
       headers: {
         Authorization: bearer
@@ -56,7 +56,7 @@ const Package = () => {
   const fetchResidentData = () => {
     const token = localStorage.getItem("token");
     const bearer = "Bearer " + token;
-    fetch("http://localhost:3000/api/resident", {
+    fetch("https://tz-package-manager.herokuapp.com/api/resident", {
       method: "GET",
       headers: {
         Authorization: bearer
@@ -78,7 +78,7 @@ const Package = () => {
     const token = localStorage.getItem("token");
     const bearer = "Bearer " + token;
     event.preventDefault();
-    fetch("http://localhost:3000/api/package", {
+    fetch("https://tz-package-manager.herokuapp.com/api/package", {
       method: "post",
       headers: {
         "Content-Type": "application/json",

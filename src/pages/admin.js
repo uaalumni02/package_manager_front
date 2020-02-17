@@ -9,7 +9,7 @@ const Admins = () => {
   const fetchUserData = () => {
     const token = localStorage.getItem("token");
     const bearer = "Bearer " + token;
-    fetch("http://localhost:3000/api/user", {
+    fetch("https://tz-package-manager.herokuapp.com/api/user", {
       method: "GET",
       headers: {
         Authorization: bearer
@@ -29,7 +29,7 @@ const Admins = () => {
   const declineAdminRequest = user => {
     const token = localStorage.getItem("token");
     const bearer = "Bearer " + token;
-    fetch("http://localhost:3000/api/user/" + user._id, {
+    fetch("https://tz-package-manager.herokuapp.com/api/user/" + user._id, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -53,7 +53,7 @@ const Admins = () => {
 
     const token = localStorage.getItem("token");
     const bearer = "Bearer " + token;
-    fetch("http://localhost:3000/api/user/" + user._id, {
+    fetch("https://tz-package-manager.herokuapp.com/api/user/" + user._id, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",

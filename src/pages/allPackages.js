@@ -25,7 +25,7 @@ const AllPackages = () => {
   const fetchPackageData = () => {
     const token = localStorage.getItem("token");
     const bearer = "Bearer " + token;
-    fetch("http://localhost:3000/api/package", {
+    fetch("https://tz-package-manager.herokuapp.com/api/package", {
       method: "GET",
       headers: {
         Authorization: bearer
@@ -52,7 +52,7 @@ const AllPackages = () => {
 
     const token = localStorage.getItem("token");
     const bearer = "Bearer " + token;
-    fetch("http://localhost:3000/api/package/" + delivery._id, {
+    fetch("https://tz-package-manager.herokuapp.com/api/package/" + delivery._id, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -77,7 +77,7 @@ const AllPackages = () => {
 
     const token = localStorage.getItem("token");
     const bearer = "Bearer " + token;
-    fetch("http://localhost:3000/api/package/" + delivery._id, {
+    fetch("https://tz-package-manager.herokuapp.com/api/package/" + delivery._id, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",

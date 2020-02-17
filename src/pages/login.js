@@ -18,7 +18,7 @@ const Login = () => {
 
   const handleSubmit = event => {
     event.preventDefault();
-    fetch("http://localhost:3000/api/user/login", {
+    fetch("https://tz-package-manager.herokuapp.com/api/user/login", {
       method: "post",
       headers: {
         "Content-Type": "application/json"
