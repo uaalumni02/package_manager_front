@@ -1,19 +1,19 @@
 import React from "react";
 import "./App.css";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import Resident from "./resident/resident";
-import Login from "./login/login";
-import Register from "./register/register";
-import Package from "./package/package";
+import Resident from "./pages/resident";
+import Login from "./pages/login";
+import Register from "./pages/register";
+import Package from "./pages/package";
 import Confirmation from "./confirmation/confirmation";
-import AllPackages from "./allPackages/allPackages";
+import AllPackages from "./pages/allPackages";
 import UserContextProvider from "./contexts/UserContext";
-import AllResidents from "./allResidents/allResidents";
-import EditResident from "./editResident/editResident";
-import EditPackage from "./editPackage/editPackage";
+import AllResidents from "./pages/allResidents";
+import EditResident from "./pages/editResident";
+import EditPackage from "./pages/editPackage";
 import ApprovalMessage from "./components/approvalMessage";
-import AdminLogin from "./adminLogin/adminLogin";
-import Admins from "./admin/admin";
+import AdminLogin from "./pages/adminLogin";
+import Admins from "./pages/admin";
 
 function App() {
   return (

@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import * as moment from "moment";
 import { UserContext } from "../contexts/UserContext";
 import NavbarPage from "../components/navBar";
-import "./allPackages.css";
+import "../static/allPackages.css";
 import {
   MDBTable,
   MDBTableBody,
