@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Redirect } from "react-router-dom";
 import { UserContext } from "../contexts/UserContext";
-import NavbarPage from "../components/navBar";
+import NavbarPage from "../components/NavBar";
 import "bootstrap-css-only/css/bootstrap.min.css";
 import "mdbreact/dist/css/mdb.css";
 
-import SubmitBtn from  "../components/submitBtn"
+import SubmitBtn from  "../components/SubmitBtn"
 
 import {
   MDBRow,

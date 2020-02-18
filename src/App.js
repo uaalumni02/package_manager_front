@@ -11,7 +11,7 @@ import UserContextProvider from "./contexts/UserContext";
 import AllResidents from "./pages/allResidents";
 import EditResident from "./pages/editResident";
 import EditPackage from "./pages/editPackage";
-import ApprovalMessage from "./components/approvalMessage";
+import ApprovalMessage from "./components/ApprovalMessage";
 import AdminLogin from "./pages/adminLogin";
 import Admins from "./pages/admin";
 
