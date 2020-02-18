@@ -125,6 +125,7 @@ const EditPackage = () => {
           className="packageCenter"
         />
       </header> */}
+     <br></br><br></br><br></br>
       <br></br>
       {packageConfirmation ? <Redirect to={`/allPackages/`} /> : ""}
       <MDBContainer>

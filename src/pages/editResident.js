@@ -78,6 +78,7 @@ const EditResident = () => {
           className="residentCenter"
         />
       </header> */}
+    <br></br><br></br><br></br>
       <br></br>
       {updateConfirmation ? <Redirect to={`/allResidents/`} /> : ""}
       <MDBRow>
