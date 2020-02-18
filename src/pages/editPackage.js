@@ -125,120 +125,119 @@ const EditPackage = () => {
           className="packageCenter"
         />
       </header> */}
-     <br></br><br></br><br></br>
-      <br></br>
+      <br></br> <br></br> <br></br> <br></br> <br></br> <br></br> <br></br>
       {packageConfirmation ? <Redirect to={`/allPackages/`} /> : ""}
       <MDBContainer>
-      <MDBRow>
-        <MDBCol md="6" className="col-md-8 mx-auto">
-          <MDBCard className="package">
-            <MDBCardBody>
-              <form>
-                <p className="h4 text-center py-4">Edit Package</p>
-                <label
-                  htmlFor="defaultFormCardNameEx"
-                  className="grey-text font-weight-light"
-                >
-                  Company
-                </label>
-                <select
-                  id="defaultFormCardNameEx"
-                  className="form-control"
-                  onChange={e => setCompanyId(e.target.value)}
-                >
-                  {companyName.map(company => {
-                    console.log(currentPackageData);
-                    const selected =
-                      currentPackageData &&
-                      currentPackageData.companyName._id === company._id;
-                    return (
-                      <option
-                        value={company._id}
-                        key={company._id}
-                        selected={selected}
-                      >
-                        {company.companyName}
-                      </option>
-                    );
-                  })}
-                </select>
-                <br />
-                <label
-                  htmlFor="defaultFormCardNameEx"
-                  className="grey-text font-weight-light"
-                >
-                  Resident
-                </label>
-                <select
-                  id="defaultFormCardNameEx"
-                  className="form-control"
-                  onChange={e => setResidentId(e.target.value)}
-                >
-                  {name.map(resident => {
-                    const selected =
-                      currentPackageData &&
-                      currentPackageData.name._id === resident._id;
-                    return (
-                      <option
-                        value={resident._id}
-                        key={resident._id}
-                        selected={selected}
-                      >
-                        {resident.name}
-                      </option>
-                    );
-                  })}
-                </select>
-                <br />
-                <label
-                  htmlFor="defaultFormCardNameEx"
-                  className="grey-text font-weight-light"
-                >
-                  Select Date and Time
-                </label>
-                <input
-                  type="datetime-local"
-                  id="defaultFormCardNameEx"
-                  className="form-control"
-                  onChange={e => setDeliveryDate(e.target.value)}
-                  value={
-                    currentPackageData
-                      ? moment
-                          .unix(currentPackageData.deliveryDate)
-                          .format("YYYY-MM-DDTH:mm")
-                      : ""
-                  }
-                />
-                <br />
-                <label
-                  htmlFor="defaultFormCardNameEx"
-                  className="grey-text font-weight-light"
-                >
-                  Additionl Information
-                </label>
-                <textarea
-                  type="text"
-                  id="defaultFormCardNameEx"
-                  className="form-control"
-                  value={additionalInfo}
-                  onChange={e => setAdditionalInfo(e.target.value)}
-                />
-
-                <div className="text-center py-4 mt-3">
-                  <MDBBtn
-                    onClick={updatePackage}
-                    className="btn btn-outline-purple"
-                    type="submit"
+        <MDBRow>
+          <MDBCol md="6" className="col-md-8 mx-auto">
+            <MDBCard className="package">
+              <MDBCardBody>
+                <form>
+                  <p className="h4 text-center py-4">Edit Package</p>
+                  <label
+                    htmlFor="defaultFormCardNameEx"
+                    className="grey-text font-weight-light"
                   >
-                    Edit
-                    <MDBIcon far icon="paper-plane" className="ml-2" />
-                  </MDBBtn>
-                </div>
-              </form>
-            </MDBCardBody>
-          </MDBCard>
-        </MDBCol>
-      </MDBRow>
+                    Company
+                  </label>
+                  <select
+                    id="defaultFormCardNameEx"
+                    className="form-control"
+                    onChange={e => setCompanyId(e.target.value)}
+                  >
+                    {companyName.map(company => {
+                      console.log(currentPackageData);
+                      const selected =
+                        currentPackageData &&
+                        currentPackageData.companyName._id === company._id;
+                      return (
+                        <option
+                          value={company._id}
+                          key={company._id}
+                          selected={selected}
+                        >
+                          {company.companyName}
+                        </option>
+                      );
+                    })}
+                  </select>
+                  <br />
+                  <label
+                    htmlFor="defaultFormCardNameEx"
+                    className="grey-text font-weight-light"
+                  >
+                    Resident
+                  </label>
+                  <select
+                    id="defaultFormCardNameEx"
+                    className="form-control"
+                    onChange={e => setResidentId(e.target.value)}
+                  >
+                    {name.map(resident => {
+                      const selected =
+                        currentPackageData &&
+                        currentPackageData.name._id === resident._id;
+                      return (
+                        <option
+                          value={resident._id}
+                          key={resident._id}
+                          selected={selected}
+                        >
+                          {resident.name}
+                        </option>
+                      );
+                    })}
+                  </select>
+                  <br />
+                  <label
+                    htmlFor="defaultFormCardNameEx"
+                    className="grey-text font-weight-light"
+                  >
+                    Select Date and Time
+                  </label>
+                  <input
+                    type="datetime-local"
+                    id="defaultFormCardNameEx"
+                    className="form-control"
+                    onChange={e => setDeliveryDate(e.target.value)}
+                    value={
+                      currentPackageData
+                        ? moment
+                            .unix(currentPackageData.deliveryDate)
+                            .format("YYYY-MM-DDTH:mm")
+                        : ""
+                    }
+                  />
+                  <br />
+                  <label
+                    htmlFor="defaultFormCardNameEx"
+                    className="grey-text font-weight-light"
+                  >
+                    Additionl Information
+                  </label>
+                  <textarea
+                    type="text"
+                    id="defaultFormCardNameEx"
+                    className="form-control"
+                    value={additionalInfo}
+                    onChange={e => setAdditionalInfo(e.target.value)}
+                  />
+
+                  <div className="text-center py-4 mt-3">
+                    <MDBBtn
+                      onClick={updatePackage}
+                      className="btn btn-outline-purple"
+                      type="submit"
+                    >
+                      Edit
+                      <MDBIcon far icon="paper-plane" className="ml-2" />
+                    </MDBBtn>
+                  </div>
+                </form>
+              </MDBCardBody>
+            </MDBCard>
+          </MDBCol>
+        </MDBRow>
       </MDBContainer>
     </>
   );
