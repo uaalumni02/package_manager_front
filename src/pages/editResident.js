@@ -82,7 +82,7 @@ const EditResident = () => {
       <br></br>
       {updateConfirmation ? <Redirect to={`/allResidents/`} /> : ""}
       <MDBRow>
-        <MDBCol md="6">
+        <MDBCol md="6" className="col-md-8 mx-auto">
           <MDBCard className="residentCard">
             <MDBCardBody>
               <form>

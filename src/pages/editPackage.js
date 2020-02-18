@@ -130,7 +130,7 @@ const EditPackage = () => {
       {packageConfirmation ? <Redirect to={`/allPackages/`} /> : ""}
       <MDBContainer>
       <MDBRow>
-        <MDBCol md="6">
+        <MDBCol md="6" className="col-md-8 mx-auto">
           <MDBCard className="package">
             <MDBCardBody>
               <form>
