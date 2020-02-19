@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import * as moment from "moment";
 import { UserContext } from "../contexts/UserContext";
-import NavbarPage from "../components/navBar";
+import NavbarPage from "../components/NavBar";
 import { MDBRow, MDBCol, MDBCard, MDBCardBody, MDBContainer } from "mdbreact";
 
 const PackageConfirmation = () => {
