@@ -1,5 +1,5 @@
 import React from "react";
-import ApprovalMessage from  "../components/approvalMessage"
+import ApprovalMessage from  "../components/ApprovalMessage"
 
 
 const AdminApproval = () => {

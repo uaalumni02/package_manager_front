@@ -10,10 +10,8 @@ import SubmitBtn from  "../components/SubmitBtn"
 import {
   MDBRow,
   MDBCol,
-  MDBBtn,
   MDBCard,
   MDBCardBody,
-  MDBIcon,
   MDBContainer
 } from "mdbreact";
 
