@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { UserContext } from "../contexts/UserContext";
-import NavbarPage from "../components/NavBar";
+import NavbarPage from "../components/navBar";
 import { MDBTable, MDBTableBody, MDBTableHead, MDBBtn } from "mdbreact";
 
 const Admins = () => {

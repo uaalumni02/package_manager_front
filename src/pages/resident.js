@@ -1,8 +1,8 @@
 import React, { useState, useContext } from "react";
 import { Redirect } from "react-router-dom";
 import { UserContext } from "../contexts/UserContext";
-import NavbarPage from "../components/NavBar";
-import SubmitBtn from "../components/SubmitBtn";
+import NavbarPage from "../components/navBar";
+import SubmitBtn from "../components/submitBtn";
 
 import { MDBRow, MDBCol, MDBCard, MDBCardBody, MDBContainer } from "mdbreact";
 

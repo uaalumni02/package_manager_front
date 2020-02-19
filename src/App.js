@@ -11,7 +11,7 @@ import UserContextProvider from "./contexts/UserContext";
 import AllResidents from "./pages/allResidents";
 import EditResident from "./pages/editResident";
 import EditPackage from "./pages/editPackage";
-// import ApprovalMessage from "./components/ApprovalMessage";
+import ApprovalMessage from "./components/approvalMessage";
 import AdminLogin from "./pages/adminLogin";
 import Admins from "./pages/admin";
 
@@ -31,7 +31,7 @@ function App() {
             <Route exact path="/allResidents" component={AllResidents} />
             <Route exact path="/editResident/:id" component={EditResident} />
             <Route exact path="/editPackage/:id" component={EditPackage} />
-            {/* <Route exact path="/adminApproval" component={ApprovalMessage} /> */}
+            <Route exact path="/adminApproval" component={ApprovalMessage} />
             <Route exact path="/adminLogin" component={AdminLogin} />
             <Route exact path="/admins/" component={Admins} />
           </Switch>

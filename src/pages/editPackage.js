@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Redirect } from "react-router-dom";
 import { UserContext } from "../contexts/UserContext";
-import NavbarPage from "../components/NavBar";
+import NavbarPage from "../components/navBar";
 import moment from "moment";
 import {
   MDBRow,
