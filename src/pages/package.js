@@ -4,7 +4,7 @@ import { UserContext } from "../contexts/UserContext";
 import NavbarPage from "../components/navBar";
 import "bootstrap-css-only/css/bootstrap.min.css";
 import "mdbreact/dist/css/mdb.css";
-import {prodUrl} from "../config/configData"
+import {settings} from "../config/configData"
 
 import SubmitBtn from  "../components/submitBtn"
 
@@ -33,7 +33,7 @@ const Package = () => {
     const token = localStorage.getItem("token");
     const bearer = "Bearer " + token;
 
-    fetch(`${prodUrl}/api/company`, {
+    fetch(`${settings.apiBaseUrl}/api/company`, {
       method: "GET",
       headers: {
         Authorization: bearer
@@ -55,7 +55,7 @@ const Package = () => {
   const fetchResidentData = () => {
     const token = localStorage.getItem("token");
     const bearer = "Bearer " + token;
-    fetch(`${prodUrl}/api/resident`, {
+    fetch(`${settings.apiBaseUrl}/api/resident`, {
       method: "GET",
       headers: {
         Authorization: bearer
@@ -77,7 +77,7 @@ const Package = () => {
     const token = localStorage.getItem("token");
     const bearer = "Bearer " + token;
     event.preventDefault();
-    fetch(`${prodUrl}/api/package`, {
+    fetch(`${settings.apiBaseUrl}/api/package`, {
       method: "post",
       headers: {
         "Content-Type": "application/json",

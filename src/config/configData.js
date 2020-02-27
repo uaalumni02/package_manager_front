@@ -1,14 +1,17 @@
-// const port = 3000
-// const configData = {
-//   local: {
-//     env: 'local',
-//     tzApiUrl: `http://localhost:${port}`,
-//     prodUrl: "https://tz-package-manager.herokuapp.com",
-//   },
-// }
 
-// export default configData
+const settings = {
+  local: {
+    api_key: "local",
+    apiBaseUrl: "http://localhost:3000"
+  },
+  production: {
+    api_key: "prodkey",
+    apiBaseUrl: "https://tz-package-manager.herokuapp.com"
+  }
+};
 
-let prodUrl = "https://tz-package-manager.herokuapp.com";
+const env = process.env.NODE_ENV || 'local';
 
-export {prodUrl};
+export default settings[env]
+
+

@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { UserContext } from "../contexts/UserContext";
 import NavbarPage from "../components/navBar";
 import { MDBTable, MDBTableBody, MDBTableHead, MDBBtn } from "mdbreact";
-import {prodUrl} from "../config/configData"
+import {settings} from "../config/configData"
 
 const AllResidents = () => {
   const [residents, setResidents] = useState([]);
@@ -11,7 +11,7 @@ const AllResidents = () => {
   const fetchResidentData = () => {
     const token = localStorage.getItem("token");
     const bearer = "Bearer " + token;
-    fetch("https://tz-package-manager.herokuapp.com/api/resident", {
+    fetch(`${settings.apiBaseUrl}/api/resident`, {
       method: "GET",
       headers: {
         Authorization: bearer
@@ -35,7 +35,7 @@ const AllResidents = () => {
     const { isDeleted } = deleteResident;
     const token = localStorage.getItem("token");
     const bearer = "Bearer " + token;
-    fetch(`${prodUrl}/api/resident/` + resident._id, {
+    fetch(`${settings.apiBaseUrl}/api/resident/` + resident._id, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",

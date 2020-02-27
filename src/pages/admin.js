@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { UserContext } from "../contexts/UserContext";
 import NavbarPage from "../components/navBar";
 import { MDBTable, MDBTableBody, MDBTableHead, MDBBtn } from "mdbreact";
-import {prodUrl} from "../config/configData"
+import {settings} from "../config/configData"
 
 const Admins = () => {
   const [users, setUsers] = useState([]);
@@ -10,7 +10,7 @@ const Admins = () => {
   const fetchUserData = () => {
     const token = localStorage.getItem("token");
     const bearer = "Bearer " + token;
-    fetch(`${prodUrl}/api/user`, {
+    fetch(`${settings.apiBaseUrl}/api/user`, {
       method: "GET",
       headers: {
         Authorization: bearer
@@ -29,7 +29,7 @@ const Admins = () => {
   const declineAdminRequest = user => {
     const token = localStorage.getItem("token");
     const bearer = "Bearer " + token;
-    fetch(`${prodUrl}/api/user/` + user._id, {
+    fetch(`${settings.apiBaseUrl}/api/user/` + user._id, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -53,7 +53,7 @@ const Admins = () => {
 
     const token = localStorage.getItem("token");
     const bearer = "Bearer " + token;
-    fetch(`${prodUrl}/api/user/` + user._id, {
+    fetch(`${settings.apiBaseUrl}/api/user/` + user._id, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",

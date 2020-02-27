@@ -3,7 +3,7 @@ import { Redirect } from "react-router-dom";
 import { UserContext } from "../contexts/UserContext";
 import NavbarPage from "../components/navBar";
 import moment from "moment";
-import {prodUrl} from "../config/configData"
+import {settings} from "../config/configData"
 import {
   MDBRow,
   MDBCol,
@@ -29,7 +29,7 @@ const EditPackage = () => {
   const fetchCompanyData = () => {
     const token = localStorage.getItem("token");
     const bearer = "Bearer " + token;
-    fetch(`${prodUrl}/api/company`, {
+    fetch(`${settings.apiBaseUrl}/api/company`, {
       method: "GET",
       headers: {
         Authorization: bearer
@@ -51,7 +51,7 @@ const EditPackage = () => {
   const fetchResidentData = () => {
     const token = localStorage.getItem("token");
     const bearer = "Bearer " + token;
-    fetch(`${prodUrl}/api/resident`, {
+    fetch(`${settings.apiBaseUrl}/api/resident`, {
       method: "GET",
       headers: {
         Authorization: bearer
@@ -71,7 +71,7 @@ const EditPackage = () => {
     const bearer = "Bearer " + token;
     const url = window.location.pathname;
     const id = url.substring(url.lastIndexOf("/") + 1);
-    fetch(`${prodUrl}/api/package/` + id, {
+    fetch(`${settings.apiBaseUrl}/api/package/` + id, {
       method: "GET",
       headers: {
         Authorization: bearer
@@ -93,7 +93,7 @@ const EditPackage = () => {
     const bearer = "Bearer " + token;
     const url = window.location.pathname;
     const id = url.substring(url.lastIndexOf("/") + 1);
-    fetch(`${prodUrl}/api/package/` + id, {
+    fetch(`${settings.apiBaseUrl}/api/package/` + id, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Redirect } from "react-router-dom";
 import Button from  "../components/button"
-import {prodUrl} from "../config/configData"
+import {settings} from "../config/configData"
 import {
   MDBContainer,
   MDBRow,
@@ -19,7 +19,7 @@ const Login = () => {
 
   const handleSubmit = event => {
     event.preventDefault();
-    fetch(`${prodUrl}/api/user/login`, {
+    fetch(`${settings.apiBaseUrl}/api/user/login`, {
       method: "post",
       headers: {
         "Content-Type": "application/json"
