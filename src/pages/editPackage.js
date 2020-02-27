@@ -3,6 +3,7 @@ import { Redirect } from "react-router-dom";
 import { UserContext } from "../contexts/UserContext";
 import NavbarPage from "../components/navBar";
 import moment from "moment";
+import {prodUrl} from "../config/configData"
 import {
   MDBRow,
   MDBCol,
@@ -28,7 +29,7 @@ const EditPackage = () => {
   const fetchCompanyData = () => {
     const token = localStorage.getItem("token");
     const bearer = "Bearer " + token;
-    fetch("https://tz-package-manager.herokuapp.com/api/company", {
+    fetch(`${prodUrl}/api/company`, {
       method: "GET",
       headers: {
         Authorization: bearer
@@ -50,7 +51,7 @@ const EditPackage = () => {
   const fetchResidentData = () => {
     const token = localStorage.getItem("token");
     const bearer = "Bearer " + token;
-    fetch("https://tz-package-manager.herokuapp.com/api/resident", {
+    fetch(`${prodUrl}/api/resident`, {
       method: "GET",
       headers: {
         Authorization: bearer
@@ -70,7 +71,7 @@ const EditPackage = () => {
     const bearer = "Bearer " + token;
     const url = window.location.pathname;
     const id = url.substring(url.lastIndexOf("/") + 1);
-    fetch("https://tz-package-manager.herokuapp.com/api/package/" + id, {
+    fetch(`${prodUrl}/api/package/` + id, {
       method: "GET",
       headers: {
         Authorization: bearer
@@ -92,7 +93,7 @@ const EditPackage = () => {
     const bearer = "Bearer " + token;
     const url = window.location.pathname;
     const id = url.substring(url.lastIndexOf("/") + 1);
-    fetch("https://tz-package-manager.herokuapp.com/api/package/" + id, {
+    fetch(`${prodUrl}/api/package/` + id, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",

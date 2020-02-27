@@ -3,6 +3,8 @@ import * as moment from "moment";
 import { UserContext } from "../contexts/UserContext";
 import NavbarPage from "../components/navBar";
 import "../static/allPackages.css";
+import {prodUrl} from "../config/configData"
+
 import {
   MDBTable,
   MDBTableBody,
@@ -25,7 +27,7 @@ const AllPackages = () => {
   const fetchPackageData = () => {
     const token = localStorage.getItem("token");
     const bearer = "Bearer " + token;
-    fetch("https://tz-package-manager.herokuapp.com/api/package", {
+    fetch(`${prodUrl}/api/package`, {
       method: "GET",
       headers: {
         Authorization: bearer
@@ -52,7 +54,7 @@ const AllPackages = () => {
 
     const token = localStorage.getItem("token");
     const bearer = "Bearer " + token;
-    fetch("https://tz-package-manager.herokuapp.com/api/package/" + delivery._id, {
+    fetch(`${prodUrl}/api/package/` + delivery._id, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -77,7 +79,7 @@ const AllPackages = () => {
 
     const token = localStorage.getItem("token");
     const bearer = "Bearer " + token;
-    fetch("https://tz-package-manager.herokuapp.com/api/package/" + delivery._id, {
+    fetch(`${prodUrl}/api/package/` + delivery._id, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",

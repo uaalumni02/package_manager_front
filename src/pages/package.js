@@ -4,6 +4,7 @@ import { UserContext } from "../contexts/UserContext";
 import NavbarPage from "../components/navBar";
 import "bootstrap-css-only/css/bootstrap.min.css";
 import "mdbreact/dist/css/mdb.css";
+import {prodUrl} from "../config/configData"
 
 import SubmitBtn from  "../components/submitBtn"
 
@@ -32,7 +33,7 @@ const Package = () => {
     const token = localStorage.getItem("token");
     const bearer = "Bearer " + token;
 
-    fetch("https://tz-package-manager.herokuapp.com/api/company", {
+    fetch(`${prodUrl}/api/company`, {
       method: "GET",
       headers: {
         Authorization: bearer
@@ -54,7 +55,7 @@ const Package = () => {
   const fetchResidentData = () => {
     const token = localStorage.getItem("token");
     const bearer = "Bearer " + token;
-    fetch("https://tz-package-manager.herokuapp.com/api/resident", {
+    fetch(`${prodUrl}/api/resident`, {
       method: "GET",
       headers: {
         Authorization: bearer
@@ -76,7 +77,7 @@ const Package = () => {
     const token = localStorage.getItem("token");
     const bearer = "Bearer " + token;
     event.preventDefault();
-    fetch("https://tz-package-manager.herokuapp.com/api/package", {
+    fetch(`${prodUrl}/api/package`, {
       method: "post",
       headers: {
         "Content-Type": "application/json",

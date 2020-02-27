@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { UserContext } from "../contexts/UserContext";
 import NavbarPage from "../components/navBar";
 import { MDBTable, MDBTableBody, MDBTableHead, MDBBtn } from "mdbreact";
+import {prodUrl} from "../config/configData"
 
 const Admins = () => {
   const [users, setUsers] = useState([]);
@@ -9,7 +10,7 @@ const Admins = () => {
   const fetchUserData = () => {
     const token = localStorage.getItem("token");
     const bearer = "Bearer " + token;
-    fetch("https://tz-package-manager.herokuapp.com/api/user", {
+    fetch(`${prodUrl}/api/user`, {
       method: "GET",
       headers: {
         Authorization: bearer
@@ -17,7 +18,6 @@ const Admins = () => {
     })
       .then(res => res.json())
       .then(response => {
-        console.log(response.data)
         setUsers(response.data);
       })
       .catch(error => console.error("Error:", error));
@@ -29,7 +29,7 @@ const Admins = () => {
   const declineAdminRequest = user => {
     const token = localStorage.getItem("token");
     const bearer = "Bearer " + token;
-    fetch("https://tz-package-manager.herokuapp.com/api/user/" + user._id, {
+    fetch(`${prodUrl}/api/user/` + user._id, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -53,7 +53,7 @@ const Admins = () => {
 
     const token = localStorage.getItem("token");
     const bearer = "Bearer " + token;
-    fetch("https://tz-package-manager.herokuapp.com/api/user/" + user._id, {
+    fetch(`${prodUrl}/api/user/` + user._id, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",

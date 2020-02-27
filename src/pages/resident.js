@@ -6,6 +6,8 @@ import SubmitBtn from "../components/submitBtn";
 
 import { MDBRow, MDBCol, MDBCard, MDBCardBody, MDBContainer } from "mdbreact";
 
+import {prodUrl} from "../config/configData"
+
 const Resident = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -19,7 +21,7 @@ const Resident = () => {
     const token = localStorage.getItem("token");
     const bearer = "Bearer " + token;
 
-    fetch("https://tz-package-manager.herokuapp.com/api/resident", {
+    fetch(`${prodUrl}/api/resident`, {
       method: "post",
       headers: {
         "Content-Type": "application/json",

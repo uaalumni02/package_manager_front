@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Redirect } from "react-router-dom";
 import Button from "../components/button";
+import {prodUrl} from "../config/configData"
 
 import {
   MDBContainer,
@@ -18,7 +19,7 @@ const Register = () => {
 
   const handleSubmit = event => {
     event.preventDefault();
-    fetch("https://tz-package-manager.herokuapp.com/api/user/", {
+    fetch(`${prodUrl}/api/user/`, {
       method: "post",
       headers: {
         "Content-Type": "application/json"

@@ -2,6 +2,8 @@ import React, { useState, useContext, useEffect } from "react";
 import { Redirect } from "react-router-dom";
 import { UserContext } from "../contexts/UserContext";
 import NavbarPage from "../components/navBar";
+import {prodUrl} from "../config/configData"
+
 import {
   MDBRow,
   MDBCol,
@@ -23,7 +25,7 @@ const EditResident = () => {
     const bearer = "Bearer " + token;
     const url = window.location.pathname;
     const id = url.substring(url.lastIndexOf("/") + 1);
-    fetch("https://tz-package-manager.herokuapp.com/api/resident/" + id, {
+    fetch(`${prodUrl}/api/resident/` + id, {
       method: "GET",
       headers: {
         Authorization: bearer
@@ -47,7 +49,7 @@ const EditResident = () => {
     const bearer = "Bearer " + token;
     const url = window.location.pathname;
     const id = url.substring(url.lastIndexOf("/") + 1);
-    fetch("https://tz-package-manager.herokuapp.com/api/resident/" + id, {
+    fetch(`${prodUrl}/api/resident/` + id, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
