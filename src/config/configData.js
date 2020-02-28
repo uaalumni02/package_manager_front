@@ -1,3 +1,4 @@
+import { MDBCarouselItem } from "mdbreact";
 
 const settings = {
   local: {
@@ -12,6 +13,6 @@ const settings = {
 
 const env = process.env.NODE_ENV || 'local';
 
-export default settings[env]
+module.exports = settings[env]
 
 
