@@ -29,7 +29,7 @@ const EditPackage = () => {
   const fetchCompanyData = () => {
     const token = localStorage.getItem("token");
     const bearer = "Bearer " + token;
-    fetch(`${settings.apiBaseUrl}/api/company`, {
+    fetch(`${settings.production.apiBaseUrl}/api/company`, {
       method: "GET",
       headers: {
         Authorization: bearer
@@ -51,7 +51,7 @@ const EditPackage = () => {
   const fetchResidentData = () => {
     const token = localStorage.getItem("token");
     const bearer = "Bearer " + token;
-    fetch(`${settings.apiBaseUrl}/api/resident`, {
+    fetch(`${settings.production.apiBaseUrl}/api/resident`, {
       method: "GET",
       headers: {
         Authorization: bearer
@@ -71,7 +71,7 @@ const EditPackage = () => {
     const bearer = "Bearer " + token;
     const url = window.location.pathname;
     const id = url.substring(url.lastIndexOf("/") + 1);
-    fetch(`${settings.apiBaseUrl}/api/package/` + id, {
+    fetch(`${settings.production.apiBaseUrl}/api/package/` + id, {
       method: "GET",
       headers: {
         Authorization: bearer
@@ -93,7 +93,7 @@ const EditPackage = () => {
     const bearer = "Bearer " + token;
     const url = window.location.pathname;
     const id = url.substring(url.lastIndexOf("/") + 1);
-    fetch(`${settings.apiBaseUrl}/api/package/` + id, {
+    fetch(`${settings.production.apiBaseUrl}/api/package/` + id, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",

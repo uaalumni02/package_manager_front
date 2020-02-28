@@ -25,7 +25,7 @@ const EditResident = () => {
     const bearer = "Bearer " + token;
     const url = window.location.pathname;
     const id = url.substring(url.lastIndexOf("/") + 1);
-    fetch(`${settings.apiBaseUrl}/api/resident/` + id, {
+    fetch(`${settings.production.apiBaseUrl}/api/resident/` + id, {
       method: "GET",
       headers: {
         Authorization: bearer
@@ -49,7 +49,7 @@ const EditResident = () => {
     const bearer = "Bearer " + token;
     const url = window.location.pathname;
     const id = url.substring(url.lastIndexOf("/") + 1);
-    fetch(`${settings.apiBaseUrl}/api/resident/` + id, {
+    fetch(`${settings.production.apiBaseUrl}/api/resident/` + id, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
