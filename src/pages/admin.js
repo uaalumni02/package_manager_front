@@ -10,7 +10,7 @@ const Admins = () => {
   const fetchUserData = () => {
     const token = localStorage.getItem("token");
     const bearer = "Bearer " + token;
-    fetch(`${settings.production.apiBaseUrl}/api/user`, {
+    fetch(`${settings.apiBaseUrl}/api/user`, {
       method: "GET",
       headers: {
         Authorization: bearer
@@ -29,7 +29,7 @@ const Admins = () => {
   const declineAdminRequest = user => {
     const token = localStorage.getItem("token");
     const bearer = "Bearer " + token;
-    fetch(`${settings.production.apiBaseUrl}/api/user/` + user._id, {
+    fetch(`${settings.apiBaseUrl}/api/user/` + user._id, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -53,7 +53,7 @@ const Admins = () => {
 
     const token = localStorage.getItem("token");
     const bearer = "Bearer " + token;
-    fetch(`${settings.production.apiBaseUrl}/api/user/` + user._id, {
+    fetch(`${settings.apiBaseUrl}/api/user/` + user._id, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",

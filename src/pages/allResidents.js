@@ -11,7 +11,7 @@ const AllResidents = () => {
   const fetchResidentData = () => {
     const token = localStorage.getItem("token");
     const bearer = "Bearer " + token;
-    fetch(`${settings.production.apiBaseUrl}/api/resident`, {
+    fetch(`${settings.apiBaseUrl}/api/resident`, {
       method: "GET",
       headers: {
         Authorization: bearer
@@ -35,7 +35,7 @@ const AllResidents = () => {
     const { isDeleted } = deleteResident;
     const token = localStorage.getItem("token");
     const bearer = "Bearer " + token;
-    fetch(`${settings.production.apiBaseUrl}/api/resident/` + resident._id, {
+    fetch(`${settings.apiBaseUrl}/api/resident/` + resident._id, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",

@@ -21,7 +21,7 @@ const Resident = () => {
     const token = localStorage.getItem("token");
     const bearer = "Bearer " + token;
 
-    fetch(`${settings.production.apiBaseUrl}/api/resident`, {
+    fetch(`${settings.apiBaseUrl}/api/resident`, {
       method: "post",
       headers: {
         "Content-Type": "application/json",

@@ -19,7 +19,7 @@ const Login = () => {
 
   const handleSubmit = event => {
     event.preventDefault();
-    fetch(`${settings.production.apiBaseUrl}/api/user/login`, {
+    fetch(`${settings.apiBaseUrl}/api/user/login`, {
       method: "post",
       headers: {
         "Content-Type": "application/json"
