@@ -2,7 +2,7 @@ import React, { useState, useContext, useEffect } from "react";
 import { Redirect } from "react-router-dom";
 import { UserContext } from "../contexts/UserContext";
 import NavbarPage from "../components/navBar";
-import {settings} from "../config/configData"
+import settings from "../config/configData"
 
 import {
   MDBRow,
@@ -25,7 +25,7 @@ const EditResident = () => {
     const bearer = "Bearer " + token;
     const url = window.location.pathname;
     const id = url.substring(url.lastIndexOf("/") + 1);
-    fetch(`${settings.apiBaseUrl}/api/resident/` + id, {
+    fetch(`${settings}/api/resident/` + id, {
       method: "GET",
       headers: {
         Authorization: bearer
@@ -49,7 +49,7 @@ const EditResident = () => {
     const bearer = "Bearer " + token;
     const url = window.location.pathname;
     const id = url.substring(url.lastIndexOf("/") + 1);
-    fetch(`${settings.apiBaseUrl}/api/resident/` + id, {
+    fetch(`${settings}/api/resident/` + id, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",

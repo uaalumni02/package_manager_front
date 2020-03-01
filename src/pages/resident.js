@@ -6,7 +6,7 @@ import SubmitBtn from "../components/submitBtn";
 
 import { MDBRow, MDBCol, MDBCard, MDBCardBody, MDBContainer } from "mdbreact";
 
-import {settings} from "../config/configData"
+import settings from "../config/configData"
 
 const Resident = () => {
   const [name, setName] = useState("");
@@ -21,7 +21,7 @@ const Resident = () => {
     const token = localStorage.getItem("token");
     const bearer = "Bearer " + token;
 
-    fetch(`${settings.apiBaseUrl}/api/resident`, {
+    fetch(`${settings}/api/resident`, {
       method: "post",
       headers: {
         "Content-Type": "application/json",

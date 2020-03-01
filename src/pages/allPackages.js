@@ -3,7 +3,7 @@ import * as moment from "moment";
 import { UserContext } from "../contexts/UserContext";
 import NavbarPage from "../components/navBar";
 import "../static/allPackages.css";
-import {settings} from "../config/configData"
+import settings from "../config/configData"
 
 import {
   MDBTable,
@@ -27,7 +27,7 @@ const AllPackages = () => {
   const fetchPackageData = () => {
     const token = localStorage.getItem("token");
     const bearer = "Bearer " + token;
-    fetch(`${settings.apiBaseUrl}/api/package`, {
+    fetch(`${settings}/api/package`, {
       method: "GET",
       headers: {
         Authorization: bearer
@@ -54,7 +54,7 @@ const AllPackages = () => {
 
     const token = localStorage.getItem("token");
     const bearer = "Bearer " + token;
-    fetch(`${settings.apiBaseUrl}/api/package/` + delivery._id, {
+    fetch(`${settings}/api/package/` + delivery._id, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -79,7 +79,7 @@ const AllPackages = () => {
 
     const token = localStorage.getItem("token");
     const bearer = "Bearer " + token;
-    fetch(`${settings.apiBaseUrl}/api/package/` + delivery._id, {
+    fetch(`${settings}/api/package/` + delivery._id, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
