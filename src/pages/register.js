@@ -19,7 +19,7 @@ const Register = () => {
 
   const handleSubmit = event => {
     event.preventDefault();
-    fetch(`${settings}/api/user/`, {
+    fetch(`${settings.apiBaseUrl}/api/user/`, {
       method: "post",
       headers: {
         "Content-Type": "application/json"

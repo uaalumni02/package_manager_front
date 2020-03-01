@@ -19,7 +19,7 @@ const AdminLogin = () => {
   const [loggedIn, setLoggedIn] = useState(false);
   const handleSubmit = event => {
     event.preventDefault();
-    fetch(`${settings}/api/user/login`, {
+    fetch(`${settings.apiBaseUrl}/api/user/login`, {
       method: "post",
       headers: {
         "Content-Type": "application/json"

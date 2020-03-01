@@ -33,7 +33,7 @@ const Package = () => {
     const token = localStorage.getItem("token");
     const bearer = "Bearer " + token;
 
-    fetch(`${settings}/api/company`, {
+    fetch(`${settings.apiBaseUrl}/api/company`, {
       method: "GET",
       headers: {
         Authorization: bearer
@@ -55,7 +55,7 @@ const Package = () => {
   const fetchResidentData = () => {
     const token = localStorage.getItem("token");
     const bearer = "Bearer " + token;
-    fetch(`${settings}/api/resident`, {
+    fetch(`${settings.apiBaseUrl}/api/resident`, {
       method: "GET",
       headers: {
         Authorization: bearer
@@ -77,7 +77,7 @@ const Package = () => {
     const token = localStorage.getItem("token");
     const bearer = "Bearer " + token;
     event.preventDefault();
-    fetch(`${settings}/api/package`, {
+    fetch(`${settings.apiBaseUrl}/api/package`, {
       method: "post",
       headers: {
         "Content-Type": "application/json",
