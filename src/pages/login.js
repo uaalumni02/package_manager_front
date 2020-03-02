@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Redirect } from "react-router-dom";
 import Button from  "../components/button"
 import settings from "../config/configData"
+
 import {
   MDBContainer,
   MDBRow,
@@ -19,6 +20,7 @@ const Login = () => {
 
   const handleSubmit = event => {
     event.preventDefault();
+    console.log(process.env.NODE_ENV)
     fetch(`${settings.apiBaseUrl}/api/user/login`, {
       method: "post",
       headers: {

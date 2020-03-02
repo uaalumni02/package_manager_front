@@ -1,6 +1,6 @@
 
 const settings = {
-  local: {
+  development: {
     api_key: "local",
     apiBaseUrl: "http://localhost:3000"
   },
@@ -12,7 +12,7 @@ const settings = {
 
 const env = process.env.NODE_ENV || 'local';
 
-module.exports = settings[env]
+export default settings[env]
 
 
 
