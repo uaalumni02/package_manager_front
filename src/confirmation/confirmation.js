@@ -4,6 +4,9 @@ import { UserContext } from "../contexts/UserContext";
 import NavbarPage from "../components/navBar";
 import { MDBRow, MDBCol, MDBCard, MDBCardBody, MDBContainer } from "mdbreact";
 
+import settings from "../config/configData";
+import TextArea from "../components/textArea";
+
 const PackageConfirmation = () => {
   const [companyName, setCompanyNames] = useState("");
   const [name, setResidentNames] = useState("");
@@ -16,7 +19,7 @@ const PackageConfirmation = () => {
     const bearer = "Bearer " + token;
     const url = window.location.pathname;
     const id = url.substring(url.lastIndexOf("/") + 1);
-    fetch("https://tz-package-manager.herokuapp.com/api/package/" + id, {
+    fetch(`${settings.apiBaseUrl}/api/package/` + id, {
       method: "GET",
       headers: {
         Authorization: bearer
@@ -36,13 +39,6 @@ const PackageConfirmation = () => {
   });
   return (
     <>
-      {/* <header className="logo">
-        <img
-          src="https://chris180.org/wp-content/uploads/2016/08/Logo-450x200.png"
-          alt="main logo"
-          className="packageCenter"
-        />
-      </header> */}
       <div>{loggedIn ? <NavbarPage /> : ""}</div>
       <br></br> <br></br> <br></br> <br></br> <br></br> <br></br> <br></br>
       <MDBContainer>
@@ -102,10 +98,7 @@ const PackageConfirmation = () => {
                   >
                     Additionl Information
                   </label>
-                  <textarea
-                    type="text"
-                    id="defaultFormCardNameEx"
-                    className="form-control"
+                  <TextArea
                     value={additionalInfo}
                     onChange={e => setAdditionalInfo(e.target.value)}
                   />

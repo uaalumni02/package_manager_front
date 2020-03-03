@@ -4,17 +4,12 @@ import { UserContext } from "../contexts/UserContext";
 import NavbarPage from "../components/navBar";
 import "bootstrap-css-only/css/bootstrap.min.css";
 import "mdbreact/dist/css/mdb.css";
-import settings from "../config/configData"
+import settings from "../config/configData";
 
-import SubmitBtn from  "../components/submitBtn"
+import SubmitBtn from "../components/submitBtn";
+import TextArea from "../components/textArea";
 
-import {
-  MDBRow,
-  MDBCol,
-  MDBCard,
-  MDBCardBody,
-  MDBContainer
-} from "mdbreact";
+import { MDBRow, MDBCol, MDBCard, MDBCardBody, MDBContainer } from "mdbreact";
 
 const Package = () => {
   const [companyName, setCompanyNames] = useState([]);
@@ -103,13 +98,6 @@ const Package = () => {
   };
   return (
     <>
-      {/* <header className="logo">
-        <img
-          src="https://chris180.org/wp-content/uploads/2016/08/Logo-450x200.png"
-          alt="main logo"
-          className="packageCenter"
-        />
-      </header> */}
       <div>{loggedIn ? <NavbarPage /> : ""}</div>
       <br></br> <br></br> <br></br> <br></br> <br></br> <br></br> <br></br>
       {packageConfirmation ? (
@@ -183,15 +171,15 @@ const Package = () => {
                   >
                     Additionl Information
                   </label>
-                  <textarea
+                  {/* <textarea
                     type="text"
                     id="defaultFormCardNameEx"
                     className="form-control"
                     onChange={e => setAdditionalInfo(e.target.value)}
-                  />
-
+                  /> */}
+                  <TextArea onChange={e => setAdditionalInfo(e.target.value)} />
                   <div className="text-center py-4 mt-3">
-                    <SubmitBtn  onClick={submitPackage} label="Submit" />
+                    <SubmitBtn onClick={submitPackage} label="Submit" />
                   </div>
                 </form>
               </MDBCardBody>
