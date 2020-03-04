@@ -5,7 +5,7 @@ import Resident from "./pages/resident";
 import Login from "./pages/login";
 import Register from "./pages/register";
 import Package from "./pages/package";
-import Confirmation from "./confirmation/confirmation";
+import Confirmation from "./pages/confirmation";
 import AllPackages from "./pages/allPackages";
 import UserContextProvider from "./contexts/UserContext";
 import AllResidents from "./pages/allResidents";
