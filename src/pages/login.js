@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Redirect } from "react-router-dom";
 import Button from "../components/button";
 import UserName from "../components/UserName";
+import Password from "../components/Password";
 import settings from "../config/configData";
 
 import {
@@ -67,15 +68,7 @@ const Login = () => {
               <UserName
                 onChange={e => setUsername(e.target.value.toLowerCase().trim())}
               />
-
-              <MDBInput
-                label="Your password"
-                onChange={e => setPassword(e.target.value.trim())}
-                group
-                type="password"
-                validate
-                containerClass="mb-0"
-              />
+              <Password onChange={e => setPassword(e.target.value.trim())} />
 
               <div className="text-center mb-4 mt-5">
                 <p>{InvalidLogin}</p>
