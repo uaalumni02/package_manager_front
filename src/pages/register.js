@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { Redirect } from "react-router-dom";
 import Button from "../components/button";
-import settings from "../config/configData"
+import UserName from "../components/UserName";
+import settings from "../config/configData";
 
 import {
   MDBContainer,
@@ -55,12 +56,8 @@ const Register = () => {
               </MDBRow>
             </div>
             <MDBCardBody>
-              <MDBInput
-                label="Your username"
-                onChange={e => setUsername(e.target.value.trim())}
-                group
-                type="text"
-                validate
+              <UserName
+                onChange={e => setUsername(e.target.value.toLowerCase().trim())}
               />
 
               <MDBInput

@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { Redirect } from "react-router-dom";
-import Button from  "../components/button"
-import settings from "../config/configData"
+import Button from "../components/button";
+import UserName from "../components/UserName";
+import settings from "../config/configData";
 
 import {
   MDBContainer,
@@ -46,11 +47,13 @@ const AdminLogin = () => {
 
   return (
     <MDBContainer>
-      <br></br><br></br><br></br>
+      <br></br>
+      <br></br>
+      <br></br>
       <br></br>
       {loggedIn ? <Redirect to="/admins/" /> : ""}
       <MDBRow>
-      <MDBCol md="5" className="col-md-4 mx-auto" >
+        <MDBCol md="5" className="col-md-4 mx-auto">
           <MDBCard className="loginCard">
             <div className="header pt-3 grey lighten-2">
               <MDBRow className="d-flex justify-content-start">
@@ -60,12 +63,8 @@ const AdminLogin = () => {
               </MDBRow>
             </div>
             <MDBCardBody>
-              <MDBInput
-                label="Your username"
+              <UserName
                 onChange={e => setUsername(e.target.value.toLowerCase().trim())}
-                group
-                type="text"
-                validate
               />
 
               <MDBInput
@@ -79,7 +78,7 @@ const AdminLogin = () => {
 
               <div className="text-center mb-4 mt-5">
                 <p>{InvalidLogin}</p>
-                 <Button onClick={handleSubmit} label="Log In"  />
+                <Button onClick={handleSubmit} label="Log In" />
               </div>
               <p className="font-small grey-text d-flex justify-content-center">
                 Return to user log in?

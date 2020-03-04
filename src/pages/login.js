@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { Redirect } from "react-router-dom";
-import Button from  "../components/button"
-import settings from "../config/configData"
+import Button from "../components/button";
+import UserName from "../components/UserName";
+import settings from "../config/configData";
 
 import {
   MDBContainer,
@@ -20,7 +21,7 @@ const Login = () => {
 
   const handleSubmit = event => {
     event.preventDefault();
-    console.log(process.env.NODE_ENV)
+    console.log(process.env.NODE_ENV);
     fetch(`${settings.apiBaseUrl}/api/user/login`, {
       method: "post",
       headers: {
@@ -63,12 +64,8 @@ const Login = () => {
               </MDBRow>
             </div>
             <MDBCardBody>
-              <MDBInput
-                label="Your username"
+              <UserName
                 onChange={e => setUsername(e.target.value.toLowerCase().trim())}
-                group
-                type="text"
-                validate
               />
 
               <MDBInput
@@ -82,7 +79,7 @@ const Login = () => {
 
               <div className="text-center mb-4 mt-5">
                 <p>{InvalidLogin}</p>
-                <Button onClick={handleSubmit} label="Log In"  />
+                <Button onClick={handleSubmit} label="Log In" />
               </div>
 
               <p className="font-small grey-text d-flex justify-content-center">
