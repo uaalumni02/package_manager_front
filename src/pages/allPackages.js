@@ -3,7 +3,10 @@ import * as moment from "moment";
 import { UserContext } from "../contexts/UserContext";
 import NavbarPage from "../components/navBar";
 import "../static/allPackages.css";
-import settings from "../config/configData"
+
+import ActionBtn from "../components/ActionBtn";
+
+import settings from "../config/configData";
 
 import {
   MDBTable,
@@ -112,13 +115,6 @@ const AllPackages = () => {
 
   return (
     <>
-      {/* <header className="logo">
-        <img
-          src="https://chris180.org/wp-content/uploads/2016/08/Logo-450x200.png"
-          alt="main logo"
-          className="packageCenter"
-        />
-      </header> */}
       <div>{loggedIn ? <NavbarPage /> : ""}</div>
       <br></br>
       <br></br> <br></br>
@@ -158,23 +154,17 @@ const AllPackages = () => {
               <td>{delivery.additionalInfo}</td>
               <td>{delivery.isDelivered ? "Yes" : "No"}</td>
               <td>
-                <MDBBtn
+                <ActionBtn
                   disabled={delivery.isDelivered}
                   onClick={() => deliverPackage(delivery)}
-                  color=""
-                  size="sm"
-                >
-                  Pick Up
-                </MDBBtn>
-                <MDBBtn
-                  color=""
-                  size="sm"
+                  label="Pick Up"
+                />
+                <ActionBtn
                   onClick={event =>
                     (window.location.href = `/editPackage/${delivery._id}`)
                   }
-                >
-                  Edit
-                </MDBBtn>
+                  label="Edit"
+                />
                 <MDBContainer>
                   <MDBModal isOpen={modal} onClick={toggle}>
                     <MDBModalHeader onClick={toggle}>

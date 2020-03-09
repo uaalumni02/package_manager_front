@@ -171,12 +171,6 @@ const Package = () => {
                   >
                     Additionl Information
                   </label>
-                  {/* <textarea
-                    type="text"
-                    id="defaultFormCardNameEx"
-                    className="form-control"
-                    onChange={e => setAdditionalInfo(e.target.value)}
-                  /> */}
                   <TextArea onChange={e => setAdditionalInfo(e.target.value)} />
                   <div className="text-center py-4 mt-3">
                     <SubmitBtn onClick={submitPackage} label="Submit" />
