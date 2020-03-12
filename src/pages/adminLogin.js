@@ -11,7 +11,6 @@ import {
   MDBCol,
   MDBCard,
   MDBCardBody,
-  MDBInput
 } from "mdbreact";
 
 const AdminLogin = () => {

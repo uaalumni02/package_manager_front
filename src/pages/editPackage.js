@@ -3,7 +3,7 @@ import { Redirect } from "react-router-dom";
 import { UserContext } from "../contexts/UserContext";
 import NavbarPage from "../components/navBar";
 import moment from "moment";
-import settings from "../config/configData"
+import settings from "../config/configData";
 import {
   MDBRow,
   MDBCol,

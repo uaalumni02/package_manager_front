@@ -26,6 +26,7 @@ const AllPackages = () => {
   const [search, setSearch] = useState("");
   const { loggedIn } = useContext(UserContext);
   const [modal, setModal] = useState(false);
+  const [deleteId, setDeleteId] = useState("");
 
   const fetchPackageData = () => {
     const token = localStorage.getItem("token");
@@ -49,7 +50,7 @@ const AllPackages = () => {
   };
   useEffect(() => {
     fetchPackageData();
-  });
+  }, []);
 
   const deliverPackage = delivery => {
     const deliveredPackage = { ...delivery, isDelivered: true };
@@ -82,7 +83,7 @@ const AllPackages = () => {
 
     const token = localStorage.getItem("token");
     const bearer = "Bearer " + token;
-    fetch(`${settings.apiBaseUrl}/api/package/` + delivery._id, {
+    fetch(`${settings.apiBaseUrl}/api/package/` + deleteId, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -187,9 +188,13 @@ const AllPackages = () => {
                     </MDBModalFooter>
                   </MDBModal>
                 </MDBContainer>
-                <MDBBtn color="" size="sm" onClick={toggle}>
-                  Delete
-                </MDBBtn>
+                <ActionBtn
+                  onClick={() => {
+                    setDeleteId(delivery._id);
+                    toggle();
+                  }}
+                  label="Delete"
+                />
               </td>
             </tr>
           ))}
