@@ -2,7 +2,10 @@ import React, { useState, useEffect, useContext } from "react";
 import { UserContext } from "../contexts/UserContext";
 import NavbarPage from "../components/navBar";
 import { MDBTable, MDBTableBody, MDBTableHead, MDBBtn } from "mdbreact";
-import settings from "../config/configData"
+
+import ActionBtn from "../components/ActionBtn";
+
+import settings from "../config/configData";
 
 const AllResidents = () => {
   const [residents, setResidents] = useState([]);
@@ -56,13 +59,6 @@ const AllResidents = () => {
 
   return (
     <>
-      {/* <header className="logo">
-        <img
-          src="https://chris180.org/wp-content/uploads/2016/08/Logo-450x200.png"
-          alt="main logo"
-          className="packageCenter"
-        />
-      </header> */}
       <div>{loggedIn ? <NavbarPage /> : ""}</div>
       <br></br> <br></br> <br></br> <br></br> <br></br> <br></br> <br></br>
       <MDBTable bordered>
@@ -80,24 +76,18 @@ const AllResidents = () => {
               <td>{resident.name}</td>
               <td>{resident.email}</td>
               <td>{resident.phone}</td>
-              <MDBBtn
-                color=""
-                size="sm"
+              <ActionBtn
                 onClick={event =>
                   (window.location.href = `/editResident/${resident._id}`)
                 }
-              >
-                Edit
-              </MDBBtn>
-              <MDBBtn
-                color=""
-                size="sm"
+                label="Edit"
+              />
+              <ActionBtn
                 onClick={() => {
                   deleteResident(resident);
                 }}
-              >
-                Delete
-              </MDBBtn>
+                label="Delete"
+              />
             </tr>
           ))}
         </MDBTableBody>

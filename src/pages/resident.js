@@ -6,7 +6,7 @@ import SubmitBtn from "../components/submitBtn";
 
 import { MDBRow, MDBCol, MDBCard, MDBCardBody, MDBContainer } from "mdbreact";
 
-import settings from "../config/configData"
+import settings from "../config/configData";
 
 const Resident = () => {
   const [name, setName] = useState("");
@@ -44,13 +44,6 @@ const Resident = () => {
   };
   return (
     <>
-      {/* <header className="logo">
-        <img
-          src="https://chris180.org/wp-content/uploads/2016/08/Logo-450x200.png"
-          alt="main logo"
-          className="packageCenter"
-        />
-      </header> */}
       <div>{loggedIn ? <NavbarPage /> : ""}</div>
       <br></br> <br></br> <br></br> <br></br> <br></br> <br></br> <br></br>
       {residentConfirmation ? <Redirect to={`/allResidents/`} /> : ""}

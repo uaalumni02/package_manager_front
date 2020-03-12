@@ -2,7 +2,7 @@ import React, { useState, useContext, useEffect } from "react";
 import { Redirect } from "react-router-dom";
 import { UserContext } from "../contexts/UserContext";
 import NavbarPage from "../components/navBar";
-import settings from "../config/configData"
+import settings from "../config/configData";
 
 import {
   MDBRow,
@@ -73,13 +73,6 @@ const EditResident = () => {
   return (
     <>
       <div>{loggedIn ? <NavbarPage /> : ""}</div>
-      {/* <header className="logo">
-        <img
-          src="https://chris180.org/wp-content/uploads/2016/08/Logo-450x200.png"
-          alt="main logo"
-          className="residentCenter"
-        />
-      </header> */}
       <br></br> <br></br> <br></br> <br></br> <br></br> <br></br> <br></br>
       {updateConfirmation ? <Redirect to={`/allResidents/`} /> : ""}
       <MDBRow>

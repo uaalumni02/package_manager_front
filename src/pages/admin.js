@@ -2,8 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { UserContext } from "../contexts/UserContext";
 import NavbarPage from "../components/navBar";
 import { MDBTable, MDBTableBody, MDBTableHead, MDBBtn } from "mdbreact";
-import settings from "../config/configData"
-
+import settings from "../config/configData";
 
 const Admins = () => {
   const [users, setUsers] = useState([]);
@@ -75,13 +74,6 @@ const Admins = () => {
 
   return (
     <>
-      {/* <header className="logo">
-        <img
-          src="https://chris180.org/wp-content/uploads/2016/08/Logo-450x200.png"
-          alt="main logo"
-          className="packageCenter"
-        />
-      </header> */}
       <div>{loggedIn ? <NavbarPage /> : ""}</div>
       <br></br> <br></br> <br></br> <br></br> <br></br> <br></br> <br></br>
       <MDBTable bordered className="table-responsive-md">
