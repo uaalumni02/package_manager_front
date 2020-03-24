@@ -1,7 +1,19 @@
 import React, { useState, useEffect, useContext } from "react";
 import { UserContext } from "../contexts/UserContext";
 import NavbarPage from "../components/navBar";
-import { MDBTable, MDBTableBody, MDBTableHead, MDBBtn } from "mdbreact";
+
+import {
+  MDBTable,
+  MDBTableBody,
+  MDBTableHead,
+  MDBBtn,
+  MDBCol,
+  MDBContainer,
+  MDBModal,
+  MDBModalBody,
+  MDBModalHeader,
+  MDBModalFooter
+} from "mdbreact";
 
 import ActionBtn from "../components/ActionBtn";
 
@@ -10,6 +22,8 @@ import settings from "../config/configData";
 const AllResidents = () => {
   const [residents, setResidents] = useState([]);
   const { loggedIn } = useContext(UserContext);
+  const [modal, setModal] = useState(false);
+  const [deleteId, setDeleteId] = useState("");
 
   const fetchResidentData = () => {
     const token = localStorage.getItem("token");
@@ -38,7 +52,7 @@ const AllResidents = () => {
     const { isDeleted } = deleteResident;
     const token = localStorage.getItem("token");
     const bearer = "Bearer " + token;
-    fetch(`${settings.apiBaseUrl}/api/resident/` + resident._id, {
+    fetch(`${settings.apiBaseUrl}/api/resident/` + deleteId, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -55,6 +69,10 @@ const AllResidents = () => {
         }
       })
       .catch(error => console.error("Error:", error));
+  };
+
+  const toggle = () => {
+    setModal(!modal);
   };
 
   return (
@@ -82,9 +100,32 @@ const AllResidents = () => {
                 }
                 label="Edit"
               />
+              <MDBContainer>
+                <MDBModal isOpen={modal} onClick={toggle}>
+                  <MDBModalHeader onClick={toggle}>
+                    Delete Confirmation
+                  </MDBModalHeader>
+                  <MDBModalBody>Please Confirm Deletion</MDBModalBody>
+                  <MDBModalFooter>
+                    <MDBBtn color="secondary" onClick={toggle}>
+                      Close
+                    </MDBBtn>
+                    <MDBBtn
+                      onClick={() => {
+                        deleteResident(resident);
+                        toggle();
+                      }}
+                      color="primary"
+                    >
+                      Delete
+                    </MDBBtn>
+                  </MDBModalFooter>
+                </MDBModal>
+              </MDBContainer>
               <ActionBtn
                 onClick={() => {
-                  deleteResident(resident);
+                  setDeleteId(resident._id);
+                  toggle();
                 }}
                 label="Delete"
               />
