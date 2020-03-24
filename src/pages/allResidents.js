@@ -94,41 +94,43 @@ const AllResidents = () => {
               <td>{resident.name}</td>
               <td>{resident.email}</td>
               <td>{resident.phone}</td>
-              <ActionBtn
-                onClick={event =>
-                  (window.location.href = `/editResident/${resident._id}`)
-                }
-                label="Edit"
-              />
-              <MDBContainer>
-                <MDBModal isOpen={modal} onClick={toggle}>
-                  <MDBModalHeader onClick={toggle}>
-                    Delete Confirmation
-                  </MDBModalHeader>
-                  <MDBModalBody>Please Confirm Deletion</MDBModalBody>
-                  <MDBModalFooter>
-                    <MDBBtn color="secondary" onClick={toggle}>
-                      Close
-                    </MDBBtn>
-                    <MDBBtn
-                      onClick={() => {
-                        deleteResident(resident);
-                        toggle();
-                      }}
-                      color="primary"
-                    >
-                      Delete
-                    </MDBBtn>
-                  </MDBModalFooter>
-                </MDBModal>
-              </MDBContainer>
-              <ActionBtn
-                onClick={() => {
-                  setDeleteId(resident._id);
-                  toggle();
-                }}
-                label="Delete"
-              />
+              <td>
+                <ActionBtn
+                  onClick={event =>
+                    (window.location.href = `/editResident/${resident._id}`)
+                  }
+                  label="Edit"
+                />
+                <ActionBtn
+                  onClick={() => {
+                    setDeleteId(resident._id);
+                    toggle();
+                  }}
+                  label="Delete"
+                />
+                <MDBContainer>
+                  <MDBModal isOpen={modal} onClick={toggle}>
+                    <MDBModalHeader onClick={toggle}>
+                      Delete Confirmation
+                    </MDBModalHeader>
+                    <MDBModalBody>Please Confirm Deletion</MDBModalBody>
+                    <MDBModalFooter>
+                      <MDBBtn color="secondary" onClick={toggle}>
+                        Close
+                      </MDBBtn>
+                      <MDBBtn
+                        onClick={() => {
+                          deleteResident(resident);
+                          toggle();
+                        }}
+                        color="primary"
+                      >
+                        Delete
+                      </MDBBtn>
+                    </MDBModalFooter>
+                  </MDBModal>
+                </MDBContainer>
+              </td>
             </tr>
           ))}
         </MDBTableBody>
