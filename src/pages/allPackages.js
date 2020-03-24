@@ -83,7 +83,7 @@ const AllPackages = () => {
 
     const token = localStorage.getItem("token");
     const bearer = "Bearer " + token;
-    fetch(`${settings.apiBaseUrl}/api/package/` + deleteId, {
+    fetch(`${settings.apiBaseUrl}/api/deletePackage/` + deleteId, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",

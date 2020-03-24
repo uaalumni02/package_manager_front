@@ -7,7 +7,6 @@ import {
   MDBTableBody,
   MDBTableHead,
   MDBBtn,
-  MDBCol,
   MDBContainer,
   MDBModal,
   MDBModalBody,
