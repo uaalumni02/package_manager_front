@@ -3,6 +3,7 @@ import React from "react";
 const TextArea = props => {
   return (
     <textarea
+      name={props.name}
       type="text"
       id="defaultFormCardNameEx"
       className="form-control"
