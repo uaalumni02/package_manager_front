@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useReducer, useContext } from "react";
 import { Redirect } from "react-router-dom";
 import { UserContext } from "../contexts/UserContext";
 import NavbarPage from "../components/navBar";
@@ -8,12 +8,23 @@ import { MDBRow, MDBCol, MDBCard, MDBCardBody, MDBContainer } from "mdbreact";
 
 import settings from "../config/configData";
 
+const initialState = {
+  name: "",
+  email: "",
+  phone: "",
+  isDeleted: false,
+  residentConfirmation: false
+};
+
+const reducer = (state, { field, value }) => {
+  return {
+    ...state,
+    [field]: value
+  };
+};
+
 const Resident = () => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
-  const [isDeleted] = useState(false);
-  const [residentConfirmation, setResidentConfirmation] = useState(false);
+  const [state, dispatch] = useReducer(reducer, initialState);
   const { loggedIn } = useContext(UserContext);
 
   const handleSubmit = event => {
@@ -37,11 +48,24 @@ const Resident = () => {
       .then(res => res.json())
       .then(response => {
         if (response.success === true) {
-          setResidentConfirmation(true);
+          dispatch({
+            field: "residentConfirmation",
+            value: true
+          });
         }
       })
       .catch(error => console.error("Error:", error));
   };
+
+  const onChange = e => {
+    dispatch({
+      field: e.target.name,
+      value: e.target.value
+    });
+  };
+
+  const { name, email, phone, isDeleted, residentConfirmation } = state;
+
   return (
     <>
       <div>{loggedIn ? <NavbarPage /> : ""}</div>
@@ -64,7 +88,9 @@ const Resident = () => {
                     type="text"
                     id="defaultFormCardNameEx"
                     className="form-control"
-                    onChange={e => setName(e.target.value)}
+                    name="name"
+                    value={name}
+                    onChange={onChange}
                   />
                   <br />
                   <label
@@ -77,7 +103,9 @@ const Resident = () => {
                     type="email"
                     id="defaultFormCardEmailEx"
                     className="form-control"
-                    onChange={e => setEmail(e.target.value)}
+                    name="email"
+                    value={email}
+                    onChange={onChange}
                   />
                   <label
                     htmlFor="defaultFormCardNameEx"
@@ -91,7 +119,9 @@ const Resident = () => {
                     id="defaultFormCardNameEx"
                     className="form-control"
                     placeholder="999-999-9999"
-                    onChange={e => setPhone(e.target.value)}
+                    name="phone"
+                    value={phone}
+                    onChange={onChange}
                   />
                   <div className="text-center py-4 mt-3">
                     <SubmitBtn onClick={handleSubmit} label="Submit" />
