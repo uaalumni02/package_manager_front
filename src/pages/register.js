@@ -1,23 +1,27 @@
-import React, { useState } from "react";
+import React, { useState, useReducer } from "react";
 import { Redirect } from "react-router-dom";
 import Button from "../components/button";
 import UserName from "../components/UserName";
 import Password from "../components/Password";
 import settings from "../config/configData";
 
-import {
-  MDBContainer,
-  MDBRow,
-  MDBCol,
-  MDBCard,
-  MDBCardBody,
-} from "mdbreact";
+import { MDBContainer, MDBRow, MDBCol, MDBCard, MDBCardBody } from "mdbreact";
+
+const initialState = {
+  username: "",
+  password: "",
+  role: ""
+};
+
+const reducer = (state, { field, value }) => {
+  return {
+    ...state,
+    [field]: value
+  };
+};
 
 const Register = () => {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [role, setRole] = useState("");
-
+  const [state, dispatch] = useReducer(reducer, initialState);
   const handleSubmit = event => {
     event.preventDefault();
     fetch(`${settings.apiBaseUrl}/api/user/`, {
@@ -33,11 +37,24 @@ const Register = () => {
       .then(res => res.json())
       .then(response => {
         if (response.success) {
-          setRole("standard");
+          dispatch({
+            field: "role",
+            value: "standard"
+          });
         }
       })
       .catch(error => console.error("Error:", error));
   };
+
+  const onChange = e => {
+    dispatch({
+      field: e.target.name,
+      value: e.target.value.toLowerCase().trim()
+    });
+  };
+
+  const { username, password, role } = state;
+
   return (
     <MDBContainer>
       <br></br>
@@ -56,10 +73,8 @@ const Register = () => {
               </MDBRow>
             </div>
             <MDBCardBody>
-              <UserName
-                onChange={e => setUsername(e.target.value.toLowerCase().trim())}
-              />
-              <Password onChange={e => setPassword(e.target.value.trim())} />
+              <UserName name="username" value={username} onChange={onChange} />
+              <Password name="password" value={password} onChange={onChange} />
               <div className="text-center mb-4 mt-5">
                 <Button onClick={handleSubmit} title="register" />
               </div>
