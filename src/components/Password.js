@@ -4,6 +4,7 @@ import { MDBInput } from "mdbreact";
 const Password = props => {
   return (
     <MDBInput
+      name={props.name}
       label="Your password"
       group
       type="password"

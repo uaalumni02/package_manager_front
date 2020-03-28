@@ -1,27 +1,30 @@
-import React, { useState } from "react";
+import React, { useState, username, useReducer } from "react";
 import { Redirect } from "react-router-dom";
 import Button from "../components/button";
 import UserName from "../components/UserName";
 import Password from "../components/Password";
 import settings from "../config/configData";
 
-import {
-  MDBContainer,
-  MDBRow,
-  MDBCol,
-  MDBCard,
-  MDBCardBody,
-} from "mdbreact";
+import { MDBContainer, MDBRow, MDBCol, MDBCard, MDBCardBody } from "mdbreact";
+
+const initialState = {
+  username: "",
+  password: "",
+  InvalidLogin: "",
+  loggedIn: false
+};
+
+const reducer = (state, { field, value }) => {
+  return {
+    ...state,
+    [field]: value
+  };
+};
 
 const Login = () => {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [InvalidLogin, setInvalidLogin] = useState("");
-  const [loggedIn, setLoggedIn] = useState(false);
-
+  const [state, dispatch] = useReducer(reducer, initialState);
   const handleSubmit = event => {
     event.preventDefault();
-    console.log(process.env.NODE_ENV);
     fetch(`${settings.apiBaseUrl}/api/user/login`, {
       method: "post",
       headers: {
@@ -38,15 +41,30 @@ const Login = () => {
           response.success === false ||
           response.data.user.role === "standard"
         ) {
-          setInvalidLogin("Invalid username, password or pending approval");
+          dispatch({
+            field: "InvalidLogin",
+            value: "Invalid username, password or pending approval"
+          });
         } else {
           localStorage.setItem("token", response.data.token);
           localStorage.setItem("user", response.data.user._id);
-          setLoggedIn(true);
+          dispatch({
+            field: "loggedIn",
+            value: true
+          });
         }
       })
       .catch(error => console.error("Error:", error));
   };
+
+  const onChange = e => {
+    dispatch({
+      field: e.target.name,
+      value: e.target.value.toLowerCase().trim()
+    });
+  };
+
+  const { username, password, InvalidLogin, loggedIn } = state;
 
   return (
     <MDBContainer>
@@ -64,10 +82,8 @@ const Login = () => {
               </MDBRow>
             </div>
             <MDBCardBody>
-              <UserName
-                onChange={e => setUsername(e.target.value.toLowerCase().trim())}
-              />
-              <Password onChange={e => setPassword(e.target.value.trim())} />
+              <UserName name="username" value={username} onChange={onChange} />
+              <Password name="password" value={password} onChange={onChange} />
 
               <div className="text-center mb-4 mt-5">
                 <p>{InvalidLogin}</p>
