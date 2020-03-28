@@ -1,4 +1,4 @@
-import React, { useState, username, useReducer } from "react";
+import React, { useReducer } from "react";
 import { Redirect } from "react-router-dom";
 import Button from "../components/button";
 import UserName from "../components/UserName";
