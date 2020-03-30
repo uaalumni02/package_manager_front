@@ -1,6 +1,10 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, useReducer } from "react";
 import { UserContext } from "../contexts/UserContext";
 import NavbarPage from "../components/navBar";
+
+import ActionBtn from "../components/ActionBtn";
+
+import settings from "../config/configData";
 
 import {
   MDBTable,
@@ -14,14 +18,21 @@ import {
   MDBModalFooter
 } from "mdbreact";
 
-import ActionBtn from "../components/ActionBtn";
+const initialState = {
+  residents: [],
+  modal: false
+};
 
-import settings from "../config/configData";
+const reducer = (state, { field, value }) => {
+  return {
+    ...state,
+    [field]: value
+  };
+};
 
 const AllResidents = () => {
-  const [residents, setResidents] = useState([]);
+  const [state, dispatch] = useReducer(reducer, initialState);
   const { loggedIn } = useContext(UserContext);
-  const [modal, setModal] = useState(false);
   const [deleteId, setDeleteId] = useState("");
 
   const fetchResidentData = () => {
@@ -38,7 +49,10 @@ const AllResidents = () => {
         let newArray = response.data.filter(el => {
           return !el.isDeleted;
         });
-        setResidents(newArray);
+        dispatch({
+          field: "residents",
+          value: newArray
+        });
       })
       .catch(error => console.error("Error:", error));
   };
@@ -71,8 +85,12 @@ const AllResidents = () => {
   };
 
   const toggle = () => {
-    setModal(!modal);
+    dispatch({
+      field: "modal",
+      value: !modal
+    });
   };
+  const { residents, modal } = state;
 
   return (
     <>

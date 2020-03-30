@@ -4,7 +4,7 @@ import { MDBBtn } from "mdbreact";
 
 const ActionBtn = props => {
   return (
-    <MDBBtn color="" size="sm" onClick={props.onClick}>
+    <MDBBtn name={props.name} value={props.value} color="" size="sm" onClick={props.onClick}>
       {props.label}
     </MDBBtn>
   );
