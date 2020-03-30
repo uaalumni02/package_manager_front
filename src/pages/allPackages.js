@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, useReducer } from "react";
 import * as moment from "moment";
 import { UserContext } from "../contexts/UserContext";
 import NavbarPage from "../components/navBar";
@@ -21,11 +21,22 @@ import {
   MDBModalFooter
 } from "mdbreact";
 
+const initialState = {
+  packages: [],
+  search: "",
+  modal: false
+};
+
+const reducer = (state, { field, value }) => {
+  return {
+    ...state,
+    [field]: value
+  };
+};
+
 const AllPackages = () => {
-  const [packages, setPackages] = useState([]);
-  const [search, setSearch] = useState("");
+  const [state, dispatch] = useReducer(reducer, initialState);
   const { loggedIn } = useContext(UserContext);
-  const [modal, setModal] = useState(false);
   const [deleteId, setDeleteId] = useState("");
 
   const fetchPackageData = () => {
@@ -44,7 +55,10 @@ const AllPackages = () => {
         let newArray = response.data.filter(el => {
           return !el.isDeleted;
         });
-        setPackages(newArray);
+        dispatch({
+          field: "packages",
+          value: newArray
+        });
       })
       .catch(error => console.error("Error:", error));
   };
@@ -103,16 +117,24 @@ const AllPackages = () => {
   };
 
   const handleInput = e => {
-    setSearch(e.target.value);
+    dispatch({
+      field: "search",
+      value: e.target.value
+    });
   };
+
+  const toggle = () => {
+    dispatch({
+      field: "modal",
+      value: !modal
+    });
+  };
+
+  const { packages, search, modal } = state;
 
   let filteredPackages = packages.filter(delivery => {
     return delivery.name.name.toLowerCase().includes(search.toLowerCase());
   });
-
-  const toggle = () => {
-    setModal(!modal);
-  };
 
   return (
     <>
