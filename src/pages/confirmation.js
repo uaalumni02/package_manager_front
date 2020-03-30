@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, useReducer } from "react";
 import * as moment from "moment";
 import { UserContext } from "../contexts/UserContext";
 import NavbarPage from "../components/navBar";
@@ -7,13 +7,23 @@ import { MDBRow, MDBCol, MDBCard, MDBCardBody, MDBContainer } from "mdbreact";
 import settings from "../config/configData";
 import TextArea from "../components/textArea";
 
-const PackageConfirmation = () => {
-  const [companyName, setCompanyNames] = useState("");
-  const [name, setResidentNames] = useState("");
-  const [additionalInfo, setAdditionalInfo] = useState("");
-  const [deliveryDate, setDeliveryDate] = useState("");
-  const { loggedIn } = useContext(UserContext);
+const initialState = {
+  companyName: "",
+  name: "",
+  additionalInfo: "",
+  deliveryDate: ""
+};
 
+const reducer = (state, { field, value }) => {
+  return {
+    ...state,
+    [field]: value
+  };
+};
+
+const PackageConfirmation = () => {
+  const [state, dispatch] = useReducer(reducer, initialState);
+  const { loggedIn } = useContext(UserContext);
   const fetchPackageData = () => {
     const token = localStorage.getItem("token");
     const bearer = "Bearer " + token;
@@ -27,16 +37,38 @@ const PackageConfirmation = () => {
     })
       .then(res => res.json())
       .then(response => {
-        setCompanyNames(response.data.companyName.companyName);
-        setResidentNames(response.data.name.name);
-        setAdditionalInfo(response.data.additionalInfo);
-        setDeliveryDate(response.data.deliveryDate);
+        dispatch({
+          field: "companyName",
+          value: response.data.companyName.companyName
+        });
+        dispatch({
+          field: "name",
+          value: response.data.name.name
+        });
+        dispatch({
+          field: "additionalInfo",
+          value: response.data.additionalInfo
+        });
+        dispatch({
+          field: "deliveryDate",
+          value: response.data.deliveryDate
+        });
       })
       .catch(error => console.error("Error:", error));
   };
   useEffect(() => {
     fetchPackageData();
   });
+
+  const onChange = e => {
+    dispatch({
+      field: e.target.name,
+      value: e.target.value
+    });
+  };
+
+  const { companyName, name, additionalInfo, deliveryDate } = state;
+
   return (
     <>
       <div>{loggedIn ? <NavbarPage /> : ""}</div>
@@ -58,8 +90,9 @@ const PackageConfirmation = () => {
                     type="text"
                     id="defaultFormCardNameEx"
                     className="form-control"
+                    name="companyName"
                     value={companyName}
-                    onChange={e => setCompanyNames(e.target.value)}
+                    onChange={onChange}
                   />
                   <br />
                   <label
@@ -72,8 +105,9 @@ const PackageConfirmation = () => {
                     type="text"
                     id="defaultFormCardNameEx"
                     className="form-control"
+                    name="name"
                     value={name}
-                    onChange={e => setResidentNames(e.target.value)}
+                    onChange={onChange}
                   />
                   <br />
                   <label
@@ -86,10 +120,11 @@ const PackageConfirmation = () => {
                     type="text"
                     id="defaultFormCardNameEx"
                     className="form-control"
+                    name="deliveryDate"
                     value={moment
                       .unix(deliveryDate)
                       .format("MM/DD/YYYY hh:mmA")}
-                    onChange={e => setDeliveryDate(e.target.value)}
+                    onChange={onChange}
                   />
                   <br />
                   <label
@@ -99,8 +134,9 @@ const PackageConfirmation = () => {
                     Additionl Information
                   </label>
                   <TextArea
+                    name="additionalInfo"
                     value={additionalInfo}
-                    onChange={e => setAdditionalInfo(e.target.value)}
+                    onChange={onChange}
                   />
                 </form>
               </MDBCardBody>
