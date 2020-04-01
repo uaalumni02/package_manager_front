@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext, useEffect, useReducer } from "react";
 import { Redirect } from "react-router-dom";
 import { UserContext } from "../contexts/UserContext";
 import NavbarPage from "../components/navBar";
@@ -10,13 +10,25 @@ import {
   MDBBtn,
   MDBCard,
   MDBCardBody,
-  MDBIcon
+  MDBIcon,
+  MDBContainer
 } from "mdbreact";
 
+const initialState = {
+  name: "",
+  email: "",
+  phone: "",
+};
+
+const reducer = (state, { field, value }) => {
+  return {
+    ...state,
+    [field]: value
+  };
+};
+
 const EditResident = () => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
+  const [state, dispatch] = useReducer(reducer, initialState);
   const { loggedIn } = useContext(UserContext);
   const [updateConfirmation, setUpdateConfirmation] = useState(false);
 
@@ -33,15 +45,16 @@ const EditResident = () => {
     })
       .then(res => res.json())
       .then(response => {
-        setName(response.data.name);
-        setEmail(response.data.email);
-        setPhone(response.data.phone);
+        let { name, email, phone } = response.data;
+        dispatch({ field: "name", value: name });
+        dispatch({ field: "email", value: email });
+        dispatch({ field: "phone", value: phone });
       })
       .catch(error => console.error("Error:", error));
   };
   useEffect(() => {
     fetchResidentData();
-  });
+  }, []);
 
   const updateResident = event => {
     event.preventDefault();
@@ -70,11 +83,22 @@ const EditResident = () => {
       .catch(error => console.error("Error:", error));
   };
 
+  const handleInput = e => {
+  console.log(e.target.value)
+    dispatch({
+      field: e.target.name,
+      value: e.target.value
+    });
+  };
+
+  const { name, email, phone } = state;
+
   return (
     <>
       <div>{loggedIn ? <NavbarPage /> : ""}</div>
       <br></br> <br></br> <br></br> <br></br> <br></br> <br></br> <br></br>
       {updateConfirmation ? <Redirect to={`/allResidents/`} /> : ""}
+      <MDBContainer>
       <MDBRow>
         <MDBCol md="6" className="col-md-8 mx-auto">
           <MDBCard className="residentCard">
@@ -91,8 +115,9 @@ const EditResident = () => {
                   type="text"
                   id="defaultFormCardNameEx"
                   className="form-control"
-                  value={name}
-                  onChange={e => setName(e.target.value)}
+                  name="name"
+                  defaultValue={name}
+                  onChange={ handleInput }
                 />
                 <br />
                 <label
@@ -105,8 +130,9 @@ const EditResident = () => {
                   type="email"
                   id="defaultFormCardEmailEx"
                   className="form-control"
-                  value={email}
-                  onChange={e => setEmail(e.target.value)}
+                  name="email"
+                  defaultValue={email}
+                  onChange={ handleInput }
                 />
                 <label
                   htmlFor="defaultFormCardNameEx"
@@ -119,9 +145,10 @@ const EditResident = () => {
                   type="text"
                   id="defaultFormCardNameEx"
                   className="form-control"
+                  name="phone"
                   placeholder="999-999-9999"
-                  value={phone}
-                  onChange={e => setPhone(e.target.value)}
+                  defaultValue={phone}
+                  onChange={ handleInput }
                 />
                 <div className="text-center py-4 mt-3">
                   <MDBBtn
@@ -138,6 +165,7 @@ const EditResident = () => {
           </MDBCard>
         </MDBCol>
       </MDBRow>
+      </MDBContainer>
     </>
   );
 };
