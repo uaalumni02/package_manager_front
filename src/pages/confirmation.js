@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext, useReducer } from "react";
+import React, { useEffect, useContext, useReducer } from "react";
 import * as moment from "moment";
 import { UserContext } from "../contexts/UserContext";
 import NavbarPage from "../components/navBar";
@@ -58,7 +58,7 @@ const PackageConfirmation = () => {
   };
   useEffect(() => {
     fetchPackageData();
-  });
+  }, []);
 
   const onChange = e => {
     dispatch({

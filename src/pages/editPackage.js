@@ -18,7 +18,7 @@ const EditPackage = () => {
   const [companyName, setCompanyNames] = useState([]);
   const [name, setResidentNames] = useState([]);
   const [additionalInfo, setAdditionalInfo] = useState("");
-  const [deliveryDate, setDeliveryDate] = useState("");
+  const [deliveryDate, setDeliveryDate] = useState("nananan");
   const [companyId, setCompanyId] = useState("");
   const [residentId, setResidentId] = useState("");
   const [packageConfirmation, setPackageConfirmation] = useState(false);
@@ -46,7 +46,7 @@ const EditPackage = () => {
   useEffect(() => {
     fetchCompanyData();
     fetchResidentData();
-  });
+  }, []);
 
   const fetchResidentData = () => {
     const token = localStorage.getItem("token");
@@ -89,11 +89,12 @@ const EditPackage = () => {
   }, []);
   const updatePackage = event => {
     event.preventDefault();
+    console.log({name: residentId, companyName: companyId, deliveryDate, additionalInfo, isDelivered})
     const token = localStorage.getItem("token");
     const bearer = "Bearer " + token;
     const url = window.location.pathname;
     const id = url.substring(url.lastIndexOf("/") + 1);
-    fetch(`${settings.apiBaseUrl}/api/package/` + id, {
+    fetch(`${settings.apiBaseUrl}/api/editPackage/` + id, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -140,7 +141,6 @@ const EditPackage = () => {
                     onChange={e => setCompanyId(e.target.value)}
                   >
                     {companyName.map(company => {
-                      console.log(currentPackageData);
                       const selected =
                         currentPackageData &&
                         currentPackageData.companyName._id === company._id;
@@ -193,8 +193,8 @@ const EditPackage = () => {
                     type="datetime-local"
                     id="defaultFormCardNameEx"
                     className="form-control"
-                    onChange={e => setDeliveryDate(e.target.value)}
-                    value={
+                    onChange={e => setDeliveryDate(e.target.value) }
+                    defaultValue={
                       currentPackageData
                         ? moment
                             .unix(currentPackageData.deliveryDate)

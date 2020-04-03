@@ -84,7 +84,6 @@ const EditResident = () => {
   };
 
   const handleInput = e => {
-  console.log(e.target.value)
     dispatch({
       field: e.target.name,
       value: e.target.value
