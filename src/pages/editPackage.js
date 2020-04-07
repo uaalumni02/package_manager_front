@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useEffect, useContext, useReducer } from "react";
 import { Redirect } from "react-router-dom";
 import { UserContext } from "../contexts/UserContext";
 import NavbarPage from "../components/navBar";
@@ -14,18 +14,28 @@ import {
   MDBContainer,
 } from "mdbreact";
 
-const EditPackage = () => {
-  const [companyName, setCompanyNames] = useState([]);
-  const [name, setResidentNames] = useState([]);
-  const [additionalInfo, setAdditionalInfo] = useState("");
-  const [deliveryDate, setDeliveryDate] = useState("");
-  const [companyId, setCompanyId] = useState("");
-  const [residentId, setResidentId] = useState("");
-  const [packageConfirmation, setPackageConfirmation] = useState(false);
-  const [currentPackageData, setCurrentPackageData] = useState(null);
-  const [isDelivered] = useState(false);
-  const { loggedIn } = useContext(UserContext);
+const initialState = {
+  companyName: [],
+  name: [],
+  additionalInfo: "",
+  deliveryDate: "",
+  companyId: "",
+  residentId: "",
+  packageConfirmation: false,
+  currentPackageData: null,
+  isDelivered: false,
+};
 
+const reducer = (state, { field, value }) => {
+  return {
+    ...state,
+    [field]: value,
+  };
+};
+
+const EditPackage = () => {
+  const [state, dispatch] = useReducer(reducer, initialState);
+  const { loggedIn } = useContext(UserContext);
   const fetchCompanyData = () => {
     const token = localStorage.getItem("token");
     const bearer = "Bearer " + token;
@@ -38,7 +48,7 @@ const EditPackage = () => {
       .then((res) => res.json())
       .then((response) => {
         const companies = response.data;
-        setCompanyNames(companies);
+        dispatch({ field: "companyName", value: companies });
       })
       .catch((error) => console.error("Error:", error));
   };
@@ -59,7 +69,7 @@ const EditPackage = () => {
       .then((res) => res.json())
       .then((response) => {
         const residents = response.data;
-        setResidentNames(residents);
+        dispatch({ field: "name", value: residents });
       })
       .catch((error) => console.error("Error:", error));
   };
@@ -77,11 +87,19 @@ const EditPackage = () => {
     })
       .then((res) => res.json())
       .then((response) => {
-        setResidentId(response.data.name._id)
-        setCompanyId(response.data.companyName._id);
-        setCurrentPackageData(response.data);
-        setDeliveryDate(moment.unix(response.data.deliveryDate).format("YYYY-MM-DDTH:mm"))
-        setAdditionalInfo(response.data.additionalInfo);
+        dispatch({ field: "residentId", value: response.data.name._id });
+        dispatch({ field: "companyId", value: response.data.companyName._id });
+        dispatch({ field: "currentPackageData", value: response.data });
+        dispatch({
+          field: "deliveryDate",
+          value: moment
+            .unix(response.data.deliveryDate)
+            .format("YYYY-MM-DDTH:mm"),
+        });
+        dispatch({
+          field: "additionalInfo",
+          value: response.data.additionalInfo,
+        });
       })
       .catch((error) => console.error("Error:", error));
   };
@@ -111,11 +129,30 @@ const EditPackage = () => {
       .then((res) => res.json())
       .then((response) => {
         if (response.success === true) {
-          setPackageConfirmation(true);
+          dispatch({ field: "packageConfirmation", value: true });
         }
       })
       .catch((error) => console.error("Error:", error));
   };
+
+  const handleInput = (e) => {
+    dispatch({
+      field: e.target.name,
+      value: e.target.value,
+    });
+  };
+
+  const {
+    companyName,
+    name,
+    additionalInfo,
+    deliveryDate,
+    companyId,
+    residentId,
+    packageConfirmation,
+    currentPackageData,
+    isDelivered,
+  } = state;
 
   return (
     <>
@@ -138,7 +175,8 @@ const EditPackage = () => {
                   <select
                     id="defaultFormCardNameEx"
                     className="form-control"
-                    onChange={(e) => setCompanyId(e.target.value)}
+                    name="companyName"
+                    onChange={handleInput}
                   >
                     {companyName.map((company) => {
                       const selected =
@@ -165,7 +203,8 @@ const EditPackage = () => {
                   <select
                     id="defaultFormCardNameEx"
                     className="form-control"
-                    onChange={(e) => setResidentId(e.target.value)}
+                    name="name"
+                    onChange={handleInput}
                   >
                     {name.map((resident) => {
                       const selected =
@@ -200,7 +239,8 @@ const EditPackage = () => {
                             .format("YYYY-MM-DDTH:mm")
                         : ""
                     }
-                    onSelect={(e) => setDeliveryDate(e.target.value)}
+                    name="deliveryDate"
+                    onChange={handleInput}
                   />
                   <br />
                   <label
@@ -213,8 +253,9 @@ const EditPackage = () => {
                     type="text"
                     id="defaultFormCardNameEx"
                     className="form-control"
-                    value={additionalInfo}
-                    onChange={(e) => setAdditionalInfo(e.target.value)}
+                    defaultValue={additionalInfo}
+                    name="additionalInfo"
+                    onChange={handleInput}
                   />
 
                   <div className="text-center py-4 mt-3">
