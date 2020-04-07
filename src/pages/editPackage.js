@@ -38,7 +38,6 @@ const EditPackage = () => {
       .then((res) => res.json())
       .then((response) => {
         const companies = response.data;
-        // setCompanyId(companies[0]._id);
         setCompanyNames(companies);
       })
       .catch((error) => console.error("Error:", error));
@@ -60,7 +59,6 @@ const EditPackage = () => {
       .then((res) => res.json())
       .then((response) => {
         const residents = response.data;
-        // setResidentId(residents[0]._id);
         setResidentNames(residents);
       })
       .catch((error) => console.error("Error:", error));
@@ -82,6 +80,7 @@ const EditPackage = () => {
         setResidentId(response.data.name._id)
         setCompanyId(response.data.companyName._id);
         setCurrentPackageData(response.data);
+        setDeliveryDate(moment.unix(response.data.deliveryDate).format("YYYY-MM-DDTH:mm"))
         setAdditionalInfo(response.data.additionalInfo);
       })
       .catch((error) => console.error("Error:", error));
