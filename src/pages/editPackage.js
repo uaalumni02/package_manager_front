@@ -11,14 +11,14 @@ import {
   MDBCard,
   MDBCardBody,
   MDBIcon,
-  MDBContainer
+  MDBContainer,
 } from "mdbreact";
 
 const EditPackage = () => {
   const [companyName, setCompanyNames] = useState([]);
   const [name, setResidentNames] = useState([]);
   const [additionalInfo, setAdditionalInfo] = useState("");
-  const [deliveryDate, setDeliveryDate] = useState("nananan");
+  const [deliveryDate, setDeliveryDate] = useState("");
   const [companyId, setCompanyId] = useState("");
   const [residentId, setResidentId] = useState("");
   const [packageConfirmation, setPackageConfirmation] = useState(false);
@@ -32,16 +32,16 @@ const EditPackage = () => {
     fetch(`${settings.apiBaseUrl}/api/company`, {
       method: "GET",
       headers: {
-        Authorization: bearer
-      }
+        Authorization: bearer,
+      },
     })
-      .then(res => res.json())
-      .then(response => {
+      .then((res) => res.json())
+      .then((response) => {
         const companies = response.data;
-        setCompanyId(companies[0]._id);
+        // setCompanyId(companies[0]._id);
         setCompanyNames(companies);
       })
-      .catch(error => console.error("Error:", error));
+      .catch((error) => console.error("Error:", error));
   };
   useEffect(() => {
     fetchCompanyData();
@@ -54,16 +54,16 @@ const EditPackage = () => {
     fetch(`${settings.apiBaseUrl}/api/resident`, {
       method: "GET",
       headers: {
-        Authorization: bearer
-      }
+        Authorization: bearer,
+      },
     })
-      .then(res => res.json())
-      .then(response => {
+      .then((res) => res.json())
+      .then((response) => {
         const residents = response.data;
-        setResidentId(residents[0]._id);
+        // setResidentId(residents[0]._id);
         setResidentNames(residents);
       })
-      .catch(error => console.error("Error:", error));
+      .catch((error) => console.error("Error:", error));
   };
 
   const fetchPackageToEdit = () => {
@@ -74,22 +74,23 @@ const EditPackage = () => {
     fetch(`${settings.apiBaseUrl}/api/package/` + id, {
       method: "GET",
       headers: {
-        Authorization: bearer
-      }
+        Authorization: bearer,
+      },
     })
-      .then(res => res.json())
-      .then(response => {
+      .then((res) => res.json())
+      .then((response) => {
+        setResidentId(response.data.name._id)
+        setCompanyId(response.data.companyName._id);
         setCurrentPackageData(response.data);
         setAdditionalInfo(response.data.additionalInfo);
       })
-      .catch(error => console.error("Error:", error));
+      .catch((error) => console.error("Error:", error));
   };
   useEffect(() => {
     fetchPackageToEdit();
   }, []);
-  const updatePackage = event => {
+  const updatePackage = (event) => {
     event.preventDefault();
-    console.log({name: residentId, companyName: companyId, deliveryDate, additionalInfo, isDelivered})
     const token = localStorage.getItem("token");
     const bearer = "Bearer " + token;
     const url = window.location.pathname;
@@ -98,23 +99,23 @@ const EditPackage = () => {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
-        Authorization: bearer
+        Authorization: bearer,
       },
       body: JSON.stringify({
         name: residentId,
         companyName: companyId,
         deliveryDate,
         additionalInfo,
-        isDelivered
-      })
+        isDelivered,
+      }),
     })
-      .then(res => res.json())
-      .then(response => {
+      .then((res) => res.json())
+      .then((response) => {
         if (response.success === true) {
           setPackageConfirmation(true);
         }
       })
-      .catch(error => console.error("Error:", error));
+      .catch((error) => console.error("Error:", error));
   };
 
   return (
@@ -138,9 +139,9 @@ const EditPackage = () => {
                   <select
                     id="defaultFormCardNameEx"
                     className="form-control"
-                    onChange={e => setCompanyId(e.target.value)}
+                    onChange={(e) => setCompanyId(e.target.value)}
                   >
-                    {companyName.map(company => {
+                    {companyName.map((company) => {
                       const selected =
                         currentPackageData &&
                         currentPackageData.companyName._id === company._id;
@@ -165,9 +166,9 @@ const EditPackage = () => {
                   <select
                     id="defaultFormCardNameEx"
                     className="form-control"
-                    onChange={e => setResidentId(e.target.value)}
+                    onChange={(e) => setResidentId(e.target.value)}
                   >
-                    {name.map(resident => {
+                    {name.map((resident) => {
                       const selected =
                         currentPackageData &&
                         currentPackageData.name._id === resident._id;
@@ -193,7 +194,6 @@ const EditPackage = () => {
                     type="datetime-local"
                     id="defaultFormCardNameEx"
                     className="form-control"
-                    onChange={e => setDeliveryDate(e.target.value) }
                     defaultValue={
                       currentPackageData
                         ? moment
@@ -201,6 +201,7 @@ const EditPackage = () => {
                             .format("YYYY-MM-DDTH:mm")
                         : ""
                     }
+                    onSelect={(e) => setDeliveryDate(e.target.value)}
                   />
                   <br />
                   <label
@@ -214,7 +215,7 @@ const EditPackage = () => {
                     id="defaultFormCardNameEx"
                     className="form-control"
                     value={additionalInfo}
-                    onChange={e => setAdditionalInfo(e.target.value)}
+                    onChange={(e) => setAdditionalInfo(e.target.value)}
                   />
 
                   <div className="text-center py-4 mt-3">
