@@ -5,9 +5,9 @@ import NavbarPage from "../components/navBar";
 import "bootstrap-css-only/css/bootstrap.min.css";
 import "mdbreact/dist/css/mdb.css";
 import settings from "../config/configData";
-
 import SubmitBtn from "../components/submitBtn";
 import TextArea from "../components/textArea";
+import reducer from "../store/reducer";
 
 import { MDBRow, MDBCol, MDBCard, MDBCardBody, MDBContainer } from "mdbreact";
 
@@ -22,13 +22,6 @@ const initialState = {
   packageId: "",
   isDelivered: false,
   isDeleted: false
-};
-
-const reducer = (state, { field, value }) => {
-  return {
-    ...state,
-    [field]: value
-  };
 };
 
 const Package = () => {

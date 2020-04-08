@@ -3,10 +3,11 @@ import { Redirect } from "react-router-dom";
 import { UserContext } from "../contexts/UserContext";
 import NavbarPage from "../components/navBar";
 import SubmitBtn from "../components/submitBtn";
+import reducer from "../store/reducer";
+import settings from "../config/configData";
 
 import { MDBRow, MDBCol, MDBCard, MDBCardBody, MDBContainer } from "mdbreact";
 
-import settings from "../config/configData";
 
 const initialState = {
   name: "",
@@ -14,13 +15,6 @@ const initialState = {
   phone: "",
   isDeleted: false,
   residentConfirmation: false
-};
-
-const reducer = (state, { field, value }) => {
-  return {
-    ...state,
-    [field]: value
-  };
 };
 
 const Resident = () => {

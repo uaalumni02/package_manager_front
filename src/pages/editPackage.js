@@ -4,6 +4,8 @@ import { UserContext } from "../contexts/UserContext";
 import NavbarPage from "../components/navBar";
 import moment from "moment";
 import settings from "../config/configData";
+import reducer from "../store/reducer";
+
 import {
   MDBRow,
   MDBCol,
@@ -24,13 +26,6 @@ const initialState = {
   packageConfirmation: false,
   currentPackageData: null,
   isDelivered: false,
-};
-
-const reducer = (state, { field, value }) => {
-  return {
-    ...state,
-    [field]: value,
-  };
 };
 
 const EditPackage = () => {

@@ -1,10 +1,9 @@
 import React, { useState, useEffect, useContext, useReducer } from "react";
 import { UserContext } from "../contexts/UserContext";
 import NavbarPage from "../components/navBar";
-
 import ActionBtn from "../components/ActionBtn";
-
 import settings from "../config/configData";
+import reducer from "../store/reducer";
 
 import {
   MDBTable,
@@ -23,12 +22,6 @@ const initialState = {
   modal: false
 };
 
-const reducer = (state, { field, value }) => {
-  return {
-    ...state,
-    [field]: value
-  };
-};
 
 const AllResidents = () => {
   const [state, dispatch] = useReducer(reducer, initialState);

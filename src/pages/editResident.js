@@ -3,6 +3,7 @@ import { Redirect } from "react-router-dom";
 import { UserContext } from "../contexts/UserContext";
 import NavbarPage from "../components/navBar";
 import settings from "../config/configData";
+import reducer from "../store/reducer";
 
 import {
   MDBRow,
@@ -20,12 +21,6 @@ const initialState = {
   phone: "",
 };
 
-const reducer = (state, { field, value }) => {
-  return {
-    ...state,
-    [field]: value
-  };
-};
 
 const EditResident = () => {
   const [state, dispatch] = useReducer(reducer, initialState);

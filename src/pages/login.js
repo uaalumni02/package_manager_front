@@ -4,6 +4,7 @@ import Button from "../components/button";
 import UserName from "../components/UserName";
 import Password from "../components/Password";
 import settings from "../config/configData";
+import reducer from "../store/reducer";
 
 import { MDBContainer, MDBRow, MDBCol, MDBCard, MDBCardBody } from "mdbreact";
 
@@ -14,12 +15,6 @@ const initialState = {
   loggedIn: false
 };
 
-const reducer = (state, { field, value }) => {
-  return {
-    ...state,
-    [field]: value
-  };
-};
 
 const Login = () => {
   const [state, dispatch] = useReducer(reducer, initialState);

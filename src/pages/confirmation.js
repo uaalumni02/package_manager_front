@@ -3,22 +3,15 @@ import * as moment from "moment";
 import { UserContext } from "../contexts/UserContext";
 import NavbarPage from "../components/navBar";
 import { MDBRow, MDBCol, MDBCard, MDBCardBody, MDBContainer } from "mdbreact";
-
 import settings from "../config/configData";
 import TextArea from "../components/textArea";
+import reducer from "../store/reducer";
 
 const initialState = {
   companyName: "",
   name: "",
   additionalInfo: "",
   deliveryDate: ""
-};
-
-const reducer = (state, { field, value }) => {
-  return {
-    ...state,
-    [field]: value
-  };
 };
 
 const PackageConfirmation = () => {
