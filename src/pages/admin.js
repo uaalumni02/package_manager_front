@@ -1,11 +1,16 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useEffect, useContext, useReducer } from "react";
 import { UserContext } from "../contexts/UserContext";
 import NavbarPage from "../components/navBar";
 import { MDBTable, MDBTableBody, MDBTableHead, MDBBtn } from "mdbreact";
 import settings from "../config/configData";
+import reducer from "../store/reducer";
+
+const initialState = {
+  users: [],
+};
 
 const Admins = () => {
-  const [users, setUsers] = useState([]);
+  const [state, dispatch] = useReducer(reducer, initialState);
   const { loggedIn } = useContext(UserContext);
   const fetchUserData = () => {
     const token = localStorage.getItem("token");
@@ -13,41 +18,44 @@ const Admins = () => {
     fetch(`${settings.apiBaseUrl}/api/user`, {
       method: "GET",
       headers: {
-        Authorization: bearer
-      }
+        Authorization: bearer,
+      },
     })
-      .then(res => res.json())
-      .then(response => {
-        setUsers(response.data);
+      .then((res) => res.json())
+      .then((response) => {
+        dispatch({
+          field: "users",
+          value: response.data,
+        });
       })
-      .catch(error => console.error("Error:", error));
+      .catch((error) => console.error("Error:", error));
   };
   useEffect(() => {
     fetchUserData();
   }, []);
 
-  const declineAdminRequest = user => {
+  const declineAdminRequest = (user) => {
     const token = localStorage.getItem("token");
     const bearer = "Bearer " + token;
     fetch(`${settings.apiBaseUrl}/api/user/` + user._id, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
-        Authorization: bearer
+        Authorization: bearer,
       },
       body: JSON.stringify({
-        role: "standard"
-      })
+        role: "standard",
+      }),
     })
-      .then(res => res.json())
-      .then(response => {
+      .then((res) => res.json())
+      .then((response) => {
         if (response.success) {
           fetchUserData();
         }
       })
-      .catch(error => console.error("Error:", error));
+      .catch((error) => console.error("Error:", error));
   };
-  const approveRequest = user => {
+  const approveRequest = (user) => {
     const approve = { ...user, role: "admin" };
     const { role } = approve;
 
@@ -57,20 +65,22 @@ const Admins = () => {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
-        Authorization: bearer
+        Authorization: bearer,
       },
       body: JSON.stringify({
-        role
-      })
+        role,
+      }),
     })
-      .then(res => res.json())
-      .then(response => {
+      .then((res) => res.json())
+      .then((response) => {
         if (response.success) {
           fetchUserData();
         }
       })
-      .catch(error => console.error("Error:", error));
+      .catch((error) => console.error("Error:", error));
   };
+
+  const { users } = state;
 
   return (
     <>
@@ -84,7 +94,7 @@ const Admins = () => {
           </tr>
         </MDBTableHead>
         <MDBTableBody>
-          {users.map(user => (
+          {users.map((user) => (
             <tr value={user._id} key={user._id}>
               <td>{user.username}</td>
               <td>
