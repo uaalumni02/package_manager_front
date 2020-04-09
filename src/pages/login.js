@@ -11,6 +11,7 @@ import { MDBContainer, MDBRow, MDBCol, MDBCard, MDBCardBody } from "mdbreact";
 
 const Login = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
+  console.log(initialState.username)
   const handleSubmit = event => {
     event.preventDefault();
     fetch(`${settings.apiBaseUrl}/api/user/login`, {
