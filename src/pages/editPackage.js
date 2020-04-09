@@ -1,13 +1,9 @@
-import React, { useEffect, useContext, useReducer } from "react";
+import React, { useState, useEffect, useContext, useReducer } from "react";
 import { Redirect } from "react-router-dom";
 import { UserContext } from "../contexts/UserContext";
 import NavbarPage from "../components/navBar";
 import moment from "moment";
 import settings from "../config/configData";
-import reducer from "../store/reducer";
-import initialState from "../store/editPackage";
-
-
 import {
   MDBRow,
   MDBCol,
@@ -18,9 +14,29 @@ import {
   MDBContainer,
 } from "mdbreact";
 
+const initialState = {
+  companyName: [],
+  name: [],
+  additionalInfo: "",
+  deliveryDate: "",
+  companyId: "",
+  residentId: "",
+  packageConfirmation: false,
+  currentPackageData: null,
+  isDelivered: false,
+};
+
+const reducer = (state, { field, value }) => {
+  return {
+    ...state,
+    [field]: value,
+  };
+};
+
 const EditPackage = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
   const { loggedIn } = useContext(UserContext);
+
   const fetchCompanyData = () => {
     const token = localStorage.getItem("token");
     const bearer = "Bearer " + token;
@@ -88,9 +104,11 @@ const EditPackage = () => {
       })
       .catch((error) => console.error("Error:", error));
   };
+
   useEffect(() => {
     fetchPackageToEdit();
   }, []);
+
   const updatePackage = (event) => {
     event.preventDefault();
     const token = localStorage.getItem("token");
@@ -160,7 +178,7 @@ const EditPackage = () => {
                   <select
                     id="defaultFormCardNameEx"
                     className="form-control"
-                    name="companyName"
+                    name="companyId"
                     onChange={handleInput}
                   >
                     {companyName.map((company) => {
@@ -188,7 +206,7 @@ const EditPackage = () => {
                   <select
                     id="defaultFormCardNameEx"
                     className="form-control"
-                    name="name"
+                    name="residentId"
                     onChange={handleInput}
                   >
                     {name.map((resident) => {

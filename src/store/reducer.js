@@ -1,5 +1,3 @@
-import React from 'react'
-
 const reducer = (state, { field, value }) => {
     return {
       ...state,
