@@ -3,7 +3,7 @@ import { Redirect } from "react-router-dom";
 import { UserContext } from "../contexts/UserContext";
 import NavbarPage from "../components/navBar";
 import SubmitBtn from "../components/submitBtn";
-import reducer from "../store/reducer";
+import reducer from "../reducer/reducer";
 import settings from "../config/configData";
 import initialState from "../store/resident";
 

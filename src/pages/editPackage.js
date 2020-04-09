@@ -4,6 +4,9 @@ import { UserContext } from "../contexts/UserContext";
 import NavbarPage from "../components/navBar";
 import moment from "moment";
 import settings from "../config/configData";
+import reducer from "../reducer/reducer";
+import initialState from "../store/editPackage";
+
 import {
   MDBRow,
   MDBCol,
@@ -14,24 +17,6 @@ import {
   MDBContainer,
 } from "mdbreact";
 
-const initialState = {
-  companyName: [],
-  name: [],
-  additionalInfo: "",
-  deliveryDate: "",
-  companyId: "",
-  residentId: "",
-  packageConfirmation: false,
-  currentPackageData: null,
-  isDelivered: false,
-};
-
-const reducer = (state, { field, value }) => {
-  return {
-    ...state,
-    [field]: value,
-  };
-};
 
 const EditPackage = () => {
   const [state, dispatch] = useReducer(reducer, initialState);

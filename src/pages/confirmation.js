@@ -5,7 +5,7 @@ import NavbarPage from "../components/navBar";
 import { MDBRow, MDBCol, MDBCard, MDBCardBody, MDBContainer } from "mdbreact";
 import settings from "../config/configData";
 import TextArea from "../components/textArea";
-import reducer from "../store/reducer";
+import reducer from "../reducer/reducer";
 import initialState from "../store/confirmation";
 
 

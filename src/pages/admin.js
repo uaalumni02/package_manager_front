@@ -3,7 +3,7 @@ import { UserContext } from "../contexts/UserContext";
 import NavbarPage from "../components/navBar";
 import { MDBTable, MDBTableBody, MDBTableHead, MDBBtn } from "mdbreact";
 import settings from "../config/configData";
-import reducer from "../store/reducer";
+import reducer from "../reducer/reducer";
 import initialState from "../store/admin";
 
 const Admins = () => {

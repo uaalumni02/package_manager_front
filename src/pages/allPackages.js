@@ -3,7 +3,7 @@ import * as moment from "moment";
 import { UserContext } from "../contexts/UserContext";
 import NavbarPage from "../components/navBar";
 import "../static/allPackages.css";
-import reducer from "../store/reducer";
+import reducer from "../reducer/reducer";
 import ActionBtn from "../components/ActionBtn";
 import settings from "../config/configData";
 import initialState from "../store/allPackages";

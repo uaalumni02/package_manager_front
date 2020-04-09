@@ -4,7 +4,7 @@ import Button from "../components/button";
 import UserName from "../components/UserName";
 import Password from "../components/Password";
 import settings from "../config/configData";
-import reducer from "../store/reducer";
+import reducer from "../reducer/reducer";
 import initialState from "../store/login";
 
 

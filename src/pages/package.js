@@ -7,7 +7,7 @@ import "mdbreact/dist/css/mdb.css";
 import settings from "../config/configData";
 import SubmitBtn from "../components/submitBtn";
 import TextArea from "../components/textArea";
-import reducer from "../store/reducer";
+import reducer from "../reducer/reducer";
 import initialState from "../store/package";
 
 import { MDBRow, MDBCol, MDBCard, MDBCardBody, MDBContainer } from "mdbreact";
