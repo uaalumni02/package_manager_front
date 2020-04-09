@@ -8,21 +8,9 @@ import settings from "../config/configData";
 import SubmitBtn from "../components/submitBtn";
 import TextArea from "../components/textArea";
 import reducer from "../store/reducer";
+import initialState from "../store/package";
 
 import { MDBRow, MDBCol, MDBCard, MDBCardBody, MDBContainer } from "mdbreact";
-
-const initialState = {
-  companyName: [],
-  name: [],
-  deliveryDate: "",
-  additionalInfo: "",
-  companyId: "",
-  residentId: "",
-  packageConfirmation: false,
-  packageId: "",
-  isDelivered: false,
-  isDeleted: false
-};
 
 const Package = () => {
   const [state, dispatch] = useReducer(reducer, initialState);

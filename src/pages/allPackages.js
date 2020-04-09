@@ -6,6 +6,7 @@ import "../static/allPackages.css";
 import reducer from "../store/reducer";
 import ActionBtn from "../components/ActionBtn";
 import settings from "../config/configData";
+import initialState from "../store/allPackages";
 
 import {
   MDBTable,
@@ -20,11 +21,6 @@ import {
   MDBModalFooter
 } from "mdbreact";
 
-const initialState = {
-  packages: [],
-  search: "",
-  modal: false
-};
 
 const AllPackages = () => {
   const [state, dispatch] = useReducer(reducer, initialState);

@@ -4,6 +4,7 @@ import NavbarPage from "../components/navBar";
 import ActionBtn from "../components/ActionBtn";
 import settings from "../config/configData";
 import reducer from "../store/reducer";
+import initialState from "../store/allResidents";
 
 import {
   MDBTable,
@@ -16,11 +17,6 @@ import {
   MDBModalHeader,
   MDBModalFooter
 } from "mdbreact";
-
-const initialState = {
-  residents: [],
-  modal: false
-};
 
 
 const AllResidents = () => {

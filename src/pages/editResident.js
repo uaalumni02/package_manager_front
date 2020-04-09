@@ -4,6 +4,7 @@ import { UserContext } from "../contexts/UserContext";
 import NavbarPage from "../components/navBar";
 import settings from "../config/configData";
 import reducer from "../store/reducer";
+import initialState from "../store/editResident";
 
 import {
   MDBRow,
@@ -14,13 +15,6 @@ import {
   MDBIcon,
   MDBContainer
 } from "mdbreact";
-
-const initialState = {
-  name: "",
-  email: "",
-  phone: "",
-};
-
 
 const EditResident = () => {
   const [state, dispatch] = useReducer(reducer, initialState);

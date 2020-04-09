@@ -4,10 +4,7 @@ import NavbarPage from "../components/navBar";
 import { MDBTable, MDBTableBody, MDBTableHead, MDBBtn } from "mdbreact";
 import settings from "../config/configData";
 import reducer from "../store/reducer";
-
-const initialState = {
-  users: [],
-};
+import initialState from "../store/admin";
 
 const Admins = () => {
   const [state, dispatch] = useReducer(reducer, initialState);

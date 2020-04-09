@@ -5,17 +5,9 @@ import NavbarPage from "../components/navBar";
 import SubmitBtn from "../components/submitBtn";
 import reducer from "../store/reducer";
 import settings from "../config/configData";
+import initialState from "../store/resident";
 
 import { MDBRow, MDBCol, MDBCard, MDBCardBody, MDBContainer } from "mdbreact";
-
-
-const initialState = {
-  name: "",
-  email: "",
-  phone: "",
-  isDeleted: false,
-  residentConfirmation: false
-};
 
 const Resident = () => {
   const [state, dispatch] = useReducer(reducer, initialState);

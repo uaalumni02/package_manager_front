@@ -4,7 +4,7 @@ const initialState = {
   username: "",
   password: "",
   InvalidLogin: "",
-  loggedIn: false
+  loggedIn: false,
 };
 
 export default initialState;

@@ -6,13 +6,8 @@ import { MDBRow, MDBCol, MDBCard, MDBCardBody, MDBContainer } from "mdbreact";
 import settings from "../config/configData";
 import TextArea from "../components/textArea";
 import reducer from "../store/reducer";
+import initialState from "../store/confirmation";
 
-const initialState = {
-  companyName: "",
-  name: "",
-  additionalInfo: "",
-  deliveryDate: ""
-};
 
 const PackageConfirmation = () => {
   const [state, dispatch] = useReducer(reducer, initialState);

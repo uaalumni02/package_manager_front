@@ -5,14 +5,9 @@ import UserName from "../components/UserName";
 import Password from "../components/Password";
 import settings from "../config/configData";
 import reducer from "../store/reducer";
+import initialState from "../store/register";
 
 import { MDBContainer, MDBRow, MDBCol, MDBCard, MDBCardBody } from "mdbreact";
-
-const initialState = {
-  username: "",
-  password: "",
-  role: ""
-};
 
 const Register = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
