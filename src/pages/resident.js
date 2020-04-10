@@ -5,12 +5,12 @@ import NavbarPage from "../components/navBar";
 import SubmitBtn from "../components/submitBtn";
 import reducer from "../reducer/reducer";
 import settings from "../config/configData";
-import initialState from "../store/resident";
+import initialState from "../store/store";
 
 import { MDBRow, MDBCol, MDBCard, MDBCardBody, MDBContainer } from "mdbreact";
 
 const Resident = () => {
-  const [state, dispatch] = useReducer(reducer, initialState);
+  const [state, dispatch] = useReducer(reducer, initialState.resident);
   const { loggedIn } = useContext(UserContext);
 
   const handleSubmit = event => {

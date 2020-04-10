@@ -6,7 +6,7 @@ import "../static/allPackages.css";
 import reducer from "../reducer/reducer";
 import ActionBtn from "../components/ActionBtn";
 import settings from "../config/configData";
-import initialState from "../store/allPackages";
+import initialState from "../store/store";
 
 import {
   MDBTable,
@@ -23,7 +23,7 @@ import {
 
 
 const AllPackages = () => {
-  const [state, dispatch] = useReducer(reducer, initialState);
+  const [state, dispatch] = useReducer(reducer, initialState.allPackages);
   const { loggedIn } = useContext(UserContext);
   const [deleteId, setDeleteId] = useState("");
 

@@ -6,11 +6,11 @@ import { MDBRow, MDBCol, MDBCard, MDBCardBody, MDBContainer } from "mdbreact";
 import settings from "../config/configData";
 import TextArea from "../components/textArea";
 import reducer from "../reducer/reducer";
-import initialState from "../store/confirmation";
+import initialState from "../store/store";
 
 
 const PackageConfirmation = () => {
-  const [state, dispatch] = useReducer(reducer, initialState);
+  const [state, dispatch] = useReducer(reducer, initialState.confirmation);
   const { loggedIn } = useContext(UserContext);
   const fetchPackageData = () => {
     const token = localStorage.getItem("token");

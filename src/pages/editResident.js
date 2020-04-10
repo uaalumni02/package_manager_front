@@ -4,7 +4,7 @@ import { UserContext } from "../contexts/UserContext";
 import NavbarPage from "../components/navBar";
 import settings from "../config/configData";
 import reducer from "../reducer/reducer";
-import initialState from "../store/editResident";
+import initialState from "../store/store";
 
 import {
   MDBRow,
@@ -17,7 +17,7 @@ import {
 } from "mdbreact";
 
 const EditResident = () => {
-  const [state, dispatch] = useReducer(reducer, initialState);
+  const [state, dispatch] = useReducer(reducer, initialState.editResident);
   const { loggedIn } = useContext(UserContext);
   const [updateConfirmation, setUpdateConfirmation] = useState(false);
 

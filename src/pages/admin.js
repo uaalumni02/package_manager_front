@@ -4,10 +4,10 @@ import NavbarPage from "../components/navBar";
 import { MDBTable, MDBTableBody, MDBTableHead, MDBBtn } from "mdbreact";
 import settings from "../config/configData";
 import reducer from "../reducer/reducer";
-import initialState from "../store/admin";
+import initialState from "../store/store";
 
 const Admins = () => {
-  const [state, dispatch] = useReducer(reducer, initialState);
+  const [state, dispatch] = useReducer(reducer, initialState.admin);
   const { loggedIn } = useContext(UserContext);
   const fetchUserData = () => {
     const token = localStorage.getItem("token");

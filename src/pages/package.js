@@ -8,12 +8,12 @@ import settings from "../config/configData";
 import SubmitBtn from "../components/submitBtn";
 import TextArea from "../components/textArea";
 import reducer from "../reducer/reducer";
-import initialState from "../store/package";
+import initialState from "../store/store";
 
 import { MDBRow, MDBCol, MDBCard, MDBCardBody, MDBContainer } from "mdbreact";
 
 const Package = () => {
-  const [state, dispatch] = useReducer(reducer, initialState);
+  const [state, dispatch] = useReducer(reducer, initialState.package);
   const { loggedIn } = useContext(UserContext);
   
   const fetchCompanyData = () => {

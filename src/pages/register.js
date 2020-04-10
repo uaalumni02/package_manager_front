@@ -5,12 +5,12 @@ import UserName from "../components/UserName";
 import Password from "../components/Password";
 import settings from "../config/configData";
 import reducer from "../reducer/reducer";
-import initialState from "../store/register";
+import initialState from "../store/store";
 
 import { MDBContainer, MDBRow, MDBCol, MDBCard, MDBCardBody } from "mdbreact";
 
 const Register = () => {
-  const [state, dispatch] = useReducer(reducer, initialState);
+  const [state, dispatch] = useReducer(reducer, initialState.register);
   const handleSubmit = event => {
     event.preventDefault();
     fetch(`${settings.apiBaseUrl}/api/user/`, {

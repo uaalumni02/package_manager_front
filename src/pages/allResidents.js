@@ -4,7 +4,7 @@ import NavbarPage from "../components/navBar";
 import ActionBtn from "../components/ActionBtn";
 import settings from "../config/configData";
 import reducer from "../reducer/reducer";
-import initialState from "../store/allResidents";
+import initialState from "../store/store";
 
 import {
   MDBTable,
@@ -20,7 +20,7 @@ import {
 
 
 const AllResidents = () => {
-  const [state, dispatch] = useReducer(reducer, initialState);
+  const [state, dispatch] = useReducer(reducer, initialState.allResidents);
   const { loggedIn } = useContext(UserContext);
   const [deleteId, setDeleteId] = useState("");
 

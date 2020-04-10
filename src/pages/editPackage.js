@@ -5,7 +5,7 @@ import NavbarPage from "../components/navBar";
 import moment from "moment";
 import settings from "../config/configData";
 import reducer from "../reducer/reducer";
-import initialState from "../store/editPackage";
+import initialState from "../store/store";
 
 import {
   MDBRow,
@@ -19,7 +19,7 @@ import {
 
 
 const EditPackage = () => {
-  const [state, dispatch] = useReducer(reducer, initialState);
+  const [state, dispatch] = useReducer(reducer, initialState.editPackage);
   const { loggedIn } = useContext(UserContext);
 
   const fetchCompanyData = () => {
