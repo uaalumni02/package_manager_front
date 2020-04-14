@@ -3,8 +3,8 @@ import { UserContext } from "../contexts/UserContext";
 import NavbarPage from "../components/navBar";
 import ActionBtn from "../components/ActionBtn";
 import settings from "../config/configData";
-import reducer from "../reducer/reducer";
 import initialState from "../store/store";
+import residentReducer from "../reducer/residents";
 
 import {
   MDBTable,
@@ -20,7 +20,7 @@ import {
 
 
 const AllResidents = () => {
-  const [state, dispatch] = useReducer(reducer, initialState.allResidents);
+  const [state, dispatch] = useReducer(residentReducer, initialState.allResidents)
   const { loggedIn } = useContext(UserContext);
   const [deleteId, setDeleteId] = useState("");
 
@@ -39,8 +39,8 @@ const AllResidents = () => {
           return !el.isDeleted;
         });
         dispatch({
-          field: "residents",
-          value: newArray
+          type: 'GET_RESIDENTS',
+          payload: newArray
         });
       })
       .catch(error => console.error("Error:", error));
@@ -75,8 +75,8 @@ const AllResidents = () => {
 
   const toggle = () => {
     dispatch({
-      field: "modal",
-      value: !modal
+      type: 'MODAL',
+      payload: !modal
     });
   };
   const { residents, modal } = state;
