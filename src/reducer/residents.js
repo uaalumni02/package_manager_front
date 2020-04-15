@@ -1,5 +1,4 @@
 const residentReducer = (state, action) => {
-  console.log(action);
   switch (action.type) {
     case "GET_RESIDENTS":
       return { residents: action.payload, state };
